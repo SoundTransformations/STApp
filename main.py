@@ -20,7 +20,6 @@ def play_song():
     filename = filedialog.askopenfilename()
     UF.wavplay(filename)
 
-
 def browse_file1():
     try:
         #
@@ -231,6 +230,8 @@ open_file1 = customtkinter.CTkButton(master.frame_right, text="...", width = 3, 
 open_file1.grid(row=0, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
 
 # Button to play the input file 1
+#photo = PhotoImage(file= r"C:\Users\USUARIO\Desktop\play.jpg")
+#photo = photo.subsample(14,14)
 preview1 =customtkinter.CTkButton(master.frame_right, text="Play!",width = 3, command=lambda: UF.wavplay(master.frame_right.filelocation1.get()),fg_color=("gray75", "gray30"), hover_color = "green")
 preview1.grid(row=0, column=0, columnspan = 3, sticky="e", padx=(250,100), pady=5)
 
