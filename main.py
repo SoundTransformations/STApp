@@ -19,6 +19,7 @@ customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-bl
 #Albert
 #Andrea
 #Nil
+#Paula
 #Functions
 def play_song():
     filename = filedialog.askopenfilename()
