@@ -15,13 +15,10 @@ from Functions.transformations_interface import stftMorph_function as sT
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
-<<<<<<< HEAD
 
-=======
-#Albertº
+#Albert
 #Andrea
 #Nil
->>>>>>> e59fd15959cc80fd33f48da599936ce112448d9e
 #Functions
 def play_song():
     filename = filedialog.askopenfilename()
