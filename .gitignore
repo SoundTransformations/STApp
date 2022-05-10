@@ -3,10 +3,7 @@
 *.pyc
 *.o
 *.py~
-workspace_dev/*
-workspace/*
-!workspace/.gitkeep
-software/models_interface/output_sounds/*.wav
-software/transformations_interface/output_sounds/*.wav
+Functions/models_interface/output_sounds/*.wav
+Functions/transformations_interface/output_sounds/*.wav
 .ipynb_checkpoints/
 *.idea/

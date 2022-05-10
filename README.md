@@ -1,11 +1,11 @@
-# ST
+# Sound Transformations Application
 
-Sound analysis/synthesis tools for music applications written in python (with a bit of C) plus complementary teaching materials.
+Sound transformations tool for music applications written in python (with a bit of C) plus complementary modules.
 
 How to use
 ----------
 
-In order to use these tools you have to install python (recommended 3.7.x) and the following modules: ipython, numpy, matplotlib, scipy, and cython. 
+In order to use these tools you have to install python (recommended 3.8.x) and the following modules: ipython, numpy, matplotlib, scipy, and cython. 
 
 In Ubuntu (which we strongly recommend) in order to install all these modules it is as simple as typing in the Terminal:
 
@@ -15,24 +15,18 @@ In OSX (which we do not support but that should work) you install these modules 
 
 <code>$ pip install ipython numpy matplotlib scipy cython</code>
 
-then, for using the tools, after downloading the whole package, you need to compile some C functions. For that you should go to the directory <code>software/models/utilFunctions_C</code> and type:</p>
+then, for using the software, after downloading the whole package, you need to compile some C functions. For that you should go to the directory <code>Functions/models/utilFunctions_C</code> and type:</p>
 
-<code>$ python compileModule.py build_ext --inplace </code>
+<code>$ python3 compileModule.py build_ext --inplace </code>
 
-The basic sound analysis/synthesis functions, or models, are in the directory <code>software/models</code> and there is a graphical interface and individual example functions in <code>software/models_interface</code>. To execute the models GUI you have to go to the directory <code>software/models_interface</code> and type: 
+The basic sound analysis/synthesis functions, or models, are in the python archive <code>main.py</code>. To execute the application you have to go to the directory where the <code>main.py</code> file is and type: 
 
-<code>$ python models_GUI.py </code>
-
-To execute the transformations GUI that calls various sound transformation functions go to the directory <code>software/transformations_interface</code> and type: 
-
-<code>$ python transformations_GUI.py </code>
-
-To modify the existing code, or to create your own using some of the functions, we recommend to use the <code>workspace</code> directory. Typically you would copy a file from <code>software/models_interface</code> or from <code>software/transformations_interface</code> to that directory, modify the code, and execute it from there (you will have to change some of the paths inside the files). 
+<code>$ python3 main.py </code>
 
 Content
 -------
 
-All the code is in the <code> software </code> directory, with subdirectories for the models, the transformations, and the interfaces.
+All the code is in the <code> Functions </code> directory, with subdirectories for the models, the transformations, and the interfaces.
 
 License
 -------

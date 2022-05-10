@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import get_window
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/')) #Check those directories in order to import correctly the libraries
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
 import stft as STFT
 import utilFunctions as UF
@@ -42,8 +42,8 @@ def main(inputFile1='../../sounds/ocean.wav', inputFile2='../../sounds/speech-ma
 	mY, pY = STFT.stftAnal(y, w1, N1, H1)
 	
 	# write output sound
-	outputFile = 'output_sounds/' + os.path.basename(inputFile1)[:-4] + '_stftMorph.wav'
-	UF.wavwrite(y, fs, outputFile)
+	#outputFile = 'Functions/transformations_interface/output_sounds/' + os.path.basename(inputFile1)[:-4] + '_stftMorph.wav'
+	#UF.wavwrite(y, fs, outputFile)
 
 	# create figure to plot
 	plt.figure(figsize=(9, 6))
@@ -91,6 +91,7 @@ def main(inputFile1='../../sounds/ocean.wav', inputFile2='../../sounds/speech-ma
 
 	plt.tight_layout()
 	plt.show()
+	return y,fs
 
 if __name__ == '__main__':
 	main()
