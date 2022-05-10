@@ -15,6 +15,7 @@ from Functions.transformations_interface import stftMorph_function as sT
 customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
+#Albertº
 #Functions
 def play_song():
     filename = filedialog.askopenfilename()
