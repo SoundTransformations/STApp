@@ -99,13 +99,11 @@ def slider2_changed(event):
 
 #Initialize the master root as a Tkinter interface
 
-#master = Tk()
 master = customtkinter.CTk()
 master.title("Sound Transformations App")
 
 #Set the size of the window
 master.geometry("780x520")
-
 
 ## CREATE THREE FRAMES
 
@@ -113,13 +111,16 @@ master.geometry("780x520")
 master.grid_columnconfigure(1, weight=1)
 master.grid_rowconfigure(0, weight=1)
 
+# Functions.interfaces.create_menu_frame(master)  -->  S'ha de fer una funció de l'estil aquesta
+
 #Create the Menu Selector Frame
 master.frame_left = customtkinter.CTkFrame(master=master, width=180, corner_radius=0)
 master.frame_left.grid(row=0, column=0, sticky="nswe")
 
-#Create two possible frames (Equalizer and Strethcer)
+#Create two possible frames (Equalizer and Stretcher)
 master.frame_right2 = customtkinter.CTkFrame(master=master)
 master.frame_right2.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
+
 master.frame_right = customtkinter.CTkFrame(master=master)
 master.frame_right.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
 
@@ -132,10 +133,6 @@ master.frame_left.grid_rowconfigure(0, minsize=10)   # empty row with minsize as
 master.frame_left.grid_rowconfigure(5, weight=1)  # empty row as spacing
 master.frame_left.grid_rowconfigure(8, minsize=20)    # empty row with minsize as spacing
 master.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
-
-#Add a switch
-#master.switch_2 = customtkinter.CTkSwitch(master=master.frame_left,text="Dark Mode",command=change_mode)
-#master.switch_2.grid(row=10, column=0, pady=10, padx=20, sticky="w")
 
 #Add a Label
 master.label_1 = customtkinter.CTkLabel(master=master.frame_left,text="STApp",text_font=("Roboto Medium", -16))  # font name and size in px
