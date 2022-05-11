@@ -1,7 +1,7 @@
 import os
 import sys
 import customtkinter
-import utilities as f
+from Functions import utilities as f
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
 from Functions.models import utilFunctions as UF

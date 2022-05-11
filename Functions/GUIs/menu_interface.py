@@ -1,5 +1,5 @@
 import customtkinter
-import utilities as f
+from Functions import utilities as f
 
 
 def create_main_interface(master):
