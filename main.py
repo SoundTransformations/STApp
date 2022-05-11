@@ -1,242 +1,72 @@
 import os
 import sys
-
-from tkinter import *
-import tkinter as tk
-from tkinter import ttk
 import customtkinter
-from tkinter import filedialog
-from tkinter import messagebox
 
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Functions/models/'))
-from Functions.models import utilFunctions as UF
-from Functions.transformations_interface import stftMorph_function as sT
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Functions/GUIs'))
+from Functions.GUIs import equalizer_interface as ei, menu_interface as mi, stretcher_interface as si
 
-customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
+
+## ============= INITIALIZE MASTER =============
+
+#Configure customtkinter appearance
+customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
-#Albert
-#Andrea
-#Nil
-#Paula
-#Marc
-
-#Functions
-def play_song():
-    filename = filedialog.askopenfilename()
-    UF.wavplay(filename)
-
-def browse_file1():
-    try:
-        #
-        filename = filedialog.askopenfilename(title="Please Select a File")
-        master.frame_right.filelocation1.delete(0, END)
-        master.frame_right.filelocation1.insert(0,filename)
-        master.frame_right2.filelocation1.delete(0, END)
-        master.frame_right2.filelocation1.insert(0, filename)
-
-    except Exception as e:
-        print(e)
-
-def browse_file2():
-    try:
-        filename = filedialog.askopenfilename(title="Please Select a File")
-        master.filelocation2.delete(0, END)
-        master.filelocation2.insert(0,filename)
-
-    except Exception as e:
-        print(e)
-
-def transformation_synthesis():
-    try:
-        inputFile1 = master.filelocation1.get()
-        inputFile2 = master.filelocation2.get()
-        window1 = master.w1_type.get()
-        window2 = master.w2_type.get()
-        M1 = int(master.M1.get())
-        M2 = int(master.M2.get())
-        N1 = int(master.N1.get())
-        N2 = int(master.N2.get())
-        H1 = int(master.H1.get())
-        smoothf = float(master.smoothf.get())
-        balancef = float(master.balancef.get())
-        y, fs = sT.main(inputFile1, inputFile2, window1, window2, M1, M2, N1, N2, H1, smoothf, balancef)
-        save_audio(y,fs)
-
-
-    except ValueError as errorMessage:
-        messagebox.showerror("Input values error", errorMessage)
-
-def save_audio(y,fs):
-    outputFile = filedialog.asksaveasfile()
-    print(outputFile.name + '_stftMorph.wav')
-    #outputFile = 'Functions/transformations_interface/output_sounds/' + os.path.basename(inputFile1)[:-4] + '_stftMorph.wav'
-    UF.wavwrite(y, fs, outputFile.name + '_stftMorph.wav')
-
-def button_event():
-    print("Button pressed")
-
-# Define a function for switching the frames
-def change_to_frame1():
-    master.frame_right.tkraise()
-    #master.frame_right2.grid_forget()
-
-def change_to_frame2():
-    master.frame_right2.tkraise()
-    #master.frame_right.grid_forget()
-
-def get_current_value1():
-    return '{: .2f}'.format(current_value1.get())
-
-def slider1_changed(event):
-    value_label1.configure(text=get_current_value1())
-
-def get_current_value2():
-    return '{: .2f}'.format(current_value2.get())
-
-def slider2_changed(event):
-    value_label2.configure(text=get_current_value2())
-
 #Initialize the master root as a Tkinter interface
-
 master = customtkinter.CTk()
 master.title("Sound Transformations App")
 
 #Set the size of the window
 master.geometry("780x520")
 
-## CREATE THREE FRAMES
+
+## ============= CREATE THE INTERFACES =============
 
 #Configure grid layout (2x1)
 master.grid_columnconfigure(1, weight=1)
 master.grid_rowconfigure(0, weight=1)
 
-# Functions.interfaces.create_menu_frame(master)  -->  S'ha de fer una funció de l'estil aquesta
+#Create the principal interface
+mi.create_main_interface(master)
 
-#Create the Menu Selector Frame
-master.frame_left = customtkinter.CTkFrame(master=master, width=180, corner_radius=0)
-master.frame_left.grid(row=0, column=0, sticky="nswe")
+#Create the Equalizer interface
+ei.equalizer_interface(master)
 
-#Create two possible frames (Equalizer and Stretcher)
-master.frame_right2 = customtkinter.CTkFrame(master=master)
-master.frame_right2.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
-
-master.frame_right = customtkinter.CTkFrame(master=master)
-master.frame_right.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
-
-
-
-## CONFIGURE THE MENU SELECTOR FRAME
-
-# configure grid layout (1x11)
-master.frame_left.grid_rowconfigure(0, minsize=10)   # empty row with minsize as spacing
-master.frame_left.grid_rowconfigure(5, weight=1)  # empty row as spacing
-master.frame_left.grid_rowconfigure(8, minsize=20)    # empty row with minsize as spacing
-master.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
-
-#Add a Label
-master.label_1 = customtkinter.CTkLabel(master=master.frame_left,text="STApp",text_font=("Roboto Medium", -16))  # font name and size in px
-master.label_1.grid(row=1, column=0, pady=10, padx=10)
-
-#Add a button
-master.button_1 = customtkinter.CTkButton(master=master.frame_left,text="Equalizer",fg_color=("gray75", "gray30"),command=change_to_frame1)
-master.button_1.grid(row=2, column=0, pady=10, padx=20)
-
-#Add a second button
-master.button_2 = customtkinter.CTkButton(master=master.frame_left,text="Stretcher",fg_color=("gray75", "gray30"),command=change_to_frame2)
-master.button_2.grid(row=3, column=0, pady=10, padx=20)
-
-#Add a third button
-master.button_3 = customtkinter.CTkButton(master=master.frame_left,text="Relantizer",fg_color=("gray75", "gray30"),command=button_event)
-master.button_3.grid(row=4, column=0, pady=10, padx=20)
-
-
-## CONFIGURE THE EQUALIZER FRAME
-
-#Configure grid layout (3x7)
-master.frame_right2.rowconfigure((0, 1, 2, 3), weight=1)
-master.frame_right2.rowconfigure(7, weight=10)
-master.frame_right2.columnconfigure((0, 1), weight=1)
-master.frame_right2.columnconfigure(2, weight=0)
-
-## INPUT FILE 1
-master.label_1 = customtkinter.CTkLabel(master=master.frame_right2,text="File1:",text_font=("Roboto Medium", -16), fg_color=("white", "gray30"), width = 30)  # font name and size in px
-master.label_1.grid(row=0, column=0, pady=5, padx=50, sticky="w")
-
-master.frame_right2.filelocation1 = customtkinter.CTkEntry(master=master.frame_right2,width=10,placeholder_text="Path to the first input file") #TEXTBOX TO PRINT PATH OF THE SOUND FILE
-master.frame_right2.filelocation1.grid(row=0, column=0, columnspan=2, pady=5, padx=(120,200), sticky="we")
-master.frame_right2.filelocation1.focus_set()
-
-#Button to browse the input file 1
-open_file1 = customtkinter.CTkButton(master.frame_right2, text="...", width = 3, command= browse_file1)
-open_file1.grid(row=0, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
-
-#Button to play the input file 1
-preview1 =customtkinter.CTkButton(master.frame_right2, text="Play!",width = 3, command=lambda: UF.wavplay(master.frame_right2.filelocation1.get()),fg_color=("gray75", "gray30"), hover_color = "green")
-preview1.grid(row=0, column=0, columnspan = 3, sticky="e", padx=(250,100), pady=5)
-
-
-#SLIDERS of the EQUALIZER
-style = ttk.Style()
-style.configure("TScale", background="gray18")
-
-master.label_6 = customtkinter.CTkLabel(master=master.frame_right,text="30 Hz",text_font=("Roboto Medium", -12), fg_color=("white", "gray30"), width = 30)  # font name and size in px
-master.label_6.grid(row=2, column=0, pady=0, padx=50, sticky="w")
-
-# slider current value
-current_value1 = tk.DoubleVar()
-slider_5 = ttk.Scale(master.frame_right,from_ = 100, to = 0, orient = VERTICAL, style="TScale", command = slider1_changed, variable = current_value1)
-slider_5.grid(row=1, column=0,pady=0, padx=65, sticky="w")
-
-# Value label
-value_label1 = ttk.Label(master.frame_right,text=get_current_value1(), background = "gray18", justify="center", foreground="white")
-value_label1.grid(row=1,column = 0, pady=0, padx=105,sticky='w')
-
-
-master.label_7 = customtkinter.CTkLabel(master=master.frame_right,text="60 Hz",text_font=("Roboto Medium", -12), fg_color=("white", "gray30"), width = 30)  # font name and size in px
-master.label_7.grid(row=2, column=0, pady=0, padx=150, sticky="w")
-
-# slider current value
-current_value2 = tk.DoubleVar()
-
-slider_6 = ttk.Scale(master.frame_right,from_ = 100, to = 0, orient = VERTICAL, style="TScale", command = slider2_changed, variable = current_value2)
-slider_6.grid(row=1, column=0,pady=0, padx=165, sticky="w")
-
-# Value label
-value_label2 = ttk.Label(master.frame_right,text=get_current_value2(), background = "gray18", justify="center", foreground="white")
-value_label2.grid(row=1,column = 0, pady=0, padx=205,sticky='w')
+#Create the stretcher interface
+si.stretcher_interface(master)
 
 
 
 
 
 
-## CONFIGURE THE SECOND FRAME FOR THE STRETCHER
 
-#configure grid layout (3x7)
-master.frame_right.rowconfigure((0, 1, 2, 3), weight=1)
-master.frame_right.rowconfigure(7, weight=10)
-master.frame_right.columnconfigure((0, 1), weight=1)
-master.frame_right.columnconfigure(2, weight=0)
 
-## INPUT FILE 1
 
-master.label_1 = customtkinter.CTkLabel(master=master.frame_right,text="File1:",text_font=("Roboto Medium", -16), fg_color=("white", "gray30"), width = 30)  # font name and size in px
-master.label_1.grid(row=0, column=0, pady=5, padx=50, sticky="w")
 
-master.frame_right.filelocation1 = customtkinter.CTkEntry(master=master.frame_right,width=10,placeholder_text="Path to the first input file")#TEXTBOX TO PRINT PATH OF THE SOUND FILE
-master.frame_right.filelocation1.grid(row=0, column=0, columnspan=2, pady=5, padx=(120,200), sticky="we")
-master.frame_right.filelocation1.focus_set()
 
-# Button to browse the input file 1
-open_file1 = customtkinter.CTkButton(master.frame_right, text="...", width = 3, command= browse_file1)
-open_file1.grid(row=0, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Button to play the input file 1
 #photo = PhotoImage(file= r"C:\Users\USUARIO\Desktop\play.jpg")
 #photo = photo.subsample(14,14)
-preview1 =customtkinter.CTkButton(master.frame_right, text="Play!",width = 3, command=lambda: UF.wavplay(master.frame_right.filelocation1.get()),fg_color=("gray75", "gray30"), hover_color = "green")
-preview1.grid(row=0, column=0, columnspan = 3, sticky="e", padx=(250,100), pady=5)
+
 
 ##ANALYSIS WINDOW TYPE SOUND 1
 #wtype1_label = "window1:"
