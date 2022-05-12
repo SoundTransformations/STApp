@@ -16,10 +16,17 @@ def equalizer_interface(master):
     ## CONFIGURE THE EQUALIZER FRAME
 
     # Configure grid layout (3x7)
-    master.equalizer_frame.rowconfigure((0, 1, 2, 3), weight=1)
-    master.equalizer_frame.rowconfigure(7, weight=10)
-    #master.equalizer_frame.columnconfigure((0,1,2,3,4,5,6,7,8,9,10), weight=1)
-    #master.equalizer_frame.columnconfigure(2, weight=0)
+    master.equalizer_frame.rowconfigure(1, weight=0)
+
+
+    master.label = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                            text="Equalizer",
+                                            text_font=("Roboto Medium", -30),
+                                            fg_color=("white", "gray18"),
+                                            width=30)  # font name and size in px
+
+    master.label.grid(row=0, column=0, pady=(15,0), padx=40, sticky="w")
+
 
     ## INPUT FILE 1
     master.label_1 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -28,13 +35,13 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
 
-    master.label_1.grid(row=0, column=0, pady=5, padx=50, sticky="w")
+    master.label_1.grid(row=1, column=0, pady=0, padx=50, sticky="w")
 
     master.equalizer_frame.filelocation1 = customtkinter.CTkEntry(master=master.equalizer_frame,
                                                                   width=10,
                                                                   placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
-    master.equalizer_frame.filelocation1.grid(row=0, column=0, columnspan=2, pady=5, padx=(120, 200), sticky="we")
+    master.equalizer_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 480), sticky="we")
     master.equalizer_frame.filelocation1.focus_set()
 
     # Button to browse the input file 1
@@ -42,7 +49,7 @@ def equalizer_interface(master):
                                          text="...", width=3,
                                          command=lambda: f.browse_file1(master))
 
-    open_file1.grid(row=0, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
+    open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
 
     # Button to play the input file 1
     preview1 = customtkinter.CTkButton(master.equalizer_frame,
@@ -51,7 +58,7 @@ def equalizer_interface(master):
                                        fg_color=("gray75", "gray30"),
                                        hover_color="green")
 
-    preview1.grid(row=0, column=0, columnspan=3, sticky="e", padx=(250, 100), pady=5)
+    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(250, 380), pady=20)
 
     # SLIDERS of the EQUALIZER
 
@@ -68,7 +75,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
 
-    master.label_6.grid(row=1, column=0, pady=0, padx=50, sticky="nw")
+    master.label_6.grid(row=2, column=0, pady=(15,0), padx=50, sticky="nw")
 
     # slider current value
     master.current_value1 = tk.DoubleVar()
@@ -85,7 +92,7 @@ def equalizer_interface(master):
                                 command= slider1_changed,
                                 variable=master.current_value1)
 
-    master.slider_5.grid(row=1, column=0, pady=20, padx=65, sticky="w")
+    master.slider_5.grid(row=3, column=0, pady=10, padx=65, sticky="w")
 
     # Value label
     master.value_label1 = ttk.Label(master.equalizer_frame,
@@ -94,7 +101,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label1.grid(row=1, column=0, pady=0, padx=61, sticky='sw')
+    master.value_label1.grid(row=4, column=0, pady=0, padx=61, sticky='sw')
 
 
     ## Create an slider space
@@ -105,7 +112,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_7.grid(row=1, column=0, pady=0, padx=110, sticky="nw")
+    master.label_7.grid(row=2, column=0, pady=(15,0), padx=110, sticky="nw")
 
     # Slider current value
     master.current_value2 = tk.DoubleVar()
@@ -122,7 +129,7 @@ def equalizer_interface(master):
                                 command= slider2_changed,
                                 variable=master.current_value2)
 
-    master.slider_6.grid(row=1, column=0, pady=0, padx=125, sticky="w")
+    master.slider_6.grid(row=3, column=0, pady=10, padx=122, sticky="w")
 
     # Value label
     master.value_label2 = ttk.Label(master.equalizer_frame,
@@ -131,7 +138,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label2.grid(row=1, column=0, pady=0, padx=121, sticky='sw')
+    master.value_label2.grid(row=4, column=0, pady=0, padx=119, sticky='sw')
 
     ## Create an slider space
 
@@ -141,7 +148,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_7.grid(row=1, column=0, pady=0, padx=170, sticky="nw")
+    master.label_7.grid(row=2, column=0, pady=(15,0), padx=170, sticky="nw")
 
     # Slider current value
     master.current_value3 = tk.DoubleVar()
@@ -158,7 +165,7 @@ def equalizer_interface(master):
                                 command=slider3_changed,
                                 variable=master.current_value3)
 
-    master.slider_7.grid(row=1, column=0, pady=0, padx=185, sticky="w")
+    master.slider_7.grid(row=3, column=0, pady=10, padx=185, sticky="w")
 
     # Value label
     master.value_label3 = ttk.Label(master.equalizer_frame,
@@ -167,7 +174,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label3.grid(row=1, column=0, pady=0, padx=181, sticky='sw')
+    master.value_label3.grid(row=4, column=0, pady=0, padx=181, sticky='sw')
 
     ## Create an slider space
 
@@ -177,7 +184,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_8.grid(row=1, column=0, pady=0, padx=240, sticky="nw")
+    master.label_8.grid(row=2, column=0, pady=(15,0), padx=238, sticky="nw")
 
     # Slider current value
     master.current_value4 = tk.DoubleVar()
@@ -194,7 +201,7 @@ def equalizer_interface(master):
                                 command=slider4_changed,
                                 variable=master.current_value4)
 
-    master.slider_8.grid(row=1, column=0, pady=0, padx=255, sticky="w")
+    master.slider_8.grid(row=3, column=0, pady=10, padx=250, sticky="w")
 
     # Value label
     master.value_label4 = ttk.Label(master.equalizer_frame,
@@ -203,7 +210,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label4.grid(row=1, column=0, pady=0, padx= 251, sticky='sw')
+    master.value_label4.grid(row=4, column=0, pady=0, padx= 246, sticky='sw')
 
     ## Create an slider space
 
@@ -213,7 +220,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_15.grid(row=1, column=0, pady=0, padx= 310, sticky="nw")
+    master.label_15.grid(row=2, column=0, pady=(15,0), padx= 305, sticky="nw")
 
     # Slider current value
     master.current_value15 = tk.DoubleVar()
@@ -230,7 +237,7 @@ def equalizer_interface(master):
                                 command=slider15_changed,
                                 variable=master.current_value15)
 
-    master.slider_15.grid(row=1, column=0, pady=0, padx=325, sticky="w")
+    master.slider_15.grid(row=3, column=0, pady=10, padx=320, sticky="w")
 
     # Value label
     master.value_label15 = ttk.Label(master.equalizer_frame,
@@ -239,7 +246,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label15.grid(row=1, column=0, pady=0, padx=321, sticky='sw')
+    master.value_label15.grid(row=4, column=0, pady=0, padx=315, sticky='sw')
 
 
     ## Create an slider space
@@ -250,7 +257,7 @@ def equalizer_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_10.grid(row=1, column=0, pady=0, padx=380, sticky="nw")
+    master.label_10.grid(row=2, column=0, pady=(15,0), padx=372, sticky="nw")
 
     # Slider current value
     master.current_value5 = tk.DoubleVar()
@@ -267,7 +274,7 @@ def equalizer_interface(master):
                                 command=slider5_changed,
                                 variable=master.current_value5)
 
-    master.slider_9.grid(row=1, column=0, pady=0, padx=392, sticky="w")
+    master.slider_9.grid(row=3, column=0, pady=10, padx=382, sticky="w")
 
     # Value label
     master.value_label5 = ttk.Label(master.equalizer_frame,
@@ -276,7 +283,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label5.grid(row=1, column=0, pady=0, padx=388, sticky='sw')
+    master.value_label5.grid(row=4, column=0, pady=0, padx=378, sticky='sw')
 
     ## Create an slider space
 
@@ -286,7 +293,7 @@ def equalizer_interface(master):
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.label_11.grid(row=1, column=0, pady=0, padx=440, sticky="nw")
+    master.label_11.grid(row=2, column=0, pady=(15,0), padx=430, sticky="nw")
 
     # Slider current value
     master.current_value6 = tk.DoubleVar()
@@ -303,7 +310,7 @@ def equalizer_interface(master):
                                 command=slider6_changed,
                                 variable=master.current_value6)
 
-    master.slider_10.grid(row=1, column=0, pady=0, padx=452, sticky="w")
+    master.slider_10.grid(row=3, column=0, pady=10, padx=442, sticky="w")
 
     # Value label
     master.value_label6 = ttk.Label(master.equalizer_frame,
@@ -312,7 +319,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label6.grid(row=1, column=0, pady=0, padx=448, sticky='sw')
+    master.value_label6.grid(row=4, column=0, pady=0, padx=438, sticky='sw')
 
     ## Create an slider space
 
@@ -322,7 +329,7 @@ def equalizer_interface(master):
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.label_12.grid(row=1, column=0, pady=0, padx=500, sticky="nw")
+    master.label_12.grid(row=2, column=0, pady=(15,0), padx=490, sticky="nw")
 
     # Slider current value
     master.current_value7 = tk.DoubleVar()
@@ -339,7 +346,7 @@ def equalizer_interface(master):
                                  command=slider7_changed,
                                  variable=master.current_value7)
 
-    master.slider_11.grid(row=1, column=0, pady=0, padx=512, sticky="w")
+    master.slider_11.grid(row=3, column=0, pady=10, padx=500, sticky="w")
 
     # Value label
     master.value_label7 = ttk.Label(master.equalizer_frame,
@@ -348,7 +355,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label7.grid(row=1, column=0, pady=0, padx=508, sticky='sw')
+    master.value_label7.grid(row=4, column=0, pady=0, padx=498, sticky='sw')
 
     ## Create an slider space
 
@@ -358,7 +365,7 @@ def equalizer_interface(master):
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.label_13.grid(row=1, column=0, pady=0, padx=560, sticky="n")
+    master.label_13.grid(row=2, column=0, pady=(15,0), padx=550, sticky="n")
 
     # Slider current value
     master.current_value8 = tk.DoubleVar()
@@ -375,7 +382,7 @@ def equalizer_interface(master):
                                  command=slider8_changed,
                                  variable=master.current_value8)
 
-    master.slider_12.grid(row=1, column=0, pady=0, padx=572, sticky="w")
+    master.slider_12.grid(row=3, column=0, pady=10, padx=562, sticky="w")
 
     # Value label
     master.value_label8 = ttk.Label(master.equalizer_frame,
@@ -384,7 +391,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label8.grid(row=1, column=0, pady=0, padx=568, sticky='sw')
+    master.value_label8.grid(row=4, column=0, pady=0, padx=558, sticky='sw')
 
     ## Create an slider space
 
@@ -394,7 +401,7 @@ def equalizer_interface(master):
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.label_14.grid(row=1, column=0, pady=0, padx=495, sticky="ne")
+    master.label_14.grid(row=2, column=0, pady=(15,0), padx=485, sticky="ne")
 
     # Slider current value
     master.current_value9 = tk.DoubleVar()
@@ -411,7 +418,7 @@ def equalizer_interface(master):
                                  command=slider9_changed,
                                  variable=master.current_value9)
 
-    master.slider_13.grid(row=1, column=0, pady=0, padx=512, sticky="e")
+    master.slider_13.grid(row=3, column=0, pady=10, padx=502, sticky="e")
 
     # Value label
     master.value_label9 = ttk.Label(master.equalizer_frame,
@@ -420,5 +427,5 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label9.grid(row=1, column=0, pady=0, padx=512, sticky='se')
+    master.value_label9.grid(row=4, column=0, pady=0, padx=502, sticky='se')
 
