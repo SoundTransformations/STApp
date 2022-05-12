@@ -18,8 +18,8 @@ def equalizer_interface(master):
     # Configure grid layout (3x7)
     master.equalizer_frame.rowconfigure((0, 1, 2, 3), weight=1)
     master.equalizer_frame.rowconfigure(7, weight=10)
-    master.equalizer_frame.columnconfigure((0, 1), weight=1)
-    master.equalizer_frame.columnconfigure(2, weight=0)
+    #master.equalizer_frame.columnconfigure((0,1,2,3,4,5,6,7,8,9,10), weight=1)
+    #master.equalizer_frame.columnconfigure(2, weight=0)
 
     ## INPUT FILE 1
     master.label_1 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -54,17 +54,21 @@ def equalizer_interface(master):
     preview1.grid(row=0, column=0, columnspan=3, sticky="e", padx=(250, 100), pady=5)
 
     # SLIDERS of the EQUALIZER
+
+    # Define the style
     style = ttk.Style()
     style.configure("TScale", background="gray18")
 
+
+    # Create an slider space
+
     master.label_6 = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="30 Hz",
+                                            text="32 Hz",
                                             text_font=("Roboto Medium", -12),
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
 
-    master.label_6.grid(row=2, column=0, pady=0, padx=50, sticky="w")
-
+    master.label_6.grid(row=1, column=0, pady=0, padx=50, sticky="nw")
 
     # slider current value
     master.current_value1 = tk.DoubleVar()
@@ -72,8 +76,7 @@ def equalizer_interface(master):
     def slider1_changed(event):
         master.value_label1.configure(text='{: .2f}'.format(master.current_value1.get()))
 
-
-
+    # Slider
     master.slider_5 = ttk.Scale(master.equalizer_frame,
                                 from_=100,
                                 to=0,
@@ -82,7 +85,7 @@ def equalizer_interface(master):
                                 command= slider1_changed,
                                 variable=master.current_value1)
 
-    master.slider_5.grid(row=1, column=0, pady=0, padx=65, sticky="w")
+    master.slider_5.grid(row=1, column=0, pady=20, padx=65, sticky="w")
 
     # Value label
     master.value_label1 = ttk.Label(master.equalizer_frame,
@@ -91,22 +94,26 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label1.grid(row=1, column=0, pady=0, padx=105, sticky='w')
+    master.value_label1.grid(row=1, column=0, pady=0, padx=61, sticky='sw')
+
+
+    ## Create an slider space
 
     master.label_7 = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="60 Hz",
+                                            text="64 Hz",
                                             text_font=("Roboto Medium", -12),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.label_7.grid(row=2, column=0, pady=0, padx=150, sticky="w")
+    master.label_7.grid(row=1, column=0, pady=0, padx=110, sticky="nw")
+
+    # Slider current value
+    master.current_value2 = tk.DoubleVar()
 
     def slider2_changed(event):
         master.value_label2.configure(text='{: .2f}'.format(master.current_value2.get()))
 
-    # slider current value
-    master.current_value2 = tk.DoubleVar()
-
+    # Slider
     master.slider_6 = ttk.Scale(master.equalizer_frame,
                                 from_=100,
                                 to=0,
@@ -115,7 +122,7 @@ def equalizer_interface(master):
                                 command= slider2_changed,
                                 variable=master.current_value2)
 
-    master.slider_6.grid(row=1, column=0, pady=0, padx=165, sticky="w")
+    master.slider_6.grid(row=1, column=0, pady=0, padx=125, sticky="w")
 
     # Value label
     master.value_label2 = ttk.Label(master.equalizer_frame,
@@ -124,4 +131,294 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.value_label2.grid(row=1, column=0, pady=0, padx=205, sticky='w')
+    master.value_label2.grid(row=1, column=0, pady=0, padx=121, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_7 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                            text="125 Hz",
+                                            text_font=("Roboto Medium", -12),
+                                            fg_color=("white", "gray30"),
+                                            width=30)
+
+    master.label_7.grid(row=1, column=0, pady=0, padx=170, sticky="nw")
+
+    # Slider current value
+    master.current_value3 = tk.DoubleVar()
+
+    def slider3_changed(event):
+        master.value_label3.configure(text='{: .2f}'.format(master.current_value3.get()))
+
+    # Slider
+    master.slider_7 = ttk.Scale(master.equalizer_frame,
+                                from_=100,
+                                to=0,
+                                orient=VERTICAL,
+                                style="TScale",
+                                command=slider3_changed,
+                                variable=master.current_value3)
+
+    master.slider_7.grid(row=1, column=0, pady=0, padx=185, sticky="w")
+
+    # Value label
+    master.value_label3 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value3.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label3.grid(row=1, column=0, pady=0, padx=181, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_8 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                            text="260 Hz",
+                                            text_font=("Roboto Medium", -12),
+                                            fg_color=("white", "gray30"),
+                                            width=30)
+
+    master.label_8.grid(row=1, column=0, pady=0, padx=240, sticky="nw")
+
+    # Slider current value
+    master.current_value4 = tk.DoubleVar()
+
+    def slider4_changed(event):
+        master.value_label4.configure(text='{: .2f}'.format(master.current_value4.get()))
+
+    # Slider
+    master.slider_8 = ttk.Scale(master.equalizer_frame,
+                                from_=100,
+                                to=0,
+                                orient=VERTICAL,
+                                style="TScale",
+                                command=slider4_changed,
+                                variable=master.current_value4)
+
+    master.slider_8.grid(row=1, column=0, pady=0, padx=255, sticky="w")
+
+    # Value label
+    master.value_label4 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value4.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label4.grid(row=1, column=0, pady=0, padx= 251, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_15 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                            text="500 Hz",
+                                            text_font=("Roboto Medium", -12),
+                                            fg_color=("white", "gray30"),
+                                            width=30)
+
+    master.label_15.grid(row=1, column=0, pady=0, padx= 310, sticky="nw")
+
+    # Slider current value
+    master.current_value15 = tk.DoubleVar()
+
+    def slider15_changed(event):
+        master.value_label15.configure(text='{: .2f}'.format(master.current_value15.get()))
+
+    # Slider
+    master.slider_15 = ttk.Scale(master.equalizer_frame,
+                                from_=100,
+                                to=0,
+                                orient=VERTICAL,
+                                style="TScale",
+                                command=slider15_changed,
+                                variable=master.current_value15)
+
+    master.slider_15.grid(row=1, column=0, pady=0, padx=325, sticky="w")
+
+    # Value label
+    master.value_label15 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value15.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label15.grid(row=1, column=0, pady=0, padx=321, sticky='sw')
+
+
+    ## Create an slider space
+
+    master.label_10 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                            text="1k Hz",
+                                            text_font=("Roboto Medium", -12),
+                                            fg_color=("white", "gray30"),
+                                            width=30)
+
+    master.label_10.grid(row=1, column=0, pady=0, padx=380, sticky="nw")
+
+    # Slider current value
+    master.current_value5 = tk.DoubleVar()
+
+    def slider5_changed(event):
+        master.value_label5.configure(text='{: .2f}'.format(master.current_value5.get()))
+
+    # Slider
+    master.slider_9 = ttk.Scale(master.equalizer_frame,
+                                from_=100,
+                                to=0,
+                                orient=VERTICAL,
+                                style="TScale",
+                                command=slider5_changed,
+                                variable=master.current_value5)
+
+    master.slider_9.grid(row=1, column=0, pady=0, padx=392, sticky="w")
+
+    # Value label
+    master.value_label5 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value5.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label5.grid(row=1, column=0, pady=0, padx=388, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_11 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                             text="2k Hz",
+                                             text_font=("Roboto Medium", -12),
+                                             fg_color=("white", "gray30"),
+                                             width=30)
+
+    master.label_11.grid(row=1, column=0, pady=0, padx=440, sticky="nw")
+
+    # Slider current value
+    master.current_value6 = tk.DoubleVar()
+
+    def slider6_changed(event):
+        master.value_label6.configure(text='{: .2f}'.format(master.current_value6.get()))
+
+    # Slider
+    master.slider_10 = ttk.Scale(master.equalizer_frame,
+                                from_=100,
+                                to=0,
+                                orient=VERTICAL,
+                                style="TScale",
+                                command=slider6_changed,
+                                variable=master.current_value6)
+
+    master.slider_10.grid(row=1, column=0, pady=0, padx=452, sticky="w")
+
+    # Value label
+    master.value_label6 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value6.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label6.grid(row=1, column=0, pady=0, padx=448, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_12 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                             text="4k Hz",
+                                             text_font=("Roboto Medium", -12),
+                                             fg_color=("white", "gray30"),
+                                             width=30)
+
+    master.label_12.grid(row=1, column=0, pady=0, padx=500, sticky="nw")
+
+    # Slider current value
+    master.current_value7 = tk.DoubleVar()
+
+    def slider7_changed(event):
+        master.value_label7.configure(text='{: .2f}'.format(master.current_value7.get()))
+
+    # Slider
+    master.slider_11 = ttk.Scale(master.equalizer_frame,
+                                 from_=100,
+                                 to=0,
+                                 orient=VERTICAL,
+                                 style="TScale",
+                                 command=slider7_changed,
+                                 variable=master.current_value7)
+
+    master.slider_11.grid(row=1, column=0, pady=0, padx=512, sticky="w")
+
+    # Value label
+    master.value_label7 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value7.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label7.grid(row=1, column=0, pady=0, padx=508, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_13 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                             text="8k Hz",
+                                             text_font=("Roboto Medium", -12),
+                                             fg_color=("white", "gray30"),
+                                             width=30)
+
+    master.label_13.grid(row=1, column=0, pady=0, padx=560, sticky="n")
+
+    # Slider current value
+    master.current_value8 = tk.DoubleVar()
+
+    def slider8_changed(event):
+        master.value_label8.configure(text='{: .2f}'.format(master.current_value8.get()))
+
+    # Slider
+    master.slider_12 = ttk.Scale(master.equalizer_frame,
+                                 from_=100,
+                                 to=0,
+                                 orient=VERTICAL,
+                                 style="TScale",
+                                 command=slider8_changed,
+                                 variable=master.current_value8)
+
+    master.slider_12.grid(row=1, column=0, pady=0, padx=572, sticky="w")
+
+    # Value label
+    master.value_label8 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value8.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label8.grid(row=1, column=0, pady=0, padx=568, sticky='sw')
+
+    ## Create an slider space
+
+    master.label_14 = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                             text="16k Hz",
+                                             text_font=("Roboto Medium", -12),
+                                             fg_color=("white", "gray30"),
+                                             width=30)
+
+    master.label_14.grid(row=1, column=0, pady=0, padx=495, sticky="ne")
+
+    # Slider current value
+    master.current_value9 = tk.DoubleVar()
+
+    def slider9_changed(event):
+        master.value_label9.configure(text='{: .2f}'.format(master.current_value9.get()))
+
+    # Slider
+    master.slider_13 = ttk.Scale(master.equalizer_frame,
+                                 from_=100,
+                                 to=0,
+                                 orient=VERTICAL,
+                                 style="TScale",
+                                 command=slider9_changed,
+                                 variable=master.current_value9)
+
+    master.slider_13.grid(row=1, column=0, pady=0, padx=512, sticky="e")
+
+    # Value label
+    master.value_label9 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value9.get()),
+                                    background="gray18",
+                                    justify="center",
+                                    foreground="white")
+
+    master.value_label9.grid(row=1, column=0, pady=0, padx=512, sticky='se')
+

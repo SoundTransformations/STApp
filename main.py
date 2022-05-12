@@ -17,7 +17,8 @@ master = customtkinter.CTk()
 master.title("Sound Transformations App")
 
 #Set the size of the window
-master.geometry("780x520")
+master.geometry("1280x520")
+
 
 
 ## ============= CREATE THE INTERFACES =============
