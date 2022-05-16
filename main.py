@@ -3,7 +3,7 @@ import sys
 import customtkinter
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Functions/GUIs'))
-from Functions.GUIs import equalizer_interface as ei, menu_interface as mi, stretcher_interface as si
+from Functions.GUIs import equalizer_interface as ei, menu_interface as mi, stretcher_interface as si, other_interface as oi
 
 
 ## ============= INITIALIZE MASTER =============
@@ -35,6 +35,9 @@ ei.equalizer_interface(master)
 
 #Create the stretcher interface
 si.stretcher_interface(master)
+
+#Create the stretcher interface
+oi.create_other_interface(master)
 
 
 

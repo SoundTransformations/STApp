@@ -82,3 +82,10 @@ def change_to_frame2(master):
 
     except Exception:
         messagebox.showerror("Something went wrong")
+
+def change_to_frame3(master):
+    try:
+        master.other_interface.tkraise()
+
+    except Exception:
+        messagebox.showerror("Something went wrong")
