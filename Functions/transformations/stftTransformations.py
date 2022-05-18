@@ -4,7 +4,7 @@ import numpy as np
 import sys, os, math
 from scipy.signal import resample
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
-import dftModel as DFT
+from Functions.models import dftModel as DFT
 
 def stftFiltering(x, fs, w, N, H, filter):
 	"""
