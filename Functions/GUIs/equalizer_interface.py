@@ -85,8 +85,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_5 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command= slider1_changed,
@@ -122,8 +122,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_6 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command= slider2_changed,
@@ -158,8 +158,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_7 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider3_changed,
@@ -194,8 +194,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_8 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider4_changed,
@@ -230,8 +230,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_15 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider15_changed,
@@ -267,8 +267,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_9 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider5_changed,
@@ -303,8 +303,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_10 = ttk.Scale(master.equalizer_frame,
-                                from_=100,
-                                to=0,
+                                from_=50,
+                                to=-50,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider6_changed,
@@ -339,8 +339,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_11 = ttk.Scale(master.equalizer_frame,
-                                 from_=100,
-                                 to=0,
+                                 from_=50,
+                                 to=-50,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider7_changed,
@@ -375,8 +375,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_12 = ttk.Scale(master.equalizer_frame,
-                                 from_=100,
-                                 to=0,
+                                 from_=50,
+                                 to=-50,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider8_changed,
@@ -411,8 +411,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_13 = ttk.Scale(master.equalizer_frame,
-                                 from_=100,
-                                 to=0,
+                                 from_=50,
+                                 to=-50,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider9_changed,
