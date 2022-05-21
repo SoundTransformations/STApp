@@ -1,5 +1,8 @@
 import os
 import sys
+from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 import customtkinter
 from Functions import utilities as f
 
@@ -12,10 +15,16 @@ def stretcher_interface(master):
     ## CONFIGURE THE FRAME FOR THE STRETCHER
 
     # configure grid layout (3x7)
-    master.stretcher_frame.rowconfigure((0, 1, 2, 3), weight=1)
-    master.stretcher_frame.rowconfigure(7, weight=10)
+    master.stretcher_frame.rowconfigure((0, 1, 2, 3), weight=0)
     master.stretcher_frame.columnconfigure((0, 1), weight=1)
     master.stretcher_frame.columnconfigure(2, weight=0)
+
+    ##TITLE
+    master.label = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                          text="Stretcher", text_font=("Roboto Medium", -30),
+                                          fg_color=("white", "gray18"), width=30)  # font name and size in px
+
+    master.label.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
 
     ## INPUT FILE 1
 
@@ -25,13 +34,13 @@ def stretcher_interface(master):
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
 
-    master.label_1.grid(row=0, column=0, pady=5, padx=50, sticky="w")
+    master.label_1.grid(row=1, column=0, pady=0, padx=50, sticky="w")
 
     master.stretcher_frame.filelocation1 = customtkinter.CTkEntry(master=master.stretcher_frame,
                                                                   width=10,
                                                                   placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
-    master.stretcher_frame.filelocation1.grid(row=0, column=0, columnspan=2, pady=5, padx=(120, 200), sticky="we")
+    master.stretcher_frame.filelocation1.grid(row=1, column=0, columnspan=2, pady=5, padx=(120, 200), sticky="we")
     master.stretcher_frame.filelocation1.focus_set()
 
     # Button to browse the input file 1
@@ -40,7 +49,7 @@ def stretcher_interface(master):
                                          width=3,
                                          command=lambda: f.browse_file1(master))
 
-    open_file1.grid(row=0, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
+    open_file1.grid(row=1, column=0, columnspan=2, sticky="e", padx=(150, 160), pady=5)
 
     preview1 = customtkinter.CTkButton(master.stretcher_frame, text="Play!",
                                        width=3,
@@ -48,4 +57,78 @@ def stretcher_interface(master):
                                        fg_color=("gray75", "gray30"),
                                        hover_color="green")
 
-    preview1.grid(row=0, column=0, columnspan=3, sticky="e", padx=(250, 100), pady=5)
+    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(250, 100), pady=5)
+
+    ##DRAW THE AUDIO SPRECTOGRAM!!!
+
+    master.to_do = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                          text="We need to implement something to show the audio spectrogram",
+                                          text_font=("Roboto Medium", -12),fg_color=("white", "gray18"), width=30)
+    master.to_do.grid(row=3, column=0, columnspan=3, sticky="w", padx=(50, 300), pady=5)
+
+    ##BUTTON FOR TIME DELAY
+    # Create an slider space
+    master.label_delay = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                                text="Delay",
+                                                text_font=("Roboto Medium", -15),
+                                                fg_color=("white", "gray30"),
+                                                width=30)  # font name and size in px
+
+    master.label_delay.grid(row=15, column=0, pady=(25, 0), padx=50, sticky="nw")
+
+    ##SLIDER
+    # slider current value
+    master.current_value = tk.DoubleVar()
+
+    def slider_changed(event):
+        master.value_label.configure(text='{: .2f}'.format(master.current_value.get()))
+
+    # Slider
+    master.time_slider = ttk.Scale(master.stretcher_frame,
+                              from_=0.5,
+                              to=2.0,
+                              length=450,
+                              orient=HORIZONTAL,
+                              style="TScale",
+                              command=slider_changed,
+                              variable=master.current_value)
+
+    master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
+
+    # Right limit
+    master.left_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                                text="0.5",
+                                                text_font=("Roboto Medium", -11),
+                                                background="gray18",
+                                                foreground="white")
+
+    master.left_limit.grid(row=16, column=0, pady=(50, 0), padx=75, sticky="nw")
+
+    # Left limit
+    master.right_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                               text="2.0",
+                                               text_font=("Roboto Medium", -11),
+                                               background="gray18",
+                                               foreground="white")
+
+    master.right_limit.grid(row=16, column=0, pady=(50, 0), padx=120, sticky="e")
+
+
+    # SECOND LABEL
+    master.label2 = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                           text="Value:",
+                                           text_font=("Roboto Medium", -12),
+                                           fg_color=("white", "gray30"),
+                                           width=30)  # font name and size in px
+
+    master.label2.grid(row=15, column=0, pady=(25, 0), padx=100, sticky="e")
+
+    # VALUE LABEL
+    master.value_label = ttk.Label(master.stretcher_frame,
+                                   text='{: .2f}'.format(master.current_value.get()),
+                                   background="gray18",
+                                   justify="center",
+                                   foreground="white")
+
+    master.value_label.grid(row=15, column=0, pady=(25, 0), padx=60, sticky='e')
+
