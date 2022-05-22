@@ -4,6 +4,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 import customtkinter
+
 from Functions import utilities as f
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
@@ -76,12 +77,16 @@ def stretcher_interface(master):
 
     master.label_delay.grid(row=15, column=0, pady=(25, 0), padx=50, sticky="nw")
 
+    # Define the style
+    style = ttk.Style()
+    style.configure("TScale", background="gray18")
+
     ##SLIDER
-    # slider current value
-    master.current_value = tk.DoubleVar()
+    # slider delay value
+    master.delay_value = tk.DoubleVar()
 
     def slider_changed(event):
-        master.value_label.configure(text='{: .2f}'.format(master.current_value.get()))
+        master.value_label.configure(text='{: .2f}'.format(master.delay_value.get()))
 
     # Slider
     master.time_slider = ttk.Scale(master.stretcher_frame,
@@ -91,7 +96,7 @@ def stretcher_interface(master):
                               orient=HORIZONTAL,
                               style="TScale",
                               command=slider_changed,
-                              variable=master.current_value)
+                              variable=master.delay_value)
 
     master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
 
@@ -114,7 +119,7 @@ def stretcher_interface(master):
     master.right_limit.grid(row=16, column=0, pady=(50, 0), padx=120, sticky="e")
 
 
-    # SECOND LABEL
+    # VALUE LABEL
     master.label2 = customtkinter.CTkLabel(master=master.stretcher_frame,
                                            text="Value:",
                                            text_font=("Roboto Medium", -12),
@@ -123,10 +128,9 @@ def stretcher_interface(master):
 
     master.label2.grid(row=15, column=0, pady=(25, 0), padx=100, sticky="e")
 
-    # VALUE LABEL
+    # VALUE NUMBER
     master.value_label = ttk.Label(master.stretcher_frame,
-                                   text='{: .2f}'.format(master.current_value.get()),
-                                   background="gray18",
+                                   text="{:.2f}".format(master.delay_value.get()),                                   background="gray18",
                                    justify="center",
                                    foreground="white")
 
