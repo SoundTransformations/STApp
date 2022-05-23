@@ -61,12 +61,6 @@ oi.create_other_interface(master)
 
 
 
-
-
-
-
-
-
 # Button to play the input file 1
 #photo = PhotoImage(file= r"C:\Users\USUARIO\Desktop\play.jpg")
 #photo = photo.subsample(14,14)

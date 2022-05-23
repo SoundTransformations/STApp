@@ -3,10 +3,16 @@ import os
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+import numpy as np
+import sounddevice as sd
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models/'))
 from Functions.models import utilFunctions as UF
+from Functions.models import dftModel as DFT
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations_interface/'))
 from Functions.transformations_interface import stftMorph_function as sT
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations/'))
+from Functions.transformations import stftTransformations as stft
 
 
 # Functions
@@ -20,13 +26,12 @@ def play_song():
 
 def browse_file1(master):
     try:
-        #
         filename = filedialog.askopenfilename(title="Please Select a File")
         master.equalizer_frame.filelocation1.delete(0, END)
         master.equalizer_frame.filelocation1.insert(0, filename)
         master.stretcher_frame.filelocation1.delete(0, END)
         master.stretcher_frame.filelocation1.insert(0, filename)
-
+        return filename
     except Exception as e:
         messagebox.showerror("We can not open that file")
 
@@ -59,6 +64,7 @@ def transformation_synthesis(master):
         messagebox.showerror("Input values error")
 
 def save_audio(y, fs):
+
     try:
         outputFile = filedialog.asksaveasfile()
         UF.wavwrite(y, fs, outputFile.name + '_stftMorph.wav')
@@ -89,3 +95,23 @@ def change_to_frame3(master):
 
     except Exception:
         messagebox.showerror("Something went wrong")
+
+def filtering(master):
+
+    (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
+
+    if(master.current_value1.get()!= 0):
+        N = 2048
+        start = int(1.0 * fs)
+        x1 = x[start:start + N]
+        mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
+        startBin = int(N * 500.0 / fs)
+        nBins = int(N * 4000.0 / fs)
+        bandpass = (np.hanning(nBins) *12) + int(master.current_value1.get())
+        filt = np.zeros(mX.size) - 60
+        filt[startBin:startBin + nBins] = bandpass
+        y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+        sd.play(y, fs)
+        #save_audio(y,fs)
+    else:
+        sd.play(x,fs)

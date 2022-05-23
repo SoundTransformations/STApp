@@ -3,13 +3,17 @@ import sys
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
+import numpy as np
 import customtkinter
 
 from Functions import utilities as f
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
 from Functions.models import utilFunctions as UF
+from Functions.models import dftModel as DFT
 
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
+from Functions.transformations import stftTransformations as stft
 
 def equalizer_interface(master):
 
@@ -44,10 +48,12 @@ def equalizer_interface(master):
     master.equalizer_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 480), sticky="we")
     master.equalizer_frame.filelocation1.focus_set()
 
+
+
     # Button to browse the input file 1
     open_file1 = customtkinter.CTkButton(master.equalizer_frame,
                                          text="...", width=3,
-                                         command=lambda: f.browse_file1(master))
+                                         command= lambda: f.browse_file1(master))
 
     open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
 
@@ -85,8 +91,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_5 = ttk.Scale(master.equalizer_frame,
-                                from_=50,
-                                to=-50,
+                                from_=12,
+                                to=-12,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command= slider1_changed,
@@ -429,3 +435,10 @@ def equalizer_interface(master):
 
     master.value_label9.grid(row=4, column=0, pady=0, padx=502, sticky='se')
 
+
+    # Button to browse the input file 1
+    apply_transformation = customtkinter.CTkButton(master.equalizer_frame,
+                                         text="Equalize", width=3,
+                                         command=lambda: f.filtering(master))
+    
+    apply_transformation.grid(row=5, column=0, sticky="e", padx=(70, 440), pady=5)
