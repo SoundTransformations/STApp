@@ -10,6 +10,8 @@ from Functions import utilities as f
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
 from Functions.models import utilFunctions as UF
 
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
+
 
 def create_other_interface(master):
     ## CONFIGURE THE PITCH SHIFTING FRAME
@@ -46,7 +48,7 @@ def create_other_interface(master):
                                          text="...", width=3,
                                          command=lambda: f.browse_file1(master))
 
-    open_file1.grid(row=1, column=0, sticky="n", padx=(0, 95), pady=20)
+    open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
 
     # Button to play the input file 1
     preview1 = customtkinter.CTkButton(master.other_interface,
@@ -55,7 +57,7 @@ def create_other_interface(master):
                                        fg_color=("gray75", "gray30"),
                                        hover_color="green")
 
-    preview1.grid(row=1, column=0, columnspan=3, sticky="n", padx=(0, 3), pady=20)
+    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(250, 380), pady=20)
 
     # Define the style
     style = ttk.Style()
@@ -64,12 +66,12 @@ def create_other_interface(master):
 
     # Create an slider space
     master.label_pitch = customtkinter.CTkLabel(master=master.other_interface,
-                                            text="Tone scale",
-                                            text_font=("Roboto Medium", -15),
-                                            fg_color=("white", "gray30"),
-                                            width=30)  # font name and size in px
+                                                text="Tone scale",
+                                                text_font=("Roboto Medium", -15),
+                                                fg_color=("white", "gray30"),
+                                                width=30)  # font name and size in px
 
-    master.label_pitch.grid(row=2, column=0, pady=(25, 0), padx=50, sticky="nw")
+    master.label_pitch.grid(row=2, column=0, pady=(20, 0), padx=50, sticky="nw")
 
     # slider current value
     master.current_value = tk.DoubleVar()
@@ -79,13 +81,13 @@ def create_other_interface(master):
 
     # Slider
     master.slider = ttk.Scale(master.other_interface,
-                                from_=-2400,
-                                to=2400,
-                                length = 450,
-                                orient=HORIZONTAL,
-                                style="TScale",
-                                command=slider_changed,
-                                variable=master.current_value)
+                              from_=-2400,
+                              to=2400,
+                              length=410,
+                              orient=HORIZONTAL,
+                              style="TScale",
+                              command=slider_changed,
+                              variable=master.current_value)
 
     master.slider.grid(row=2, column=0, pady=25, padx=170, sticky="w")
 
@@ -96,7 +98,7 @@ def create_other_interface(master):
                                                 background="gray18",
                                                 foreground="white")
 
-    master.right_limit.grid(row=2, column=0, pady=(50, 0), padx=120, sticky="nw")
+    master.right_limit.grid(row=2, column=0, pady=(45, 0), padx=120, sticky="nw")
 
     # Left limit
     master.left_limit = customtkinter.CTkLabel(master=master.other_interface,
@@ -105,24 +107,22 @@ def create_other_interface(master):
                                                 background="gray18",
                                                 foreground="white")
 
-    master.left_limit.grid(row=2, column=0, pady=(50, 0), padx=560, sticky="nw")
+    master.left_limit.grid(row=2, column=0, pady=(45, 0), padx=50, sticky="n")
 
-    # Second label
+    # Second label name
     master.label2 = customtkinter.CTkLabel(master=master.other_interface,
                                            text="Value:",
                                            text_font=("Roboto Medium", -12),
                                            fg_color=("white", "gray30"),
                                            width=30)  # font name and size in px
 
-    master.label2.grid(row=2, column=0, pady=(25, 0), padx=670, sticky="nw")
+    master.label2.grid(row=2, column=0, pady=(15, 0), padx=470, sticky="e")
 
-    # Value label
+    # Value label number
     master.value_label = ttk.Label(master.other_interface,
                                    text='{: .2f}'.format(master.current_value.get()),
                                    background="gray18",
                                    justify="center",
                                    foreground="white")
 
-    master.value_label.grid(row=2, column=0, pady=(25, 0), padx=730, sticky='nw')
-
-
+    master.value_label.grid(row=2, column=0, pady=(15, 0), padx=420, sticky='e')
