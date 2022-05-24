@@ -441,4 +441,4 @@ def equalizer_interface(master):
                                          text="Equalize", width=3,
                                          command=lambda: f.filtering(master))
     
-    apply_transformation.grid(row=5, column=0, sticky="e", padx=(70, 440), pady=5)
+    apply_transformation.grid(row=5, column=0, sticky="e", padx=(100, 400), pady=5)

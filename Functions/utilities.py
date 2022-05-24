@@ -102,57 +102,43 @@ def filtering(master):
 
     (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
 
-    if(master.current_value1.get()!= 0):
-        N = 2048
-        start = int(1.0 * fs)
-        x1 = x[start:start + N]
-        mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
-        startBin = int(N * 1 / fs)
-        nBins = int(N * 700 / fs)
-        bandpass= (np.hanning(nBins) *60) + int(master.current_value1.get())-60
+    #if(master.current_value1.get()!= 0):
+    N = 2048
+    start = int(1.0 * fs)
+    x1 = x[start:start + N]
+    mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
 
-        filt = np.zeros(mX.size) - 60
-        filt[startBin:startBin + nBins] = bandpass
-        y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+    #Iteratively fill an array of arrays called bandpass, which contains all the bandpasses at the different frequencies
 
-        plt.figure(1, figsize=(6, 4))
-        plt.subplot(211)
-        plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
-        plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
-        plt.title('input sound')
+    startBin = int(N * 1 / fs)
+    nBins = int(N * 1000 / fs)
+    bandpass = (np.hanning(nBins) *60) + int(master.current_value1.get())-60
+    bandpass2 = (np.hanning(nBins) *60) + int(master.current_value2.get())-60
+    bandpass3 = (np.hanning(nBins) *60) + int(master.current_value3.get())-60
+    filt = np.zeros(mX.size) - 60
+    filt[startBin:startBin + nBins] = bandpass
 
-        plt.subplot(212)
-        plt.plot(fs * np.arange(mX.size) / float(mX.size), mX, 'r', lw=1.5, label='mX')
-        plt.plot(fs * np.arange(mX.size) / float(mX.size), filt + max(mX), 'k', lw=1.5, label='filter')
-        plt.legend(prop={'size': 10})
-        plt.axis([0, fs / 4.0, -90, max(mX) + 2])
-        plt.title('mX + filter')
+    filt[startBin+nBins:startBin+nBins+nBins] = bandpass2 #filt[startBin+20:startBin+20+nBins]
+    filt[startBin+nBins+nBins:startBin+nBins+nBins+nBins] = bandpass3 #filt[startBin+20:startBin+20+nBins]
 
 
-        plt.show()
 
-        # create figure to plot
-        #plt.figure(figsize=(6, 3))
-        #plt.plot(np.arange(y.size) / float(fs), y)
-        #plt.axis([0, y.size / float(fs), min(y), max(y)])
-        #plt.ylabel('amplitude')
-        #plt.xlabel('time (sec)')
-        #plt.title('input sound: x')
-        #plt.tight_layout()
-        #plt.show()
+    y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+
+    plt.figure(1, figsize=(10, 4))
+    plt.subplot(121)
+    plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+    plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
+    plt.title('input sound')
+
+    plt.subplot(122)
+    plt.plot(fs * np.arange(mX.size) / float(mX.size), mX, 'r', lw=1.5, label='mX')
+    plt.plot(fs * np.arange(mX.size) / float(mX.size), filt + max(mX), 'k', lw=1.5, label='filter')
+    plt.legend(prop={'size': 10})
+    plt.axis([0, fs / 4.0, -90, max(mX) + 2])
+    plt.title('mX + filter')
 
 
-        sd.play(y, fs)
-        #save_audio(y,fs)
-    else:
-        sd.play(x,fs)
-        y = x
-        # create figure to plot
-        plt.figure(figsize=(6, 3))
-        plt.plot(np.arange(y.size) / float(fs), y)
-        plt.axis([0, y.size / float(fs), min(y), max(y)])
-        plt.ylabel('amplitude')
-        plt.xlabel('time (sec)')
-        plt.title('input sound: x')
-        plt.tight_layout()
-        plt.show()
+    plt.show()
+
+    sd.play(y, fs)
