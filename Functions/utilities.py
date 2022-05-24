@@ -6,6 +6,8 @@ from tkinter import messagebox
 import numpy as np
 import sounddevice as sd
 
+import matplotlib.pyplot as plt
+
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models/'))
 from Functions.models import utilFunctions as UF
 from Functions.models import dftModel as DFT
@@ -105,13 +107,52 @@ def filtering(master):
         start = int(1.0 * fs)
         x1 = x[start:start + N]
         mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
-        startBin = int(N * 500.0 / fs)
-        nBins = int(N * 4000.0 / fs)
-        bandpass = (np.hanning(nBins) *12) + int(master.current_value1.get())
+        startBin = int(N * 1 / fs)
+        nBins = int(N * 700 / fs)
+        bandpass= (np.hanning(nBins) *60) + int(master.current_value1.get())-60
+
         filt = np.zeros(mX.size) - 60
         filt[startBin:startBin + nBins] = bandpass
         y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+
+        plt.figure(1, figsize=(6, 4))
+        plt.subplot(211)
+        plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+        plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
+        plt.title('input sound')
+
+        plt.subplot(212)
+        plt.plot(fs * np.arange(mX.size) / float(mX.size), mX, 'r', lw=1.5, label='mX')
+        plt.plot(fs * np.arange(mX.size) / float(mX.size), filt + max(mX), 'k', lw=1.5, label='filter')
+        plt.legend(prop={'size': 10})
+        plt.axis([0, fs / 4.0, -90, max(mX) + 2])
+        plt.title('mX + filter')
+
+
+        plt.show()
+
+        # create figure to plot
+        #plt.figure(figsize=(6, 3))
+        #plt.plot(np.arange(y.size) / float(fs), y)
+        #plt.axis([0, y.size / float(fs), min(y), max(y)])
+        #plt.ylabel('amplitude')
+        #plt.xlabel('time (sec)')
+        #plt.title('input sound: x')
+        #plt.tight_layout()
+        #plt.show()
+
+
         sd.play(y, fs)
         #save_audio(y,fs)
     else:
         sd.play(x,fs)
+        y = x
+        # create figure to plot
+        plt.figure(figsize=(6, 3))
+        plt.plot(np.arange(y.size) / float(fs), y)
+        plt.axis([0, y.size / float(fs), min(y), max(y)])
+        plt.ylabel('amplitude')
+        plt.xlabel('time (sec)')
+        plt.title('input sound: x')
+        plt.tight_layout()
+        plt.show()
