@@ -141,3 +141,31 @@ def filtering(master):
     plt.show()
 
     sd.play(y, fs)
+
+def sineFreqScaling(master):
+    """
+    Frequency scaling of sinusoidal tracks
+    sfreq: frequencies of input sinusoidal tracks
+    freqScaling: scaling factors, in time-value pairs (value of 1 is no scaling)
+    returns ysfreq: frequencies of output sinusoidal tracks
+    """
+    (fs,x) = UF.wavread(master.other_interface.filelocation1.get())
+    N = 2048
+    mX, pX = DFT.dftAnal(x, np.hamming(N), N)
+    sfreq = mX
+    freqScaling = (master.current_value.get())
+
+    if (freqScaling.size % 2 != 0):                        # raise exception if array not even length
+        raise ValueError("Frequency scaling array does not have an even size")
+
+    L = sfreq.shape[0]                                     # number of input frames
+    # create interpolation object from the scaling values
+    freqScalingEnv = np.interp(np.arange(L), L*freqScaling[::2]/freqScaling[-2], freqScaling[1::2])
+    ysfreq = np.zeros_like(sfreq)                          # create empty output matrix
+    for l in range(L):                                     # go through all frames
+        ind_valid = np.where(sfreq[l,:]!=0)[0]               # check if there are frequency values
+        if ind_valid.size == 0:                              # if no values go to next frame
+            continue
+        ysfreq[l,ind_valid] = sfreq[l,ind_valid] * freqScalingEnv[l] # scale of frequencies
+
+    sd.play(ysfreq, fs)
