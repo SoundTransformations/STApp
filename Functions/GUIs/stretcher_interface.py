@@ -85,8 +85,8 @@ def stretcher_interface(master):
     # slider delay value
     master.speed_value = tk.DoubleVar()
 
-    def slider_changed(event):
-        master.value_label.configure(text='{: .2f}'.format(master.speed_value.get()))
+    def slider15_changed(event):
+        master.value360_label.configure(text='{: .2f}'.format(master.speed_value.get()))
 
     # Slider
     master.time_slider = ttk.Scale(master.stretcher_frame,
@@ -95,8 +95,7 @@ def stretcher_interface(master):
                               length=450,
                               orient=HORIZONTAL,
                               style="TScale",
-                              command=slider_changed,
-                              value=1.0,
+                              command=slider15_changed,
                               variable=master.speed_value)
 
     master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
@@ -130,10 +129,10 @@ def stretcher_interface(master):
     master.label2.grid(row=15, column=0, pady=(25, 0), padx=100, sticky="e")
 
     # VALUE NUMBER
-    master.value_label = ttk.Label(master.stretcher_frame,
+    master.value360_label = ttk.Label(master.stretcher_frame,
                                    text="{:.2f}".format(master.speed_value.get()),                                   background="gray18",
                                    justify="center",
                                    foreground="white")
 
-    master.value_label.grid(row=15, column=0, pady=(25, 0), padx=60, sticky='e')
+    master.value360_label.grid(row=15, column=0, pady=(25, 0), padx=60, sticky='e')
 
