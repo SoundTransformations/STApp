@@ -109,6 +109,17 @@ def equalizer_interface(master):
 
     master.value_label1.grid(row=4, column=0, pady=0, padx=61, sticky='sw')
 
+    # Button to reset the slider
+    reset1 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height =1,
+                                     fg_color = "gray40",
+                                     command=lambda: f.reset_slider1(master))
+
+    reset1.grid(row=5, column=0, pady = (5,50), padx=62, sticky = 'sw')
+
 
     ## Create an slider space
 
@@ -146,6 +157,17 @@ def equalizer_interface(master):
 
     master.value_label2.grid(row=4, column=0, pady=0, padx=119, sticky='sw')
 
+    # Button to reset the slider
+    reset2 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider2(master))
+
+    reset2.grid(row=5, column=0, pady=(5, 50), padx=120, sticky='sw')
+
     ## Create an slider space
 
     master.label_7 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -181,6 +203,17 @@ def equalizer_interface(master):
                                     foreground="white")
 
     master.value_label3.grid(row=4, column=0, pady=0, padx=181, sticky='sw')
+
+    # Button to reset the slider
+    reset3 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider3(master))
+
+    reset3.grid(row=5, column=0, pady=(5, 50), padx=183, sticky='sw')
 
     ## Create an slider space
 
@@ -218,6 +251,17 @@ def equalizer_interface(master):
 
     master.value_label4.grid(row=4, column=0, pady=0, padx= 246, sticky='sw')
 
+    # Button to reset the slider
+    reset4 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider4(master))
+
+    reset4.grid(row=5, column=0, pady=(5, 50), padx= 247, sticky='sw')
+
     ## Create an slider space
 
     master.label_15 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -253,6 +297,17 @@ def equalizer_interface(master):
                                     foreground="white")
 
     master.value_label5.grid(row=4, column=0, pady=0, padx=315, sticky='sw')
+
+    # Button to reset the slider
+    reset5 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider5(master))
+
+    reset5.grid(row=5, column=0, pady=(5, 50), padx=317, sticky='sw')
 
 
     ## Create an slider space
@@ -291,6 +346,17 @@ def equalizer_interface(master):
 
     master.value_label6.grid(row=4, column=0, pady=0, padx=378, sticky='sw')
 
+    # Button to reset the slider
+    reset6 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider6(master))
+
+    reset6.grid(row=5, column=0, pady=(5, 50), padx=380, sticky='sw')
+
     ## Create an slider space
 
     master.label_11 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -326,6 +392,17 @@ def equalizer_interface(master):
                                     foreground="white")
 
     master.value_label7.grid(row=4, column=0, pady=0, padx=438, sticky='sw')
+
+    # Button to reset the slider
+    reset7 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider7(master))
+
+    reset7.grid(row=5, column=0, pady=(5, 50), padx=440, sticky='sw')
 
     ## Create an slider space
 
@@ -363,6 +440,17 @@ def equalizer_interface(master):
 
     master.value_label8.grid(row=4, column=0, pady=0, padx=498, sticky='sw')
 
+    # Button to reset the slider
+    reset8 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider8(master))
+
+    reset8.grid(row=5, column=0, pady=(5, 50), padx=499, sticky='sw')
+
     ## Create an slider space
 
     master.label_13 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -399,6 +487,17 @@ def equalizer_interface(master):
 
     master.value_label9.grid(row=4, column=0, pady=0, padx=558, sticky='sw')
 
+    # Button to reset the slider
+    reset9 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider9(master))
+
+    reset9.grid(row=5, column=0, pady=(5, 50), padx=559, sticky='sw')
+
     ## Create an slider space
 
     master.label_14 = customtkinter.CTkLabel(master=master.equalizer_frame,
@@ -434,6 +533,17 @@ def equalizer_interface(master):
                                     foreground="white")
 
     master.value_label10.grid(row=4, column=0, pady=0, padx=502, sticky='se')
+
+    # Button to reset the slider
+    reset9 = customtkinter.CTkButton(master.equalizer_frame,
+                                     text="R",
+                                     width=1,
+                                     text_font=("Roboto Medium", -9),
+                                     height=1,
+                                     fg_color="gray40",
+                                     command=lambda: f.reset_slider10(master))
+
+    reset9.grid(row=5, column=0, pady=(5, 50), padx=502, sticky='se')
 
 
     # Button to browse the input file 1

@@ -18,7 +18,7 @@ master.title("Sound Transformations App")
 
 #Set the size of the window
 master.geometry("1000x620")
-
+master.resizable(False,False)
 
 
 ## ============= CREATE THE INTERFACES =============

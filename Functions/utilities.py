@@ -98,6 +98,37 @@ def change_to_frame3(master):
     except Exception:
         messagebox.showerror("Something went wrong")
 
+def reset_slider1(master):
+    master.slider_5.set(0)
+
+def reset_slider2(master):
+    master.slider_6.set(0)
+
+def reset_slider3(master):
+    master.slider_7.set(0)
+
+def reset_slider4(master):
+    master.slider_8.set(0)
+
+def reset_slider5(master):
+    master.slider_1.set(0)
+
+def reset_slider6(master):
+    master.slider_9.set(0)
+
+def reset_slider7(master):
+    master.slider_10.set(0)
+
+def reset_slider8(master):
+    master.slider_11.set(0)
+
+def reset_slider9(master):
+    master.slider_12.set(0)
+
+def reset_slider10(master):
+    master.slider_13.set(0)
+
+
 def filtering(master):
 
     #Read the audio file
