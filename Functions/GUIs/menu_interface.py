@@ -54,7 +54,7 @@ def create_main_interface(master):
 
     # Add a third button
     master.button_3 = customtkinter.CTkButton(master=master.frame_left,
-                                              text="Relantizer",
+                                              text="Pitch shifting",
                                               fg_color=("gray75", "gray30"),
                                               command=lambda: f.change_to_frame3(master))
 
