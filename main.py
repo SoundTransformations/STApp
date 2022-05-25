@@ -15,7 +15,7 @@ customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-bl
 #Initialize the master root as a Tkinter interface
 master = customtkinter.CTk()
 master.title("Sound Transformations App")
-master.iconbitmap("STAppIcon.ico")
+#master.iconbitmap("STAppIcon.ico")
 
 #Set the size of the window
 master.geometry("1000x620")
