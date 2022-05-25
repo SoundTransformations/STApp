@@ -67,6 +67,10 @@ def stretcher_interface(master):
                                           text_font=("Roboto Medium", -12),fg_color=("white", "gray18"), width=30)
     master.to_do.grid(row=3, column=0, columnspan=3, sticky="w", padx=(50, 300), pady=5)
 
+    # Define the style
+    style = ttk.Style()
+    style.configure("TScale", background="gray18")
+
     ##BUTTON FOR TIME DELAY
     # Create an slider space
     master.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
@@ -76,10 +80,6 @@ def stretcher_interface(master):
                                                 width=30)  # font name and size in px
 
     master.label_speed.grid(row=15, column=0, pady=(25, 0), padx=50, sticky="nw")
-
-    # Define the style
-    style = ttk.Style()
-    style.configure("TScale", background="gray18")
 
     ##SLIDER
     # slider delay value
@@ -95,10 +95,10 @@ def stretcher_interface(master):
                               length=450,
                               orient=HORIZONTAL,
                               style="TScale",
-                              value =1.0,
                               command=slider15_changed,
                               variable=master.speed_value)
-    master.time_slider.set(1)
+
+
     master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
 
     # Right limit
@@ -131,9 +131,11 @@ def stretcher_interface(master):
 
     # VALUE NUMBER
     master.value360_label = ttk.Label(master.stretcher_frame,
-                                   text="{:.2f}".format(master.speed_value.get()),                                   background="gray18",
+                                   text="{:.2f}".format(master.speed_value.get()),
+                                   background="gray18",
                                    justify="center",
                                    foreground="white")
 
     master.value360_label.grid(row=15, column=0, pady=(25, 0), padx=60, sticky='e')
 
+    master.time_slider.set(1)

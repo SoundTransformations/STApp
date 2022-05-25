@@ -229,30 +229,30 @@ def equalizer_interface(master):
     master.label_15.grid(row=2, column=0, pady=(15,0), padx= 305, sticky="nw")
 
     # Slider current value
-    master.current_value15 = tk.DoubleVar()
+    master.current_value5 = tk.DoubleVar()
 
-    def slider15_changed(event):
-        master.value_label15.configure(text='{: .2f}'.format(master.current_value15.get()))
+    def slider5_changed(event):
+        master.value_label5.configure(text='{: .2f}'.format(master.current_value5.get()))
 
     # Slider
-    master.slider_15 = ttk.Scale(master.equalizer_frame,
+    master.slider_1 = ttk.Scale(master.equalizer_frame,
                                 from_=12,
                                 to=-12,
                                 orient=VERTICAL,
                                 style="TScale",
-                                command=slider15_changed,
-                                variable=master.current_value15)
+                                command=slider5_changed,
+                                variable=master.current_value5)
 
-    master.slider_15.grid(row=3, column=0, pady=10, padx=320, sticky="w")
+    master.slider_1.grid(row=3, column=0, pady=10, padx=320, sticky="w")
 
     # Value label
-    master.value_label15 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value15.get()),
+    master.value_label5 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value5.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label15.grid(row=4, column=0, pady=0, padx=315, sticky='sw')
+    master.value_label5.grid(row=4, column=0, pady=0, padx=315, sticky='sw')
 
 
     ## Create an slider space
@@ -266,10 +266,10 @@ def equalizer_interface(master):
     master.label_10.grid(row=2, column=0, pady=(15,0), padx=372, sticky="nw")
 
     # Slider current value
-    master.current_value5 = tk.DoubleVar()
+    master.current_value6 = tk.DoubleVar()
 
-    def slider5_changed(event):
-        master.value_label5.configure(text='{: .2f}'.format(master.current_value5.get()))
+    def slider6_changed(event):
+        master.value_label6.configure(text='{: .2f}'.format(master.current_value6.get()))
 
     # Slider
     master.slider_9 = ttk.Scale(master.equalizer_frame,
@@ -277,19 +277,19 @@ def equalizer_interface(master):
                                 to=-12,
                                 orient=VERTICAL,
                                 style="TScale",
-                                command=slider5_changed,
-                                variable=master.current_value5)
+                                command=slider6_changed,
+                                variable=master.current_value6)
 
     master.slider_9.grid(row=3, column=0, pady=10, padx=382, sticky="w")
 
     # Value label
-    master.value_label5 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value5.get()),
+    master.value_label6 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value6.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label5.grid(row=4, column=0, pady=0, padx=378, sticky='sw')
+    master.value_label6.grid(row=4, column=0, pady=0, padx=378, sticky='sw')
 
     ## Create an slider space
 
@@ -302,10 +302,10 @@ def equalizer_interface(master):
     master.label_11.grid(row=2, column=0, pady=(15,0), padx=430, sticky="nw")
 
     # Slider current value
-    master.current_value6 = tk.DoubleVar()
+    master.current_value7 = tk.DoubleVar()
 
-    def slider6_changed(event):
-        master.value_label6.configure(text='{: .2f}'.format(master.current_value6.get()))
+    def slider7_changed(event):
+        master.value_label7.configure(text='{: .2f}'.format(master.current_value7.get()))
 
     # Slider
     master.slider_10 = ttk.Scale(master.equalizer_frame,
@@ -313,19 +313,19 @@ def equalizer_interface(master):
                                 to=-12,
                                 orient=VERTICAL,
                                 style="TScale",
-                                command=slider6_changed,
-                                variable=master.current_value6)
+                                command=slider7_changed,
+                                variable=master.current_value7)
 
     master.slider_10.grid(row=3, column=0, pady=10, padx=442, sticky="w")
 
     # Value label
-    master.value_label6 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value6.get()),
+    master.value_label7 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value7.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label6.grid(row=4, column=0, pady=0, padx=438, sticky='sw')
+    master.value_label7.grid(row=4, column=0, pady=0, padx=438, sticky='sw')
 
     ## Create an slider space
 
@@ -338,10 +338,10 @@ def equalizer_interface(master):
     master.label_12.grid(row=2, column=0, pady=(15,0), padx=490, sticky="nw")
 
     # Slider current value
-    master.current_value7 = tk.DoubleVar()
+    master.current_value8 = tk.DoubleVar()
 
-    def slider7_changed(event):
-        master.value_label7.configure(text='{: .2f}'.format(master.current_value7.get()))
+    def slider8_changed(event):
+        master.value_label8.configure(text='{: .2f}'.format(master.current_value8.get()))
 
     # Slider
     master.slider_11 = ttk.Scale(master.equalizer_frame,
@@ -349,19 +349,19 @@ def equalizer_interface(master):
                                  to=-12,
                                  orient=VERTICAL,
                                  style="TScale",
-                                 command=slider7_changed,
-                                 variable=master.current_value7)
+                                 command=slider8_changed,
+                                 variable=master.current_value8)
 
     master.slider_11.grid(row=3, column=0, pady=10, padx=500, sticky="w")
 
     # Value label
-    master.value_label7 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value7.get()),
+    master.value_label8 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value8.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label7.grid(row=4, column=0, pady=0, padx=498, sticky='sw')
+    master.value_label8.grid(row=4, column=0, pady=0, padx=498, sticky='sw')
 
     ## Create an slider space
 
@@ -374,10 +374,10 @@ def equalizer_interface(master):
     master.label_13.grid(row=2, column=0, pady=(15,0), padx=550, sticky="n")
 
     # Slider current value
-    master.current_value8 = tk.DoubleVar()
+    master.current_value9 = tk.DoubleVar()
 
-    def slider8_changed(event):
-        master.value_label8.configure(text='{: .2f}'.format(master.current_value8.get()))
+    def slider9_changed(event):
+        master.value_label9.configure(text='{: .2f}'.format(master.current_value9.get()))
 
     # Slider
     master.slider_12 = ttk.Scale(master.equalizer_frame,
@@ -385,19 +385,19 @@ def equalizer_interface(master):
                                  to=-12,
                                  orient=VERTICAL,
                                  style="TScale",
-                                 command=slider8_changed,
-                                 variable=master.current_value8)
+                                 command=slider9_changed,
+                                 variable=master.current_value9)
 
     master.slider_12.grid(row=3, column=0, pady=10, padx=562, sticky="w")
 
     # Value label
-    master.value_label8 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value8.get()),
+    master.value_label9 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value9.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label8.grid(row=4, column=0, pady=0, padx=558, sticky='sw')
+    master.value_label9.grid(row=4, column=0, pady=0, padx=558, sticky='sw')
 
     ## Create an slider space
 
@@ -410,10 +410,10 @@ def equalizer_interface(master):
     master.label_14.grid(row=2, column=0, pady=(15,0), padx=485, sticky="ne")
 
     # Slider current value
-    master.current_value9 = tk.DoubleVar()
+    master.current_value10 = tk.DoubleVar()
 
-    def slider9_changed(event):
-        master.value_label9.configure(text='{: .2f}'.format(master.current_value9.get()))
+    def slider10_changed(event):
+        master.value_label10.configure(text='{: .2f}'.format(master.current_value10.get()))
 
     # Slider
     master.slider_13 = ttk.Scale(master.equalizer_frame,
@@ -421,19 +421,19 @@ def equalizer_interface(master):
                                  to=-12,
                                  orient=VERTICAL,
                                  style="TScale",
-                                 command=slider9_changed,
-                                 variable=master.current_value9)
+                                 command=slider10_changed,
+                                 variable=master.current_value10)
 
     master.slider_13.grid(row=3, column=0, pady=10, padx=502, sticky="e")
 
     # Value label
-    master.value_label9 = ttk.Label(master.equalizer_frame,
-                                    text='{: .2f}'.format(master.current_value9.get()),
+    master.value_label10 = ttk.Label(master.equalizer_frame,
+                                    text='{: .2f}'.format(master.current_value10.get()),
                                     background="gray18",
                                     justify="center",
                                     foreground="white")
 
-    master.value_label9.grid(row=4, column=0, pady=0, padx=502, sticky='se')
+    master.value_label10.grid(row=4, column=0, pady=0, padx=502, sticky='se')
 
 
     # Button to browse the input file 1

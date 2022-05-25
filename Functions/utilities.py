@@ -110,18 +110,29 @@ def filtering(master):
     mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
 
     #Build the filt array
-    startBin = int(N * 1 / fs)
-    nBins = int(N * 1000 / fs)
-    bandpass1 = (np.hanning(nBins) *60) + int(master.current_value1.get()) -60
-    bandpass2 = (np.hanning(nBins) *60) + int(master.current_value2.get())
-    bandpass3 = (np.hanning(nBins) *60) + int(master.current_value3.get())
+    startBin = 0 #int(N * 1 / fs)
+    nBins = 183 #int(N * 1000 / fs)
+    db_to_down = 60
+
+    sliders = [master.current_value1.get(),
+               master.current_value2.get(),
+               master.current_value3.get(),
+               master.current_value4.get(),
+               master.current_value5.get(),
+               master.current_value6.get(),
+               master.current_value7.get(),
+               master.current_value8.get(),
+               master.current_value9.get(),
+               master.current_value10.get()]
 
     filt = np.zeros(mX.size) - 60
+    bandpass1 = (np.hanning(nBins) * (db_to_down+int(sliders[0]))) - db_to_down
+    filt[startBin : startBin + int((nBins)/2)+1] = bandpass1[int((nBins)/2):]
 
-    filt[startBin:startBin + nBins] = bandpass1
-    filt[startBin+int(N*500/fs):startBin+int(N*500/fs)+nBins] = filt[startBin+int(N*500/fs):startBin+int(N*500/fs)+nBins] +bandpass2
-    filt[startBin+int(N*1000/fs):startBin+int(N*1000/fs)+nBins] = filt[startBin+int(N*1000/fs):startBin+int(N*1000/fs)+nBins]+bandpass3
-
+    for i in range(1,10):
+        bandpass = (np.hanning(nBins) * (db_to_down+int(sliders[i])))
+        filt[startBin+i*91-int(nBins/2):startBin +i*91-int(nBins/2) +nBins] += bandpass
+    
     y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
 
     plt.figure(1, figsize=(10, 4))
@@ -131,10 +142,12 @@ def filtering(master):
     plt.title('input sound')
 
     plt.subplot(122)
-    plt.plot(fs * np.arange(mX.size) / float(mX.size), mX, 'r', lw=1.5, label='mX')
-    plt.plot(fs * np.arange(mX.size) / float(mX.size), filt + max(mX), 'k', lw=1.5, label='filter')
+    #fs * np.arange(mX.size) / float(mX.size)
+    plt.plot(mX, 'r', lw=1.5, label='mX')
+    plt.plot(filt + max(mX), 'k', lw=1.5, label='filter')
     plt.legend(prop={'size': 10})
-    plt.axis([0, fs / 4.0, -90, max(mX) + 2])
+    plt.axis([0,mX.size,-90, max(mX)+10])
+    #plt.axis([0, fs / 4.0, -90, max(mX) + 2])
     plt.title('mX + filter')
 
 
