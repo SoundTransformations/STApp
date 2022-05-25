@@ -72,7 +72,7 @@ def save_audio(y, fs):
         UF.wavwrite(y, fs, outputFile.name + '_stftMorph.wav')
 
     except Exception:
-        messagebox.showerror("We can not save this file")
+        messagebox.showerror(message="We can not save this file", title="Something went wrong!")
 
 def button_event():
     print("Button pressed")
@@ -82,21 +82,21 @@ def change_to_frame1(master):
         master.equalizer_frame.tkraise()
 
     except Exception:
-        messagebox.showerror("Something went wrong")
+        messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
 def change_to_frame2(master):
     try:
         master.stretcher_frame.tkraise()
 
     except Exception:
-        messagebox.showerror("Something went wrong")
+        messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
 def change_to_frame3(master):
     try:
         master.other_interface.tkraise()
 
     except Exception:
-        messagebox.showerror("Something went wrong")
+        messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
 def reset_slider1(master):
     master.slider_5.set(0)
@@ -130,61 +130,63 @@ def reset_slider10(master):
 
 
 def filtering(master):
+    try:
+        #Read the audio file
+        (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
 
-    #Read the audio file
-    (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
+        #We analyze one fragment of the the sound
+        N = 2048
+        start = int(1.0 * fs)
+        x1 = x[start:start + N]
+        mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
 
-    #We analyze one fragment of the the sound
-    N = 2048
-    start = int(1.0 * fs)
-    x1 = x[start:start + N]
-    mX, pX = DFT.dftAnal(x1, np.hamming(N), N)
+        #Build the filt array
+        startBin = 0 #int(N * 1 / fs)
+        nBins = 183 #int(N * 1000 / fs)
+        db_to_down = 60
 
-    #Build the filt array
-    startBin = 0 #int(N * 1 / fs)
-    nBins = 183 #int(N * 1000 / fs)
-    db_to_down = 60
+        sliders = [master.current_value1.get(),
+                   master.current_value2.get(),
+                   master.current_value3.get(),
+                   master.current_value4.get(),
+                   master.current_value5.get(),
+                   master.current_value6.get(),
+                   master.current_value7.get(),
+                   master.current_value8.get(),
+                   master.current_value9.get(),
+                   master.current_value10.get()]
 
-    sliders = [master.current_value1.get(),
-               master.current_value2.get(),
-               master.current_value3.get(),
-               master.current_value4.get(),
-               master.current_value5.get(),
-               master.current_value6.get(),
-               master.current_value7.get(),
-               master.current_value8.get(),
-               master.current_value9.get(),
-               master.current_value10.get()]
+        filt = np.zeros(mX.size) - 60
+        bandpass1 = (np.hanning(nBins) * (db_to_down+int(sliders[0]))) - db_to_down
+        filt[startBin : startBin + int((nBins)/2)+1] = bandpass1[int((nBins)/2):]
 
-    filt = np.zeros(mX.size) - 60
-    bandpass1 = (np.hanning(nBins) * (db_to_down+int(sliders[0]))) - db_to_down
-    filt[startBin : startBin + int((nBins)/2)+1] = bandpass1[int((nBins)/2):]
+        for i in range(1,10):
+            bandpass = (np.hanning(nBins) * (db_to_down+int(sliders[i])))
+            filt[startBin+i*91-int(nBins/2):startBin +i*91-int(nBins/2) +nBins] += bandpass
 
-    for i in range(1,10):
-        bandpass = (np.hanning(nBins) * (db_to_down+int(sliders[i])))
-        filt[startBin+i*91-int(nBins/2):startBin +i*91-int(nBins/2) +nBins] += bandpass
-    
-    y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+        y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
 
-    plt.figure(1, figsize=(10, 4))
-    plt.subplot(121)
-    plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
-    plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
-    plt.title('input sound')
+        plt.figure(1, figsize=(10, 4))
+        plt.subplot(121)
+        plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+        plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
+        plt.title('input sound')
 
-    plt.subplot(122)
-    #fs * np.arange(mX.size) / float(mX.size)
-    plt.plot(mX, 'r', lw=1.5, label='mX')
-    plt.plot(filt + max(mX), 'k', lw=1.5, label='filter')
-    plt.legend(prop={'size': 10})
-    plt.axis([0,mX.size,-90, max(mX)+10])
-    #plt.axis([0, fs / 4.0, -90, max(mX) + 2])
-    plt.title('mX + filter')
+        plt.subplot(122)
+        #fs * np.arange(mX.size) / float(mX.size)
+        plt.plot(mX, 'r', lw=1.5, label='mX')
+        plt.plot(filt + max(mX), 'k', lw=1.5, label='filter')
+        plt.legend(prop={'size': 10})
+        plt.axis([0,mX.size,-90, max(mX)+10])
+        #plt.axis([0, fs / 4.0, -90, max(mX) + 2])
+        plt.title('mX + filter')
+        plt.show()
 
+        sd.play(y, fs)
 
-    plt.show()
-
-    sd.play(y, fs)
+    except Exception:
+        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+        
 
 def sineFreqScaling(master):
     """
