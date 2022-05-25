@@ -95,9 +95,10 @@ def stretcher_interface(master):
                               length=450,
                               orient=HORIZONTAL,
                               style="TScale",
+                              value =1.0,
                               command=slider15_changed,
                               variable=master.speed_value)
-
+    master.time_slider.set(1)
     master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
 
     # Right limit
