@@ -3,8 +3,10 @@ import sys
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-import numpy as np
 import customtkinter
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 from Functions import utilities as f
 
@@ -551,4 +553,15 @@ def equalizer_interface(master):
                                          text="Equalize", width=3,
                                          command=lambda: f.filtering(master))
     
-    apply_transformation.grid(row=5, column=0, sticky="e", padx=(100, 400), pady=5)
+    apply_transformation.grid(row=3, column=0, sticky="e", padx=(100, 400), pady=5)
+
+    plt.rcParams['axes.facecolor'] = '#2e2e2e'
+    f = Figure(figsize=(16,9), dpi = 100)
+    f.set_facecolor('#2e2e2e')
+    a = f.add_subplot(111)
+    a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+    canvas = FigureCanvasTkAgg(f, master.equalizer_frame)
+
+    canvas.draw()
+    canvas.get_tk_widget().configure(background='black', width=500, height=200)
+    canvas.get_tk_widget().grid(row=6, column=0, sticky="nw", padx=(0, 600), pady=0)
