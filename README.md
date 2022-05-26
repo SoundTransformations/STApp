@@ -5,7 +5,7 @@ Sound transformations tool for music applications written in python (with a bit 
 How to use
 ----------
 
-In order to use these tools you have to install python (recommended 3.8.x) and the following modules: ipython, numpy, matplotlib, scipy, and cython. 
+In order to use these tools you have to install python (recommended 3.8.x) and the following modules: ipython, numpy, matplotlib, scipy, cython and sounddevice.
 
 In Ubuntu (which we strongly recommend) in order to install all these modules it is as simple as typing in the Terminal:
 
