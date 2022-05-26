@@ -6,7 +6,7 @@ from tkinter import ttk
 import customtkinter
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from Functions import utilities as f
 
@@ -93,8 +93,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_5 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command= slider1_changed,
@@ -141,8 +141,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_6 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command= slider2_changed,
@@ -188,8 +188,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_7 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider3_changed,
@@ -235,8 +235,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_8 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider4_changed,
@@ -282,8 +282,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_1 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider5_changed,
@@ -330,8 +330,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_9 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider6_changed,
@@ -377,8 +377,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_10 = ttk.Scale(master.equalizer_frame,
-                                from_=12,
-                                to=-12,
+                                from_=0,
+                                to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
                                 command=slider7_changed,
@@ -424,8 +424,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_11 = ttk.Scale(master.equalizer_frame,
-                                 from_=12,
-                                 to=-12,
+                                 from_=0,
+                                 to=-60,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider8_changed,
@@ -471,8 +471,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_12 = ttk.Scale(master.equalizer_frame,
-                                 from_=12,
-                                 to=-12,
+                                 from_=0,
+                                 to=-60,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider9_changed,
@@ -518,8 +518,8 @@ def equalizer_interface(master):
 
     # Slider
     master.slider_13 = ttk.Scale(master.equalizer_frame,
-                                 from_=12,
-                                 to=-12,
+                                 from_=0,
+                                 to=-60,
                                  orient=VERTICAL,
                                  style="TScale",
                                  command=slider10_changed,
@@ -555,13 +555,24 @@ def equalizer_interface(master):
     
     apply_transformation.grid(row=3, column=0, sticky="e", padx=(100, 400), pady=5)
 
+    master.graphic_label = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                          text="Graphical representation:",
+                                          text_font=("Roboto Medium", -20),
+                                          fg_color=("white", "gray18"),
+                                          width=30)  # font name and size in px
+
+    master.graphic_label.grid(row=5, column=0, pady=(50, 0), padx=40, sticky="sw")
+
+
     plt.rcParams['axes.facecolor'] = '#2e2e2e'
-    fig1 = Figure(figsize=(16,9), dpi = 100)
-    fig1.set_facecolor('#2e2e2e')
-    a = fig1.add_subplot(111)
-    a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
-    canvas = FigureCanvasTkAgg(fig1, master.equalizer_frame)
+
+
+    fig2 = Figure(figsize=(16,9), dpi = 100)
+    fig2.set_facecolor('#2e2e2e')
+    a2= fig2.add_subplot(111)
+    a2.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+    canvas = FigureCanvasTkAgg(fig2, master.equalizer_frame)
 
     canvas.draw()
-    canvas.get_tk_widget().configure(background='black', width=500, height=200)
-    canvas.get_tk_widget().grid(row=6, column=0, sticky="nw", padx=(0, 600), pady=0)
+    canvas.get_tk_widget().configure(background='black', width=300, height=200)
+    canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))

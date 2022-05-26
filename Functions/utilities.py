@@ -7,6 +7,8 @@ import numpy as np
 import sounddevice as sd
 
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models/'))
 from Functions.models import utilFunctions as UF
@@ -166,21 +168,23 @@ def filtering(master):
 
         y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
 
-        plt.figure(1, figsize=(10, 4))
-        plt.subplot(121)
-        plt.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
-        plt.axis([0, N / float(fs), min(x1 * np.hamming(N)), max(x1 * np.hamming(N))])
-        plt.title('input sound')
+        fig1 = Figure(figsize=(16, 9), dpi=100)
+        fig1.set_facecolor('#2e2e2e')
+        a = fig1.add_subplot(111)
+        try:
+            a.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+            a.plot(mX, lw=1.5, label='mX')
+            a.plot(filt + max(mX), 'k', lw=1.5, label='filter')
+            a.legend(prop={'size': 10})
+            a.axis([0, mX.size, -90, max(mX) + 10])
 
-        plt.subplot(122)
-        #fs * np.arange(mX.size) / float(mX.size)
-        plt.plot(mX, 'r', lw=1.5, label='mX')
-        plt.plot(filt + max(mX), 'k', lw=1.5, label='filter')
-        plt.legend(prop={'size': 10})
-        plt.axis([0,mX.size,-90, max(mX)+10])
-        #plt.axis([0, fs / 4.0, -90, max(mX) + 2])
-        plt.title('mX + filter')
-        plt.show()
+        except Exception:
+            a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+        canvas = FigureCanvasTkAgg(fig1, master.equalizer_frame)
+        canvas.draw()
+        canvas.get_tk_widget().configure(background='black', width=300, height=200)
+        canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
 
         sd.play(y, fs)
 
