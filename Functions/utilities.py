@@ -35,7 +35,10 @@ def browse_file1(master):
         master.equalizer_frame.filelocation1.insert(0, filename)
         master.stretcher_frame.filelocation1.delete(0, END)
         master.stretcher_frame.filelocation1.insert(0, filename)
+        filtering(master,1)
+
         return filename
+
     except Exception as e:
         messagebox.showerror("We can not open that file")
 
@@ -131,7 +134,8 @@ def reset_slider10(master):
     master.slider_13.set(0)
 
 
-def filtering(master):
+def filtering(master,case):
+
     try:
         #Read the audio file
         (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
@@ -185,8 +189,8 @@ def filtering(master):
         canvas.draw()
         canvas.get_tk_widget().configure(background='black', width=300, height=200)
         canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
-
-        sd.play(y, fs)
+        if case !=1:
+            sd.play(y, fs)
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")

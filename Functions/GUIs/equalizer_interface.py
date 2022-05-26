@@ -551,7 +551,7 @@ def equalizer_interface(master):
     # Button to browse the input file 1
     apply_transformation = customtkinter.CTkButton(master.equalizer_frame,
                                          text="Equalize", width=3,
-                                         command=lambda: f.filtering(master))
+                                         command=lambda: f.filtering(master,2))
     
     apply_transformation.grid(row=3, column=0, sticky="e", padx=(100, 400), pady=5)
 
