@@ -556,11 +556,11 @@ def equalizer_interface(master):
     apply_transformation.grid(row=3, column=0, sticky="e", padx=(100, 400), pady=5)
 
     plt.rcParams['axes.facecolor'] = '#2e2e2e'
-    f = Figure(figsize=(16,9), dpi = 100)
-    f.set_facecolor('#2e2e2e')
-    a = f.add_subplot(111)
+    fig1 = Figure(figsize=(16,9), dpi = 100)
+    fig1.set_facecolor('#2e2e2e')
+    a = fig1.add_subplot(111)
     a.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
-    canvas = FigureCanvasTkAgg(f, master.equalizer_frame)
+    canvas = FigureCanvasTkAgg(fig1, master.equalizer_frame)
 
     canvas.draw()
     canvas.get_tk_widget().configure(background='black', width=500, height=200)
