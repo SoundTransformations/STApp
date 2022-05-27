@@ -34,6 +34,8 @@ def browse_file1(master):
         master.equalizer_frame.filelocation1.insert(0, filename)
         master.stretcher_frame.filelocation1.delete(0, END)
         master.stretcher_frame.filelocation1.insert(0, filename)
+        master.other_interface.filelocation1.delete(0, END)
+        master.other_interface.filelocation1.insert(0, filename)
         master.y = None
         filtering(master)
 
