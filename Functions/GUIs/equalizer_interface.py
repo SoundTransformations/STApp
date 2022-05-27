@@ -57,7 +57,7 @@ def equalizer_interface(master):
     # Button to browse the input file 1
     open_file1 = customtkinter.CTkButton(master.equalizer_frame,
                                          text="...", width=3,
-                                         command= lambda: f.browse_file1(master))
+                                         command= lambda: f.browse_file1(master,1))
 
     open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
 

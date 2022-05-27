@@ -5,6 +5,10 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter
 
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import numpy as np
+
 from Functions import utilities as f
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
@@ -37,18 +41,18 @@ def create_other_interface(master):
     master.label_1.grid(row=1, column=0, pady=0, padx=50, sticky="w")
 
     master.other_interface.filelocation1 = customtkinter.CTkEntry(master=master.other_interface,
-                                                                  width=550,
+                                                                  width=10,
                                                                   placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
-    master.other_interface.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 480), sticky="nw")
+    master.other_interface.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 650), sticky="we")
     master.other_interface.filelocation1.focus_set()
 
     # Button to browse the input file 1
     open_file1 = customtkinter.CTkButton(master.other_interface,
                                          text="...", width=3,
-                                         command=lambda: f.browse_file1(master))
+                                         command=lambda: f.browse_file1(master,3))
 
-    open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
+    open_file1.grid(row=1, column=0, sticky="e", padx=(70, 610), pady=5)
 
     # Button to play the input file 1
     preview1 = customtkinter.CTkButton(master.other_interface,
@@ -57,7 +61,19 @@ def create_other_interface(master):
                                        fg_color=("gray75", "gray30"),
                                        hover_color="green")
 
-    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(250, 380), pady=20)
+    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(150, 550), pady=20)
+
+    # Draw the audio plot
+    fig4 = Figure(figsize=(16, 9), dpi=100)
+    fig4.set_facecolor('#2e2e2e')
+    a4 = fig4.add_subplot(111)
+    data = np.random.uniform(-1, 1, 44100)
+    a4.plot(data)
+    a4.axis('off')
+    canvas4 = FigureCanvasTkAgg(fig4, master.other_interface)
+    canvas4.draw()
+    canvas4.get_tk_widget().configure(background='black', width=720, height=200)
+    canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
 
     # Define the style
     style = ttk.Style()

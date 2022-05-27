@@ -27,31 +27,42 @@ def play_song(y,fs):
     except Exception as e:
         print(e)
 
-def browse_file1(master):
-    try:
-        filename = filedialog.askopenfilename(title="Please Select a File")
-        master.equalizer_frame.filelocation1.delete(0, END)
-        master.equalizer_frame.filelocation1.insert(0, filename)
-        master.stretcher_frame.filelocation1.delete(0, END)
-        master.stretcher_frame.filelocation1.insert(0, filename)
-        master.other_interface.filelocation1.delete(0, END)
-        master.other_interface.filelocation1.insert(0, filename)
-        master.y = None
-        filtering(master)
+def browse_file1(master, case):
 
-        return filename
+    filename = filedialog.askopenfilename(title="Please Select a File")
 
-    except Exception as e:
-        messagebox.showerror("We can not open that file")
+    if case ==1:
+        try:
+            master.equalizer_frame.filelocation1.delete(0, END)
+            master.equalizer_frame.filelocation1.insert(0, filename)
+            master.y = None
+            filtering(master)
 
-def browse_file2(master):
-    try:
-        filename = filedialog.askopenfilename(title="Please Select a File")
-        master.filelocation2.delete(0, END)
-        master.filelocation2.insert(0, filename)
+        except Exception:
+            messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
 
-    except Exception as e:
-        print(e)
+    elif case ==2:
+        try:
+
+            master.stretcher_frame.filelocation1.delete(0, END)
+            master.stretcher_frame.filelocation1.insert(0, filename)
+            master.y2 = None
+            stretching(master)
+
+        except Exception:
+            messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
+
+    else:
+        try:
+            master.other_interface.filelocation1.delete(0, END)
+            master.other_interface.filelocation1.insert(0, filename)
+            master.y3 = None
+            shifting(master)
+
+        except Exception:
+            messagebox.showerror(message="We can not open that file", title="Error opening the file")
+
+    return filename
 
 def transformation_synthesis(master):
     try:
@@ -195,7 +206,58 @@ def filtering(master):
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
-        
+
+def stretching(master):
+
+    try:
+        #Read the audio file
+        (fs2,x2) = UF.wavread(master.stretcher_frame.filelocation1.get())
+
+
+        fig4 = Figure(figsize=(16, 9), dpi=100)
+        fig4.set_facecolor('#2e2e2e')
+        a4 = fig4.add_subplot(111)
+        master.y2 = x2
+        try:
+            a4.plot(master.y2)
+            #a2.legend(prop={'size': 10})
+            #a2.axis([0, x2.size, -90, max(x2) + 10])
+            a4.axis('off')
+        except Exception:
+            a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+        canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)
+        canvas4.draw()
+        canvas4.get_tk_widget().configure(background='black', width=720, height=200)
+        canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+
+    except Exception:
+        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+
+def shifting(master):
+
+    try:
+        #Read the audio file
+        (fs3,x3) = UF.wavread(master.other_interface.filelocation1.get())
+
+        fig6 = Figure(figsize=(16, 9), dpi=100)
+        fig6.set_facecolor('#2e2e2e')
+        a6 = fig6.add_subplot(111)
+        master.y3 = x3
+        try:
+            a6.plot(master.y3)
+            a6.axis('off')
+        except Exception:
+            a6.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+        canvas6 = FigureCanvasTkAgg(fig6, master.other_interface)
+        canvas6.draw()
+        canvas6.get_tk_widget().configure(background='black', width=720, height=200)
+        canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+
+    except Exception:
+        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+
 
 def sineFreqScaling(master):
     """
@@ -224,3 +286,5 @@ def sineFreqScaling(master):
         ysfreq[l,ind_valid] = sfreq[l,ind_valid] * freqScalingEnv[l] # scale of frequencies
 
     sd.play(ysfreq, fs)
+
+
