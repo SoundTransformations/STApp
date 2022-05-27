@@ -551,9 +551,9 @@ def equalizer_interface(master):
     # Button to browse the input file 1
     apply_transformation = customtkinter.CTkButton(master.equalizer_frame,
                                          text="Equalize", width=3,
-                                         command=lambda: f.filtering(master,2))
+                                         command=lambda: f.filtering(master))
     
-    apply_transformation.grid(row=3, column=0, sticky="e", padx=(100, 400), pady=5)
+    apply_transformation.grid(row=3, column=0, sticky="ne", padx=(100, 400), pady=0)
 
     master.graphic_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                           text="Graphical representation:",
@@ -576,3 +576,17 @@ def equalizer_interface(master):
     canvas.draw()
     canvas.get_tk_widget().configure(background='black', width=300, height=200)
     canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
+
+    # Button to save the result
+    save_button = customtkinter.CTkButton(master.equalizer_frame,
+                                         text="Save", width=3,
+                                         command=lambda: f.save_audio(master.y,44100))
+
+    save_button.grid(row=3, column=0, sticky="e", padx=(100, 410), pady=0)
+
+    # Button to save the result
+    play_result_button = customtkinter.CTkButton(master.equalizer_frame,
+                                          text="Play!", width=3,
+                                          command=lambda: f.play_song(master.y, 44100))
+
+    play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 410), pady=0)

@@ -20,10 +20,9 @@ from Functions.transformations import stftTransformations as stft
 
 
 # Functions
-def play_song():
+def play_song(y,fs):
     try:
-        filename = filedialog.askopenfilename()
-        UF.wavplay(filename)
+        sd.play(y, fs)
 
     except Exception as e:
         print(e)
@@ -35,7 +34,8 @@ def browse_file1(master):
         master.equalizer_frame.filelocation1.insert(0, filename)
         master.stretcher_frame.filelocation1.delete(0, END)
         master.stretcher_frame.filelocation1.insert(0, filename)
-        filtering(master,1)
+        master.y = None
+        filtering(master)
 
         return filename
 
@@ -134,7 +134,7 @@ def reset_slider10(master):
     master.slider_13.set(0)
 
 
-def filtering(master,case):
+def filtering(master):
 
     try:
         #Read the audio file
@@ -170,7 +170,7 @@ def filtering(master,case):
             bandpass = (np.hanning(nBins) * (db_to_down+int(sliders[i])))
             filt[startBin+i*91-int(nBins/2):startBin +i*91-int(nBins/2) +nBins] += bandpass
 
-        y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+        master.y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
 
         fig1 = Figure(figsize=(16, 9), dpi=100)
         fig1.set_facecolor('#2e2e2e')
@@ -189,8 +189,7 @@ def filtering(master,case):
         canvas.draw()
         canvas.get_tk_widget().configure(background='black', width=300, height=200)
         canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
-        if case !=1:
-            sd.play(y, fs)
+
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
