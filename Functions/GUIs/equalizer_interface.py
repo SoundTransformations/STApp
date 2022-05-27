@@ -17,6 +17,8 @@ from Functions.models import dftModel as DFT
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
 from Functions.transformations import stftTransformations as stft
 
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../Functions/'))
+
 def equalizer_interface(master):
 
     ## CONFIGURE THE EQUALIZER FRAME
@@ -584,9 +586,9 @@ def equalizer_interface(master):
 
     save_button.grid(row=3, column=0, sticky="e", padx=(100, 410), pady=0)
 
-    # Button to save the result
+    #Button to play the result
     play_result_button = customtkinter.CTkButton(master.equalizer_frame,
-                                          text="Play!", width=3,
-                                          command=lambda: f.play_song(master.y, 44100))
+                                                 text="Play!", width=3,
+                                                 command=lambda: f.play_song(master.y, 44100))
 
     play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 410), pady=0)
