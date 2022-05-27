@@ -78,76 +78,76 @@ def stretcher_interface(master):
     canvas3.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
 
 
-    ## Define the style
-    #style = ttk.Style()
-    #style.configure("TScale", background="gray18")
+    # Define the style
+    style = ttk.Style()
+    style.configure("TScale", background="gray18")
 
-    ###BUTTON FOR TIME DELAY
+    ##BUTTON FOR TIME DELAY
 
-    ## Create an slider space
-    #master.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
-    #                                            text="Speed",
-    #                                            text_font=("Roboto Medium", -15),
-    #                                            fg_color=("white", "gray30"),
-    #                                            width=30)  # font name and size in px
-    #
-    #master.label_speed.grid(row=15, column=0, pady=(25, 0), padx=50, sticky="nw")
-    #
-    ###SLIDER
-    ## slider delay value
-    #master.speed_value = tk.DoubleVar()
-    #
-    #def slider15_changed(event):
-    #    master.value360_label.configure(text='{: .2f}'.format(master.speed_value.get()))
-    #
-    ## Slider
-    #master.time_slider = ttk.Scale(master.stretcher_frame,
-    #                          from_=0.5,
-    #                          to=2.0,
-    #                          length=450,
-    #                          orient=HORIZONTAL,
-    #                          style="TScale",
-    #                          command=slider15_changed,
-    #                          variable=master.speed_value)
-    #
-    #
-    #master.time_slider.grid(row=16, column=0, pady=20, padx=130, sticky="nw")
-    #
-    ## Right limit
-    #master.left_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
-    #                                            text="0.5",
-    #                                            text_font=("Roboto Medium", -11),
-    #                                            background="gray18",
-    #                                            foreground="white")
-    #
-    #master.left_limit.grid(row=16, column=0, pady=(50, 0), padx=75, sticky="nw")
-    #
-    ## Left limit
-    #master.right_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
-    #                                           text="2.0",
-    #                                           text_font=("Roboto Medium", -11),
-    #                                           background="gray18",
-    #                                           foreground="white")
-    #
-    #master.right_limit.grid(row=16, column=0, pady=(50, 0), padx=120, sticky="e")
-    #
-    #
-    ## VALUE LABEL
-    #master.label2 = customtkinter.CTkLabel(master=master.stretcher_frame,
-    #                                       text="Value:",
-    #                                       text_font=("Roboto Medium", -12),
-    #                                       fg_color=("white", "gray30"),
-    #                                       width=30)  # font name and size in px
-    #
-    #master.label2.grid(row=15, column=0, pady=(25, 0), padx=100, sticky="e")
-    #
-    ## VALUE NUMBER
-    #master.value360_label = ttk.Label(master.stretcher_frame,
-    #                               text="{:.2f}".format(master.speed_value.get()),
-    #                               background="gray18",
-    #                               justify="center",
-    #                               foreground="white")
-    #
-    #master.value360_label.grid(row=15, column=0, pady=(25, 0), padx=60, sticky='e')
-    #
-    #master.time_slider.set(1)
+    # Create an slider space
+    master.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                                text="Speed",
+                                                text_font=("Roboto Medium", -15),
+                                                fg_color=("white", "gray30"),
+                                                width=30)  # font name and size in px
+
+    master.label_speed.grid(row=3, column=0, pady=(25, 0), padx=50, sticky="nw")
+
+    ##SLIDER
+    # slider delay value
+    master.speed_value = tk.DoubleVar()
+
+    def slider15_changed(event):
+        master.value360_label.configure(text='{: .2f}'.format(master.speed_value.get()))
+
+    # Slider
+    master.time_slider = ttk.Scale(master.stretcher_frame,
+                              from_=0.5,
+                              to=2.0,
+                              length=450,
+                              orient=HORIZONTAL,
+                              style="TScale",
+                              command=slider15_changed,
+                              variable=master.speed_value)
+
+
+    master.time_slider.grid(row=4, column=0, pady=20, padx=130, sticky="nw")
+
+    # Right limit
+    master.left_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                                text="0.5",
+                                                text_font=("Roboto Medium", -11),
+                                                background="gray18",
+                                                foreground="white")
+
+    master.left_limit.grid(row=4, column=0, pady=(50, 0), padx=75, sticky="nw")
+
+    # Left limit
+    master.right_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                               text="2.0",
+                                               text_font=("Roboto Medium", -11),
+                                               background="gray18",
+                                               foreground="white")
+
+    master.right_limit.grid(row=4, column=0, pady=(50, 0), padx=530, sticky="w")
+
+
+    # VALUE LABEL
+    master.label2 = customtkinter.CTkLabel(master=master.stretcher_frame,
+                                           text="Value:",
+                                           text_font=("Roboto Medium", -12),
+                                           fg_color=("white", "gray30"),
+                                           width=30)  # font name and size in px
+
+    master.label2.grid(row=3, column=0, pady=(25, 0), padx=580, sticky="sw")
+
+    # VALUE NUMBER
+    master.value360_label = ttk.Label(master.stretcher_frame,
+                                   text="{:.2f}".format(master.speed_value.get()),
+                                   background="gray18",
+                                   justify="center",
+                                   foreground="white")
+
+    master.value360_label.grid(row=3, column=0, pady=(25, 0), padx=0, sticky='s')
+
+    master.time_slider.set(1)

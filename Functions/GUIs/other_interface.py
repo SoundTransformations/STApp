@@ -87,7 +87,7 @@ def create_other_interface(master):
                                                 fg_color=("white", "gray30"),
                                                 width=30)  # font name and size in px
 
-    master.label_pitch.grid(row=2, column=0, pady=(20, 0), padx=50, sticky="nw")
+    master.label_pitch.grid(row=3, column=0, pady=(20, 0), padx=50, sticky="nw")
 
     # slider current value
     master.current_value = tk.DoubleVar()
@@ -105,7 +105,7 @@ def create_other_interface(master):
                               command=slider_changed,
                               variable=master.current_value)
 
-    master.slider.grid(row=2, column=0, pady=25, padx=170, sticky="w")
+    master.slider.grid(row=3, column=0, pady=25, padx=170, sticky="w")
 
     # Right limit
     master.right_limit = customtkinter.CTkLabel(master=master.other_interface,
@@ -114,7 +114,7 @@ def create_other_interface(master):
                                                 background="gray18",
                                                 foreground="white")
 
-    master.right_limit.grid(row=2, column=0, pady=(45, 0), padx=120, sticky="nw")
+    master.right_limit.grid(row=3, column=0, pady=(45, 0), padx=120, sticky="nw")
 
     # Left limit
     master.left_limit = customtkinter.CTkLabel(master=master.other_interface,
@@ -123,7 +123,7 @@ def create_other_interface(master):
                                                 background="gray18",
                                                 foreground="white")
 
-    master.left_limit.grid(row=2, column=0, pady=(45, 0), padx=50, sticky="n")
+    master.left_limit.grid(row=3, column=0, pady=(45, 0), padx=510, sticky="w")
 
     # Second label name
     master.label2 = customtkinter.CTkLabel(master=master.other_interface,
@@ -132,7 +132,7 @@ def create_other_interface(master):
                                            fg_color=("white", "gray30"),
                                            width=30)  # font name and size in px
 
-    master.label2.grid(row=2, column=0, pady=(15, 0), padx=470, sticky="e")
+    master.label2.grid(row=3, column=0, pady=(15, 0), padx=600, sticky="sw")
 
     # Value label number
     master.value_label = ttk.Label(master.other_interface,
@@ -141,4 +141,4 @@ def create_other_interface(master):
                                    justify="center",
                                    foreground="white")
 
-    master.value_label.grid(row=2, column=0, pady=(15, 0), padx=420, sticky='e')
+    master.value_label.grid(row=3, column=0, pady=(50, 0), padx=620, sticky='e')

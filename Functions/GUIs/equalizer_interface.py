@@ -573,6 +573,8 @@ def equalizer_interface(master):
     fig2.set_facecolor('#2e2e2e')
     a2= fig2.add_subplot(111)
     a2.plot([1,2,3,4,5,6,7,8],[5,6,1,3,8,9,3,5])
+    a2.spines['right'].set_visible(False)
+    a2.spines['top'].set_visible(False)
     canvas = FigureCanvasTkAgg(fig2, master.equalizer_frame)
 
     canvas.draw()
@@ -588,7 +590,14 @@ def equalizer_interface(master):
 
     #Button to play the result
     play_result_button = customtkinter.CTkButton(master.equalizer_frame,
-                                                 text="Play!", width=3,
+                                                 text="▶", width=3,
                                                  command=lambda: f.play_song(master.y, 44100))
 
-    play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 410), pady=0)
+    play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 400), pady=0)
+
+    # Button to stop the result
+    stop_result_button = customtkinter.CTkButton(master.equalizer_frame,
+                                                 text="II", width=3,
+                                                 command=lambda: f.stop_song(master.y))
+
+    stop_result_button.grid(row=3, column=0, sticky="se", padx=(100, 440), pady=0)

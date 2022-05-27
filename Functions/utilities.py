@@ -23,7 +23,12 @@ from Functions.transformations import stftTransformations as stft
 def play_song(y,fs):
     try:
         sd.play(y, fs)
+    except Exception as e:
+        print(e)
 
+def stop_song(y):
+    try:
+        sd.stop(y)
     except Exception as e:
         print(e)
 
@@ -86,8 +91,8 @@ def transformation_synthesis(master):
 def save_audio(y, fs):
 
     try:
-        outputFile = filedialog.asksaveasfile()
-        UF.wavwrite(y, fs, outputFile.name + '_stftMorph.wav')
+        outputFile = filedialog.asksaveasfile(defaultextension=".wav")
+        UF.wavwrite(y, fs, outputFile.name)
 
     except Exception:
         messagebox.showerror(message="We can not save this file", title="Something went wrong!")
@@ -194,6 +199,8 @@ def filtering(master):
             a.plot(filt + max(mX), 'k', lw=1.5, label='filter')
             a.legend(prop={'size': 10})
             a.axis([0, mX.size, -90, max(mX) + 10])
+            a.spines['right'].set_visible(False)
+            a.spines['top'].set_visible(False)
 
         except Exception:
             a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
