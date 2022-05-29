@@ -1,5 +1,6 @@
 import sys
 import os
+import tkinter
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
@@ -41,7 +42,8 @@ def browse_file1(master, case):
             master.equalizer_frame.filelocation1.delete(0, END)
             master.equalizer_frame.filelocation1.insert(0, filename)
             master.y = None
-            filtering(master)
+            master.save_button.configure(state = DISABLED)
+            filtering(master,1)
 
         except Exception:
             messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
@@ -152,7 +154,7 @@ def reset_slider10(master):
     master.slider_13.set(0)
 
 
-def filtering(master):
+def filtering(master,case):
 
     try:
         #Read the audio file
@@ -210,6 +212,8 @@ def filtering(master):
         canvas.get_tk_widget().configure(background='black', width=300, height=200)
         canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
 
+        if case == 2: #If we pressed the button Equalize, we can save the file (case = 2)
+            master.save_button.configure(state=NORMAL)
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
@@ -237,6 +241,7 @@ def stretching(master):
         canvas4.draw()
         canvas4.get_tk_widget().configure(background='black', width=720, height=200)
         canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")

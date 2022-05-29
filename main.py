@@ -6,7 +6,7 @@ import base64
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Functions/GUIs'))
 from Functions.GUIs import equalizer_interface as ei, menu_interface as mi, stretcher_interface as si, other_interface as oi
 
-#comentari de prova
+
 ## ============= INITIALIZE MASTER =============
 
 #Configure customtkinter appearance
@@ -16,7 +16,6 @@ customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-bl
 #Initialize the master root as a Tkinter interface
 master = customtkinter.CTk()
 master.title("Sound Transformations App")
-
 
 
 #Set the size of the window

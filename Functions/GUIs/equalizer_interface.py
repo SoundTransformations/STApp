@@ -552,8 +552,11 @@ def equalizer_interface(master):
 
     # Button to browse the input file 1
     apply_transformation = customtkinter.CTkButton(master.equalizer_frame,
-                                         text="Equalize", width=3,
-                                         command=lambda: f.filtering(master))
+                                                   text="Equalize", width=3,
+                                                   command=lambda: f.filtering(master,2),fg_color=("gray75", "gray30"),
+                                                   hover_color="#1c94cf",
+                                                   border_color="#6a777d",
+                                                   border_width=1)
     
     apply_transformation.grid(row=3, column=0, sticky="ne", padx=(100, 400), pady=0)
 
@@ -582,22 +585,27 @@ def equalizer_interface(master):
     canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
 
     # Button to save the result
-    save_button = customtkinter.CTkButton(master.equalizer_frame,
-                                         text="Save", width=3,
-                                         command=lambda: f.save_audio(master.y,44100))
+    master.save_button = customtkinter.CTkButton(master.equalizer_frame,
+                                          text="Save", width=3,
+                                          command=lambda: f.save_audio(master.y,44100),
+                                          fg_color=("gray75", "gray30"),
+                                          state=DISABLED)
 
-    save_button.grid(row=3, column=0, sticky="e", padx=(100, 410), pady=0)
+    master.save_button.grid(row=3, column=0, sticky="e", padx=(100, 410), pady=0)
+
 
     #Button to play the result
     play_result_button = customtkinter.CTkButton(master.equalizer_frame,
                                                  text="▶", width=3,
-                                                 command=lambda: f.play_song(master.y, 44100))
+                                                 command=lambda: f.play_song(master.y, 44100),
+                                                 fg_color=("gray75", "gray30"))
 
     play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 400), pady=0)
 
     # Button to stop the result
     stop_result_button = customtkinter.CTkButton(master.equalizer_frame,
                                                  text="II", width=3,
-                                                 command=lambda: f.stop_song(master.y))
+                                                 command=lambda: f.stop_song(master.y),
+                                                 fg_color=("gray75", "gray30"))
 
     stop_result_button.grid(row=3, column=0, sticky="se", padx=(100, 440), pady=0)
