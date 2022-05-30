@@ -26,44 +26,44 @@ def stretcher_interface(master):
 
 
     ##TITLE
-    master.label = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.frame_title = customtkinter.CTkLabel(master=master.stretcher_frame,
                                           text="Stretcher", text_font=("Roboto Medium", -30),
                                           fg_color=("white", "gray18"), width=30)  # font name and size in px
 
-    master.label.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
+    master.stretcher_frame.frame_title.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
 
     ## INPUT FILE 1
 
-    master.label_1 = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.file_label = customtkinter.CTkLabel(master=master.stretcher_frame,
                                             text="File1:",
                                             text_font=("Roboto Medium", -16),
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
 
-    master.label_1.grid(row=1, column=0, pady=0, padx=50, sticky="w")
+    master.stretcher_frame.file_label.grid(row=1, column=0, pady=0, padx=50, sticky="w")
 
-    master.stretcher_frame.filelocation1 = customtkinter.CTkEntry(master=master.stretcher_frame,
+    master.stretcher_frame.filelocation_stretcher = customtkinter.CTkEntry(master=master.stretcher_frame,
                                                                   width=10,
                                                                   placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
-    master.stretcher_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 650), sticky="we")
-    master.stretcher_frame.filelocation1.focus_set()
+    master.stretcher_frame.filelocation_stretcher.grid(row=1, column=0, pady=20, padx=(120, 650), sticky="we")
+    master.stretcher_frame.filelocation_stretcher.focus_set()
 
     # Button to browse the input file 1
-    open_file1 = customtkinter.CTkButton(master.stretcher_frame,
+    master.stretcher_frame.open_file_stretcher = customtkinter.CTkButton(master.stretcher_frame,
                                          text="...",
                                          width=3,
                                          command=lambda: f.browse_file1(master,2))
 
-    open_file1.grid(row=1, column=0, sticky="e", padx=(70, 610), pady=5)
+    master.stretcher_frame.open_file_stretcher.grid(row=1, column=0, sticky="e", padx=(70, 610), pady=5)
 
-    preview1 = customtkinter.CTkButton(master.stretcher_frame, text="Play!",
+    master.stretcher_frame.preview_stretcher = customtkinter.CTkButton(master.stretcher_frame, text="Play!",
                                        width=3,
-                                       command=lambda: UF.wavplay(master.stretcher_frame.filelocation1.get()),
+                                       command=lambda: UF.wavplay(master.stretcher_frame.filelocation_stretcher.get()),
                                        fg_color=("gray75", "gray30"),
                                        hover_color="green")
 
-    preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(150, 550), pady=20)
+    master.stretcher_frame.preview_stretcher.grid(row=1, column=0, columnspan=3, sticky="e", padx=(150, 550), pady=20)
 
     #Draw the audio plot
     fig3 = Figure(figsize=(16,9), dpi = 100)
@@ -85,69 +85,68 @@ def stretcher_interface(master):
     ##BUTTON FOR TIME DELAY
 
     # Create an slider space
-    master.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                 text="Speed",
                                                 text_font=("Roboto Medium", -15),
                                                 fg_color=("white", "gray30"),
                                                 width=30)  # font name and size in px
 
-    master.label_speed.grid(row=3, column=0, pady=(25, 0), padx=50, sticky="nw")
+    master.stretcher_frame.label_speed.grid(row=3, column=0, pady=(25, 0), padx=50, sticky="nw")
 
     ##SLIDER
     # slider delay value
-    master.speed_value = tk.DoubleVar()
+    master.stretcher_frame.speed_value = tk.DoubleVar()
 
     def slider15_changed(event):
-        master.value360_label.configure(text='{: .2f}'.format(master.speed_value.get()))
+        master.stretcher_frame.value_number.configure(text='{: .2f}'.format(master.stretcher_frame.speed_value.get()))
 
     # Slider
-    master.time_slider = ttk.Scale(master.stretcher_frame,
+    master.stretcher_frame.time_slider = ttk.Scale(master.stretcher_frame,
                               from_=0.5,
                               to=2.0,
                               length=450,
                               orient=HORIZONTAL,
                               style="TScale",
                               command=slider15_changed,
-                              variable=master.speed_value)
+                              variable=master.stretcher_frame.speed_value)
 
-
-    master.time_slider.grid(row=4, column=0, pady=20, padx=130, sticky="nw")
+    master.stretcher_frame.time_slider.grid(row=4, column=0, pady=20, padx=130, sticky="nw")
 
     # Right limit
-    master.left_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.left_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                 text="0.5",
                                                 text_font=("Roboto Medium", -11),
                                                 background="gray18",
                                                 foreground="white")
 
-    master.left_limit.grid(row=4, column=0, pady=(50, 0), padx=75, sticky="nw")
+    master.stretcher_frame.left_limit_stretcher.grid(row=4, column=0, pady=(50, 0), padx=75, sticky="nw")
 
     # Left limit
-    master.right_limit = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.right_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                text="2.0",
                                                text_font=("Roboto Medium", -11),
                                                background="gray18",
                                                foreground="white")
 
-    master.right_limit.grid(row=4, column=0, pady=(50, 0), padx=530, sticky="w")
+    master.stretcher_frame.right_limit_stretcher.grid(row=4, column=0, pady=(50, 0), padx=530, sticky="w")
 
 
     # VALUE LABEL
-    master.label2 = customtkinter.CTkLabel(master=master.stretcher_frame,
+    master.stretcher_frame.value_label = customtkinter.CTkLabel(master=master.stretcher_frame,
                                            text="Value:",
                                            text_font=("Roboto Medium", -12),
                                            fg_color=("white", "gray30"),
                                            width=30)  # font name and size in px
 
-    master.label2.grid(row=3, column=0, pady=(25, 0), padx=580, sticky="sw")
+    master.stretcher_frame.value_label.grid(row=3, column=0, pady=(25, 0), padx=580, sticky="sw")
 
     # VALUE NUMBER
-    master.value360_label = ttk.Label(master.stretcher_frame,
-                                   text="{:.2f}".format(master.speed_value.get()),
+    master.stretcher_frame.value_number = ttk.Label(master.stretcher_frame,
+                                   text="{:.2f}".format(master.stretcher_frame.speed_value.get()),
                                    background="gray18",
                                    justify="center",
                                    foreground="white")
 
-    master.value360_label.grid(row=3, column=0, pady=(25, 0), padx=0, sticky='s')
+    master.stretcher_frame.value_number.grid(row=3, column=0, pady=(25, 0), padx=0, sticky='s')
 
-    master.time_slider.set(1)
+    master.stretcher_frame.time_slider.set(1)
