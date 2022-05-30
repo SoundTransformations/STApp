@@ -42,7 +42,7 @@ def browse_file1(master, case):
             master.equalizer_frame.filelocation1.delete(0, END)
             master.equalizer_frame.filelocation1.insert(0, filename)
             master.y = None
-            master.save_button.configure(state = DISABLED)
+            master.equalizer_frame.save_button.configure(state = DISABLED)
             filtering(master,1)
 
         except Exception:
@@ -124,34 +124,34 @@ def change_to_frame3(master):
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
 def reset_slider1(master):
-    master.slider_5.set(0)
+    master.equalizer_frame.slider_1.set(0)
 
 def reset_slider2(master):
-    master.slider_6.set(0)
+    master.equalizer_frame.slider_2.set(0)
 
 def reset_slider3(master):
-    master.slider_7.set(0)
+    master.equalizer_frame.slider_3.set(0)
 
 def reset_slider4(master):
-    master.slider_8.set(0)
+    master.equalizer_frame.slider_4.set(0)
 
 def reset_slider5(master):
-    master.slider_1.set(0)
+    master.equalizer_frame.slider_5.set(0)
 
 def reset_slider6(master):
-    master.slider_9.set(0)
+    master.equalizer_frame.slider_6.set(0)
 
 def reset_slider7(master):
-    master.slider_10.set(0)
+    master.equalizer_frame.slider_7.set(0)
 
 def reset_slider8(master):
-    master.slider_11.set(0)
+    master.equalizer_frame.slider_8.set(0)
 
 def reset_slider9(master):
-    master.slider_12.set(0)
+    master.equalizer_frame.slider_9.set(0)
 
 def reset_slider10(master):
-    master.slider_13.set(0)
+    master.equalizer_frame.slider_10.set(0)
 
 
 def filtering(master,case):
@@ -171,16 +171,16 @@ def filtering(master,case):
         nBins = 183 #int(N * 1000 / fs)
         db_to_down = 60
 
-        sliders = [master.current_value1.get(),
-                   master.current_value2.get(),
-                   master.current_value3.get(),
-                   master.current_value4.get(),
-                   master.current_value5.get(),
-                   master.current_value6.get(),
-                   master.current_value7.get(),
-                   master.current_value8.get(),
-                   master.current_value9.get(),
-                   master.current_value10.get()]
+        sliders = [master.equalizer_frame.s1_current_value.get(),
+                   master.equalizer_frame.s2_current_value.get(),
+                   master.equalizer_frame.s3_current_value.get(),
+                   master.equalizer_frame.s4_current_value.get(),
+                   master.equalizer_frame.s5_current_value.get(),
+                   master.equalizer_frame.s6_current_value.get(),
+                   master.equalizer_frame.s7_current_value.get(),
+                   master.equalizer_frame.s8_current_value.get(),
+                   master.equalizer_frame.s9_current_value.get(),
+                   master.equalizer_frame.s10_current_value.get()]
 
         filt = np.zeros(mX.size) - 60
         bandpass1 = (np.hanning(nBins) * (db_to_down+int(sliders[0]))) - db_to_down
@@ -213,7 +213,7 @@ def filtering(master,case):
         canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
 
         if case == 2: #If we pressed the button Equalize, we can save the file (case = 2)
-            master.save_button.configure(state=NORMAL)
+            master.equalizer_frame.save_button.configure(state=NORMAL)
 
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
