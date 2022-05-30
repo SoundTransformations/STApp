@@ -51,8 +51,8 @@ def browse_file1(master, case):
     elif case ==2:
         try:
 
-            master.stretcher_frame.filelocation1.delete(0, END)
-            master.stretcher_frame.filelocation1.insert(0, filename)
+            master.stretcher_frame.filelocation_stretcher.delete(0, END)
+            master.stretcher_frame.filelocation_stretcher.insert(0, filename)
             master.y2 = None
             stretching(master)
 
@@ -222,7 +222,7 @@ def stretching(master):
 
     try:
         #Read the audio file
-        (fs2,x2) = UF.wavread(master.stretcher_frame.filelocation1.get())
+        (fs2,x2) = UF.wavread(master.stretcher_frame.filelocation_stretcher.get())
 
 
         fig4 = Figure(figsize=(16, 9), dpi=100)
