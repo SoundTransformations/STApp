@@ -10,8 +10,8 @@ def create_main_interface(master):
 
     # Create a test frame
 
-    master.other_interface = customtkinter.CTkFrame(master=master)
-    master.other_interface.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
+    master.pitch_frame = customtkinter.CTkFrame(master=master)
+    master.pitch_frame.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
 
     # Create two possible frames (Equalizer and Stretcher)
 

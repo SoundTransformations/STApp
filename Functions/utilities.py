@@ -61,8 +61,8 @@ def browse_file1(master, case):
 
     else:
         try:
-            master.other_interface.filelocation1.delete(0, END)
-            master.other_interface.filelocation1.insert(0, filename)
+            master.pitch_frame.filelocation_pitch.delete(0, END)
+            master.pitch_frame.filelocation_pitch.insert(0, filename)
             master.y3 = None
             shifting(master)
 
@@ -118,7 +118,7 @@ def change_to_frame2(master):
 
 def change_to_frame3(master):
     try:
-        master.other_interface.tkraise()
+        master.pitch_frame.tkraise()
 
     except Exception:
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
@@ -224,7 +224,6 @@ def stretching(master):
         #Read the audio file
         (fs2,x2) = UF.wavread(master.stretcher_frame.filelocation_stretcher.get())
 
-
         fig4 = Figure(figsize=(16, 9), dpi=100)
         fig4.set_facecolor('#2e2e2e')
         a4 = fig4.add_subplot(111)
@@ -250,7 +249,7 @@ def shifting(master):
 
     try:
         #Read the audio file
-        (fs3,x3) = UF.wavread(master.other_interface.filelocation1.get())
+        (fs3,x3) = UF.wavread(master.pitch_frame.filelocation_pitch.get())
 
         fig6 = Figure(figsize=(16, 9), dpi=100)
         fig6.set_facecolor('#2e2e2e')
@@ -262,7 +261,7 @@ def shifting(master):
         except Exception:
             a6.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
 
-        canvas6 = FigureCanvasTkAgg(fig6, master.other_interface)
+        canvas6 = FigureCanvasTkAgg(fig6, master.pitch_frame)
         canvas6.draw()
         canvas6.get_tk_widget().configure(background='black', width=720, height=200)
         canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
@@ -278,7 +277,7 @@ def sineFreqScaling(master):
     freqScaling: scaling factors, in time-value pairs (value of 1 is no scaling)
     returns ysfreq: frequencies of output sinusoidal tracks
     """
-    (fs,x) = UF.wavread(master.other_interface.filelocation1.get())
+    (fs,x) = UF.wavread(master.pitch_frame.filelocation_pitch.get())
     N = 2048
     mX, pX = DFT.dftAnal(x, np.hamming(N), N)
     sfreq = mX

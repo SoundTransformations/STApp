@@ -112,7 +112,7 @@ def stretcher_interface(master):
 
     master.stretcher_frame.time_slider.grid(row=4, column=0, pady=20, padx=130, sticky="nw")
 
-    # Right limit
+    # Left limit
     master.stretcher_frame.left_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                 text="0.5",
                                                 text_font=("Roboto Medium", -11),
@@ -121,7 +121,7 @@ def stretcher_interface(master):
 
     master.stretcher_frame.left_limit_stretcher.grid(row=4, column=0, pady=(50, 0), padx=75, sticky="nw")
 
-    # Left limit
+    # Right limit
     master.stretcher_frame.right_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                text="2.0",
                                                text_font=("Roboto Medium", -11),
