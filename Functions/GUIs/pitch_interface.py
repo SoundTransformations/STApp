@@ -145,7 +145,7 @@ def pitch_interface(master):
 
     master.pitch_frame.value_number.grid(row=3, column=0, pady=(7, 0), padx=580, sticky='e')
 
-    # Button to browse the input file 1
+    # Button to apply the transformation
     master.pitch_frame.apply_button = customtkinter.CTkButton(master.pitch_frame,
                                                                 text="Apply transformation", width=3,
                                                                 command=lambda: f.shifting(master, 2))

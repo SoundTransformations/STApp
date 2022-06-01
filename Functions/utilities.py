@@ -57,7 +57,7 @@ def browse_file1(master, case):
             master.stretcher_frame.filelocation_stretcher.delete(0, END)
             master.stretcher_frame.filelocation_stretcher.insert(0, filename)
             master.y2 = None
-            stretching(master)
+            stretching(master,1)
 
         except Exception:
             messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
@@ -221,32 +221,57 @@ def filtering(master,case):
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
 
-def stretching(master):
+def stretching(master,case):
 
-    try:
-        #Read the audio file
-        (fs2,x2) = UF.wavread(master.stretcher_frame.filelocation_stretcher.get())
+    # Read the audio file
+    (fs2, x2) = UF.wavread(master.stretcher_frame.filelocation_stretcher.get())
 
-        fig4 = Figure(figsize=(16, 9), dpi=100)
-        fig4.set_facecolor('#2e2e2e')
-        a4 = fig4.add_subplot(111)
-        master.y2 = x2
+    if case == 1:
         try:
-            a4.plot(master.y2)
-            #a2.legend(prop={'size': 10})
-            #a2.axis([0, x2.size, -90, max(x2) + 10])
-            a4.axis('off')
+
+            fig4 = Figure(figsize=(16, 9), dpi=100)
+            fig4.set_facecolor('#2e2e2e')
+            a4 = fig4.add_subplot(111)
+            master.y2 = x2
+            try:
+                a4.plot(master.y2)
+                a4.axis('off')
+            except Exception:
+                a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+            canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)
+            canvas4.draw()
+            canvas4.get_tk_widget().configure(background='black', width=720, height=200)
+            canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
+
         except Exception:
-            a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+            messagebox.showinfo(message="You have not loaded any file", title="File not loaded!")
 
-        canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)
-        canvas4.draw()
-        canvas4.get_tk_widget().configure(background='black', width=720, height=200)
-        canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+    else:
+        try:
+
+            fig4 = Figure(figsize=(16, 9), dpi=100)
+            fig4.set_facecolor('#2e2e2e')
+            a4 = fig4.add_subplot(111)
+
+            inputFile2, fs2, tfreq2, tmag2 = STrans.analysis(master.stretcher_frame.filelocation_stretcher.get())
+
+            master.y2 = STrans.transformation_synthesis(inputFile2, fs2, tfreq2, tmag2,freqScaling=np.array([0, 1, 1, 1]),timeScaling=np.array([0,0.0,1,0.5]))
 
 
-    except Exception:
-        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+            try:
+                a4.plot(master.y2)
+                a4.axis('off')
+            except Exception:
+                a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+            canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)
+            canvas4.draw()
+            canvas4.get_tk_widget().configure(background='black', width=720, height=200)
+            canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
+
+        except Exception as e:
+            messagebox.showinfo(message=str(e), title="File not loaded!")
 
 def shifting(master,case):
 

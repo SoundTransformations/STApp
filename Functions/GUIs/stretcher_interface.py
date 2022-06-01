@@ -27,7 +27,7 @@ def stretcher_interface(master):
 
     ##TITLE
     master.stretcher_frame.frame_title = customtkinter.CTkLabel(master=master.stretcher_frame,
-                                          text="Stretcher", text_font=("Roboto Medium", -30),
+                                          text="Time Stretcher", text_font=("Roboto Medium", -30),
                                           fg_color=("white", "gray18"), width=30)  # font name and size in px
 
     master.stretcher_frame.frame_title.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
@@ -150,3 +150,26 @@ def stretcher_interface(master):
     master.stretcher_frame.value_number.grid(row=3, column=0, pady=(25, 0), padx=0, sticky='s')
 
     master.stretcher_frame.time_slider.set(1)
+
+    # Button to apply the transformation
+    master.stretcher_frame.apply_button = customtkinter.CTkButton(master.stretcher_frame,
+                                                              text="Apply transformation", width=3,
+                                                              command=lambda: f.stretching(master, 2))
+
+    master.stretcher_frame.apply_button.grid(row=6, column=0, sticky="e", padx=(70, 550), pady=5)
+
+    # Button to play the result
+    master.stretcher_frame.play_result_button = customtkinter.CTkButton(master.stretcher_frame,
+                                                                    text="▶", width=3,
+                                                                    command=lambda: f.play_song(master.y2, 44100),
+                                                                    fg_color=("gray75", "gray30"))
+
+    master.stretcher_frame.play_result_button.grid(row=6, column=0, sticky="s", padx=(100, 400), pady=0)
+
+    # Button to stop the result
+    master.stretcher_frame.stop_result_button = customtkinter.CTkButton(master.stretcher_frame,
+                                                                    text="II", width=3,
+                                                                    command=lambda: f.stop_song(master.y2),
+                                                                    fg_color=("gray75", "gray30"))
+
+    master.stretcher_frame.stop_result_button.grid(row=6, column=0, sticky="w", padx=(100, 440), pady=0)

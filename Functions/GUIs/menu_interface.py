@@ -46,7 +46,7 @@ def create_main_interface(master):
 
     # Add a second button
     master.button_2 = customtkinter.CTkButton(master=master.frame_left,
-                                              text="Stretcher",
+                                              text="Time Stretcher",
                                               fg_color=("gray75", "gray30"),
                                               command=lambda: f.change_to_frame2(master))
 
