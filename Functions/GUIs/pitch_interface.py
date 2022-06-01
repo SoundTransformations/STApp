@@ -144,3 +144,26 @@ def pitch_interface(master):
                                    foreground="white")
 
     master.pitch_frame.value_number.grid(row=3, column=0, pady=(7, 0), padx=580, sticky='e')
+
+    # Button to browse the input file 1
+    master.pitch_frame.apply_button = customtkinter.CTkButton(master.pitch_frame,
+                                                                text="Apply transformation", width=3,
+                                                                command=lambda: f.shifting(master, 2))
+
+    master.pitch_frame.apply_button.grid(row=6, column=0, sticky="e", padx=(70, 550), pady=5)
+
+    # Button to play the result
+    master.pitch_frame.play_result_button = customtkinter.CTkButton(master.pitch_frame,
+                                                                        text="▶", width=3,
+                                                                        command=lambda: f.play_song(master.y3, 44100),
+                                                                        fg_color=("gray75", "gray30"))
+
+    master.pitch_frame.play_result_button.grid(row=6, column=0, sticky="s", padx=(100, 400), pady=0)
+
+    # Button to stop the result
+    master.pitch_frame.stop_result_button = customtkinter.CTkButton(master.pitch_frame,
+                                                                        text="II", width=3,
+                                                                        command=lambda: f.stop_song(master.y3),
+                                                                        fg_color=("gray75", "gray30"))
+
+    master.pitch_frame.stop_result_button.grid(row=6, column=0, sticky="w", padx=(100, 440), pady=0)

@@ -14,8 +14,11 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models/'))
 from Functions.models import utilFunctions as UF
 from Functions.models import dftModel as DFT
+
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations_interface/'))
 from Functions.transformations_interface import stftMorph_function as sT
+from Functions.transformations_interface import sineTransformations_function as STrans
+
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations/'))
 from Functions.transformations import stftTransformations as stft
 
@@ -64,10 +67,10 @@ def browse_file1(master, case):
             master.pitch_frame.filelocation_pitch.delete(0, END)
             master.pitch_frame.filelocation_pitch.insert(0, filename)
             master.y3 = None
-            shifting(master)
+            shifting(master,1)
 
-        except Exception:
-            messagebox.showerror(message="We can not open that file", title="Error opening the file")
+        except Exception as e:
+            messagebox.showerror(message=str(e), title="Error opening the file")
 
     return filename
 
@@ -245,57 +248,59 @@ def stretching(master):
     except Exception:
         messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
 
-def shifting(master):
+def shifting(master,case):
 
-    try:
-        #Read the audio file
-        (fs3,x3) = UF.wavread(master.pitch_frame.filelocation_pitch.get())
+    # Read the audio file
+    (fs3, x3) = UF.wavread(master.pitch_frame.filelocation_pitch.get())
 
-        fig6 = Figure(figsize=(16, 9), dpi=100)
-        fig6.set_facecolor('#2e2e2e')
-        a6 = fig6.add_subplot(111)
-        master.y3 = x3
+    if case == 1:
         try:
-            a6.plot(master.y3)
-            a6.axis('off')
+
+            fig6 = Figure(figsize=(16, 9), dpi=100)
+            fig6.set_facecolor('#2e2e2e')
+            a6 = fig6.add_subplot(111)
+
+            master.y3 = x3
+
+            try:
+                a6.plot(master.y3)
+                a6.axis('off')
+            except Exception:
+                a6.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+            canvas6 = FigureCanvasTkAgg(fig6, master.pitch_frame)
+            canvas6.draw()
+            canvas6.get_tk_widget().configure(background='black', width=720, height=200)
+            canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
+
         except Exception:
-            a6.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+           messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
 
-        canvas6 = FigureCanvasTkAgg(fig6, master.pitch_frame)
-        canvas6.draw()
-        canvas6.get_tk_widget().configure(background='black', width=720, height=200)
-        canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+    else:
+        try:
 
-    except Exception:
-        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+            fig6 = Figure(figsize=(16, 9), dpi=100)
+            fig6.set_facecolor('#2e2e2e')
+            a6 = fig6.add_subplot(111)
+
+            inputFile,fs,tfreq,tmag = STrans.analysis(master.pitch_frame.filelocation_pitch.get())
+
+            master.y3 = STrans.transformation_synthesis(inputFile,fs,tfreq,tmag,freqScaling=np.array([0, 0.6, 1, 0.6]), timeScaling=np.array([0,0.0,1,1.0]))
+
+            try:
+                a6.plot(master.y3)
+                a6.axis('off')
+            except Exception:
+                a6.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+            canvas6 = FigureCanvasTkAgg(fig6, master.pitch_frame)
+            canvas6.draw()
+            canvas6.get_tk_widget().configure(background='black', width=720, height=200)
+            canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+
+        except Exception as e:
+            messagebox.showinfo(message=str(e), title= "File not loaded!")
 
 
-def sineFreqScaling(master):
-    """
-    Frequency scaling of sinusoidal tracks
-    sfreq: frequencies of input sinusoidal tracks
-    freqScaling: scaling factors, in time-value pairs (value of 1 is no scaling)
-    returns ysfreq: frequencies of output sinusoidal tracks
-    """
-    (fs,x) = UF.wavread(master.pitch_frame.filelocation_pitch.get())
-    N = 2048
-    mX, pX = DFT.dftAnal(x, np.hamming(N), N)
-    sfreq = mX
-    freqScaling = (master.current_value.get())
-
-    if (freqScaling.size % 2 != 0):                        # raise exception if array not even length
-        raise ValueError("Frequency scaling array does not have an even size")
-
-    L = sfreq.shape[0]                                     # number of input frames
-    # create interpolation object from the scaling values
-    freqScalingEnv = np.interp(np.arange(L), L*freqScaling[::2]/freqScaling[-2], freqScaling[1::2])
-    ysfreq = np.zeros_like(sfreq)                          # create empty output matrix
-    for l in range(L):                                     # go through all frames
-        ind_valid = np.where(sfreq[l,:]!=0)[0]               # check if there are frequency values
-        if ind_valid.size == 0:                              # if no values go to next frame
-            continue
-        ysfreq[l,ind_valid] = sfreq[l,ind_valid] * freqScalingEnv[l] # scale of frequencies
-
-    sd.play(ysfreq, fs)
 
 
