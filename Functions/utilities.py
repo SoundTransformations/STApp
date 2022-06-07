@@ -6,6 +6,8 @@ from tkinter import filedialog
 from tkinter import messagebox
 import numpy as np
 import sounddevice as sd
+import soundfile as sf
+import librosa as lb
 
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
@@ -48,8 +50,8 @@ def browse_file1(master, case):
             master.equalizer_frame.save_button.configure(state = DISABLED)
             filtering(master,1)
 
-        except Exception:
-            messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
+        except Exception as e:
+            messagebox.showerror(message = str(e), title = "Error opening the file")
 
     elif case ==2:
         try:
@@ -156,12 +158,11 @@ def reset_slider9(master):
 def reset_slider10(master):
     master.equalizer_frame.slider_10.set(0)
 
-
 def filtering(master,case):
 
     try:
         #Read the audio file
-        (fs,x) = UF.wavread(master.equalizer_frame.filelocation1.get())
+        (fs, x) = UF.wavread(master.equalizer_frame.filelocation1.get())
 
         #We analyze one fragment of the the sound
         N = 2048
