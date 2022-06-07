@@ -35,7 +35,7 @@ def stretcher_interface(master):
     ## INPUT FILE 1
 
     master.stretcher_frame.file_label = customtkinter.CTkLabel(master=master.stretcher_frame,
-                                            text="File1:",
+                                            text="File:",
                                             text_font=("Roboto Medium", -16),
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px

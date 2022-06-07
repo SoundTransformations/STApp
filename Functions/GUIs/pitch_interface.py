@@ -35,7 +35,7 @@ def pitch_interface(master):
 
     #INPUT FILE 1
     master.pitch_frame.file_label = customtkinter.CTkLabel(master=master.pitch_frame,
-                                            text="File1:",
+                                            text="File:",
                                             text_font=("Roboto Medium", -16),
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px

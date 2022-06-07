@@ -233,10 +233,12 @@ def stretching(master,case):
             fig4.set_facecolor('#2e2e2e')
             a4 = fig4.add_subplot(111)
             master.y2 = x2
+            master.stretcher_frame.axis_size = master.y2.size
             try:
-                a4.plot(master.y2)
+                a4.plot(np.arange(master.stretcher_frame.axis_size),master.y2)
                 a4.axis('off')
-            except Exception:
+            except Exception as e:
+                messagebox.showerror(message=str(e), title="Error with the sound!")
                 a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
 
             canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)
@@ -256,13 +258,15 @@ def stretching(master,case):
 
             inputFile2, fs2, tfreq2, tmag2 = STrans.analysis(master.stretcher_frame.filelocation_stretcher.get())
 
-            master.y2 = STrans.transformation_synthesis(inputFile2, fs2, tfreq2, tmag2,freqScaling=np.array([0, 1, 1, 1]),timeScaling=np.array([0,0.0,1,0.5]))
+            master.y2 = STrans.transformation_synthesis(inputFile2, fs2, tfreq2, tmag2,freqScaling=np.array([0, 1, 1, 1]),timeScaling=np.array([0,0.0,1,master.stretcher_frame.speed_value.get()]))
 
 
             try:
                 a4.plot(master.y2)
+                a4.axis(xmin=0,xmax=master.stretcher_frame.axis_size)
                 a4.axis('off')
-            except Exception:
+            except Exception as e:
+                messagebox.showerror(message=str(e), title="Error with the sound!")
                 a4.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
 
             canvas4 = FigureCanvasTkAgg(fig4, master.stretcher_frame)

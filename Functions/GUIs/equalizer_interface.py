@@ -38,7 +38,7 @@ def equalizer_interface(master):
 
     ## INPUT FILE 1
     master.equalizer_frame.file_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="File1:",
+                                            text="File:",
                                             text_font=("Roboto Medium", -16),
                                             fg_color=("white", "gray30"),
                                             width=30)  # font name and size in px
