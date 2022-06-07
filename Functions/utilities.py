@@ -314,7 +314,10 @@ def shifting(master,case):
 
             inputFile,fs,tfreq,tmag = STrans.analysis(master.pitch_frame.filelocation_pitch.get())
 
-            master.y3 = STrans.transformation_synthesis(inputFile,fs,tfreq,tmag,freqScaling=np.array([0, 0.6, 1, 0.6]), timeScaling=np.array([0,0.0,1,1.0]))
+            slider_value = master.pitch_frame.current_value.get()
+            r = 2**(1/12) # semi-tons jumps
+
+            master.y3 = STrans.transformation_synthesis(inputFile,fs,tfreq,tmag,freqScaling=np.array([0, slider_value*r, 1, slider_value*r]), timeScaling=np.array([0,0.0,1,1.0]))
 
             try:
                 a6.plot(master.y3)
