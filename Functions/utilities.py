@@ -6,8 +6,6 @@ from tkinter import filedialog
 from tkinter import messagebox
 import numpy as np
 import sounddevice as sd
-import soundfile as sf
-import librosa as lb
 
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
@@ -194,33 +192,44 @@ def filtering(master,case):
             bandpass = (np.hanning(nBins) * (db_to_down+int(sliders[i])))
             filt[startBin+i*91-int(nBins/2):startBin +i*91-int(nBins/2) +nBins] += bandpass
 
-        master.y = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
+        master.y, mX_plot, mY_plot = stft.stftFiltering(x,fs,np.hanning(N),N,100,filt)
 
         fig1 = Figure(figsize=(16, 9), dpi=100)
         fig1.set_facecolor('#2e2e2e')
         a = fig1.add_subplot(111)
-        try:
-            a.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
-            a.plot(mX, lw=1.5, label='mX')
-            a.plot(filt + max(mX), 'k', lw=1.5, label='filter')
-            a.legend(prop={'size': 10})
-            a.axis([0, mX.size, -90, max(mX) + 10])
-            a.spines['right'].set_visible(False)
-            a.spines['top'].set_visible(False)
 
-        except Exception:
+        try:
+            if (case == 2):
+                #a.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+                a.plot(mY_plot, lw=1.5, label='mX')
+                a.plot(filt + max(mX_plot), c ='0.5', lw=1.5, label='filter')
+                a.legend(prop={'size': 10})
+                a.axis([0, mY_plot.size, max(mX_plot)-70, max(mX_plot) + 10])
+                a.spines['right'].set_visible(False)
+                a.spines['top'].set_visible(False)
+            else:
+                # a.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+                a.plot(mX_plot, lw=1.5, label='mX')
+                a.plot(filt + max(mX_plot), c ='0.5', lw=1.5, label='filter')
+                a.legend(prop={'size': 10})
+                a.axis([0, mX_plot.size, max(mX_plot)-70, max(mX_plot) + 10])
+                a.spines['right'].set_visible(False)
+                a.spines['top'].set_visible(False)
+
+        except Exception as e:
+            messagebox.showerror(message=str(e), title="File not loaded!")
             a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
 
         canvas = FigureCanvasTkAgg(fig1, master.equalizer_frame)
         canvas.draw()
-        canvas.get_tk_widget().configure(background='black', width=300, height=200)
-        canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
+        canvas.get_tk_widget().configure(background='black', width=330, height=200)
+        canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(220, 600), pady=(0,0))
 
         if case == 2: #If we pressed the button Equalize, we can save the file (case = 2)
             master.equalizer_frame.save_button.configure(state=NORMAL)
 
-    except Exception:
-        messagebox.showinfo(message="You have not loaded any file", title= "File not loaded!")
+    except Exception as e:
+        messagebox.showerror(message=str(e), title= "File not loaded!")
 
 def stretching(master,case):
 
