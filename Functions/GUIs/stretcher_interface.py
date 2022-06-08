@@ -86,7 +86,7 @@ def stretcher_interface(master):
 
     # Create an slider space
     master.stretcher_frame.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
-                                                text="Speed",
+                                                text="Stretch factor",
                                                 text_font=("Roboto Medium", -15),
                                                 fg_color=("white", "gray30"),
                                                 width=30)  # font name and size in px

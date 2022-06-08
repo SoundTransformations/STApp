@@ -84,7 +84,7 @@ def pitch_interface(master):
 
     # Create an slider space
     master.pitch_frame.label_tone = customtkinter.CTkLabel(master=master.pitch_frame,
-                                                           text="Tone scale",
+                                                           text="Shift factor",
                                                            text_font=("Roboto Medium", -15),
                                                            fg_color=("white", "gray30"),
                                                            width=30)  # font name and size in px
@@ -143,14 +143,14 @@ def pitch_interface(master):
                                                 justify="center",
                                                 foreground="white")
 
-    master.pitch_frame.value_number.grid(row=3, column=0, pady=(7, 0), padx=580, sticky='e')
+    master.pitch_frame.value_number.grid(row=3, column=0, pady=(7, 0), padx=590, sticky='e')
 
     # Button to apply the transformation
     master.pitch_frame.apply_button = customtkinter.CTkButton(master.pitch_frame,
                                                               text="Apply transformation", width=3,
                                                               command=lambda: f.shifting(master, 2))
 
-    master.pitch_frame.apply_button.grid(row=6, column=0, sticky="e", padx=(70, 550), pady=5)
+    master.pitch_frame.apply_button.grid(row=7, column=0, sticky="se", padx=(70, 580), pady=15)
 
     # Button to play the result
     master.pitch_frame.play_result_button = customtkinter.CTkButton(master.pitch_frame,
@@ -158,7 +158,7 @@ def pitch_interface(master):
                                                                     command=lambda: f.play_song(master.y3, 44100),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.play_result_button.grid(row=6, column=0, sticky="s", padx=(100, 400), pady=0)
+    master.pitch_frame.play_result_button.grid(row=6, column=0, sticky="se", padx=(100, 650), pady=0)
 
     # Button to stop the result
     master.pitch_frame.stop_result_button = customtkinter.CTkButton(master.pitch_frame,
@@ -166,4 +166,4 @@ def pitch_interface(master):
                                                                     command=lambda: f.stop_song(master.y3),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.stop_result_button.grid(row=6, column=0, sticky="w", padx=(100, 440), pady=0)
+    master.pitch_frame.stop_result_button.grid(row=6, column=0, sticky="se", padx=(100, 610), pady=0)
