@@ -1,13 +1,12 @@
 import sys
 import os
-import tkinter
+
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 import numpy as np
 import sounddevice as sd
 
-import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -16,14 +15,13 @@ from Functions.models import utilFunctions as UF
 from Functions.models import dftModel as DFT
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations_interface/'))
-from Functions.transformations_interface import stftMorph_function as sT
 from Functions.transformations_interface import sineTransformations_function as STrans
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations/'))
 from Functions.transformations import stftTransformations as stft
 
 
-# Functions
+# Functions to play, browse and save
 def play_song(y,fs):
     try:
         sd.play(y, fs)
@@ -48,8 +46,8 @@ def browse_file1(master, case):
             master.equalizer_frame.save_button.configure(state = DISABLED)
             filtering(master,1)
 
-        except Exception as e:
-            messagebox.showerror(message = str(e), title = "Error opening the file")
+        except Exception:
+            messagebox.showerror(message = "We can not open that file", title = "Error opening the file")
 
     elif case ==2:
         try:
@@ -69,29 +67,10 @@ def browse_file1(master, case):
             master.y3 = None
             shifting(master,1)
 
-        except Exception as e:
-            messagebox.showerror(message=str(e), title="Error opening the file")
+        except Exception:
+            messagebox.showerror(message="We can not open that file", title="Error opening the file")
 
     return filename
-
-def transformation_synthesis(master):
-    try:
-        inputFile1 = master.filelocation1.get()
-        inputFile2 = master.filelocation2.get()
-        window1 = master.w1_type.get()
-        window2 = master.w2_type.get()
-        M1 = int(master.M1.get())
-        M2 = int(master.M2.get())
-        N1 = int(master.N1.get())
-        N2 = int(master.N2.get())
-        H1 = int(master.H1.get())
-        smoothf = float(master.smoothf.get())
-        balancef = float(master.balancef.get())
-        y, fs = sT.main(inputFile1, inputFile2, window1, window2, M1, M2, N1, N2, H1, smoothf, balancef)
-        save_audio(y, fs)
-
-    except ValueError:
-        messagebox.showerror("Input values error")
 
 def save_audio(y, fs):
 
@@ -102,8 +81,8 @@ def save_audio(y, fs):
     except Exception:
         messagebox.showerror(message="We can not save this file", title="Something went wrong!")
 
-def button_event():
-    print("Button pressed")
+
+#Functions to change between frames
 
 def change_to_frame1(master):
     try:
@@ -125,6 +104,9 @@ def change_to_frame3(master):
 
     except Exception:
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
+
+
+#Functions to reset each slider individually
 
 def reset_slider1(master):
     master.equalizer_frame.slider_1.set(0)
@@ -155,6 +137,8 @@ def reset_slider9(master):
 
 def reset_slider10(master):
     master.equalizer_frame.slider_10.set(0)
+
+#Functions to equalize, time stretch and pitch shift
 
 def filtering(master,case):
 
@@ -208,11 +192,11 @@ def filtering(master,case):
                 a.spines['right'].set_visible(False)
                 a.spines['top'].set_visible(False)
             else:
-                # a.plot(np.arange(N) / float(fs), x1 * np.hamming(N), 'b', lw=1.5)
+                #np.log10(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size))
                 a.plot(mX_plot, lw=1.5, label='mX')
                 a.plot(filt + max(mX_plot), c ='0.5', lw=1.5, label='filter')
                 a.legend(prop={'size': 10})
-                a.axis([0, mX_plot.size, max(mX_plot)-70, max(mX_plot) + 10])
+                a.axis([0, mX_plot.size -110, max(mX_plot)-70, max(mX_plot) + 10])
                 a.spines['right'].set_visible(False)
                 a.spines['top'].set_visible(False)
 
