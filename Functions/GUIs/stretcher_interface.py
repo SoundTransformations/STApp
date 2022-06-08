@@ -69,7 +69,7 @@ def stretcher_interface(master):
     fig3 = Figure(figsize=(16,9), dpi = 100)
     fig3.set_facecolor('#2e2e2e')
     a3= fig3.add_subplot(111)
-    data = np.random.uniform(-1,1,44100)
+    data = np.zeros(2)
     a3.plot(data)
     a3.axis('off')
     canvas3 = FigureCanvasTkAgg(fig3, master.stretcher_frame)

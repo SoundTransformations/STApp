@@ -70,7 +70,7 @@ def pitch_interface(master):
     fig4 = Figure(figsize=(16, 9), dpi=100)
     fig4.set_facecolor('#2e2e2e')
     a4 = fig4.add_subplot(111)
-    data = np.random.uniform(-1, 1, 44100)
+    data = np.zeros(2)
     a4.plot(data)
     a4.axis('off')
     canvas4 = FigureCanvasTkAgg(fig4, master.pitch_frame)
