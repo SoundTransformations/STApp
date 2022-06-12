@@ -55,6 +55,7 @@ def browse_file1(master, case):
             master.stretcher_frame.filelocation_stretcher.delete(0, END)
             master.stretcher_frame.filelocation_stretcher.insert(0, filename)
             master.y2 = None
+            master.stretcher_frame.save_button.configure(state=DISABLED)
             stretching(master,1)
 
         except Exception:
@@ -65,6 +66,7 @@ def browse_file1(master, case):
             master.pitch_frame.filelocation_pitch.delete(0, END)
             master.pitch_frame.filelocation_pitch.insert(0, filename)
             master.y3 = None
+            master.pitch_frame.save_button.configure(state=DISABLED)
             shifting(master,1)
 
         except Exception:
@@ -79,7 +81,7 @@ def save_audio(y, fs):
         UF.wavwrite(y, fs, outputFile.name)
 
     except Exception:
-        messagebox.showerror(message="We can not save this file", title="Something went wrong!")
+        messagebox.showinfo(message="You have not saved the file ", title="Are you okay?")
 
 
 #Functions to change between frames
@@ -138,6 +140,24 @@ def reset_slider9(master):
 def reset_slider10(master):
     master.equalizer_frame.slider_10.set(0)
 
+def reset_slider_pitch(master):
+    master.pitch_frame.pitch_slider.set(0)
+
+def reset_slider_stretcher(master):
+    master.stretcher_frame.time_slider.set(1)
+
+def forward_stretcher_slider(master):
+    master.stretcher_frame.time_slider.set(master.stretcher_frame.time_slider.get()+1)
+
+def backward_stretcher_slider(master):
+    master.stretcher_frame.time_slider.set(master.stretcher_frame.time_slider.get()-1)
+
+def forward_pitch_slider(master):
+    master.pitch_frame.pitch_slider.set(master.pitch_frame.pitch_slider.get()+1)
+
+def backward_pitch_slider(master):
+    master.pitch_frame.pitch_slider.set(master.pitch_frame.pitch_slider.get()-1)
+
 #Functions to equalize, time stretch and pitch shift
 
 def filtering(master,case):
@@ -181,6 +201,10 @@ def filtering(master,case):
         fig1 = Figure(figsize=(16, 9), dpi=100)
         fig1.set_facecolor('#2e2e2e')
         a = fig1.add_subplot(111)
+
+        #index_log = mX_plot.size * (1 - np.log10(np.arange(10, 1, -10 / mX_plot.size)))
+        #samples = np.arange(0, mX_plot.size)
+        #mX_log = np.interp(index_log, samples, mX_plot)
 
         try:
             if (case == 2):
@@ -268,6 +292,8 @@ def stretching(master,case):
             canvas4.get_tk_widget().configure(background='black', width=720, height=200)
             canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
 
+            master.stretcher_frame.save_button.configure(state=NORMAL)
+
         except Exception as e:
             messagebox.showinfo(message=str(e), title="File not loaded!")
 
@@ -323,6 +349,8 @@ def shifting(master,case):
             canvas6.draw()
             canvas6.get_tk_widget().configure(background='black', width=720, height=200)
             canvas6.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
+
+            master.pitch_frame.save_button.configure(state=NORMAL)
 
         except Exception as e:
             messagebox.showinfo(message=str(e), title= "File not loaded!")

@@ -49,26 +49,18 @@ def equalizer_interface(master):
                                                                   width=10,
                                                                   placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
-    master.equalizer_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(120, 480), sticky="we")
+    master.equalizer_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(110, 480), sticky="we")
     master.equalizer_frame.filelocation1.focus_set()
 
 
 
     # Button to browse the input file 1
     master.equalizer_frame.open_file1 = customtkinter.CTkButton(master.equalizer_frame,
-                                         text="...", width=3,
+                                         text="Import", width=3,
                                          command= lambda: f.browse_file1(master,1))
 
-    master.equalizer_frame.open_file1.grid(row=1, column=0, sticky="e", padx=(70, 440), pady=5)
+    master.equalizer_frame.open_file1.grid(row=1, column=0, sticky="e", padx=(70, 410), pady=5)
 
-    # Button to play the input file 1
-    master.equalizer_frame.preview1 = customtkinter.CTkButton(master.equalizer_frame,
-                                       text="Play!", width=3,
-                                       command=lambda: UF.wavplay(master.equalizer_frame.filelocation1.get()),
-                                       fg_color=("gray75", "gray30"),
-                                       hover_color="green")
-
-    master.equalizer_frame.preview1.grid(row=1, column=0, columnspan=3, sticky="e", padx=(250, 380), pady=20)
 
     #============= SLIDERS of the EQUALIZER =======================
 
