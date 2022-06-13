@@ -574,6 +574,14 @@ def equalizer_interface(master):
     canvas.get_tk_widget().configure(background='black', width=300, height=200)
     canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
 
+    master.equalizer_frame.no_audio_label = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                                                text="No audio loaded",
+                                                                text_font=("Roboto Medium", -15),
+                                                                fg_color=("white", "gray18"),
+                                                                width=30)  # font name and size in px
+
+    master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(0, 0), padx=(335,600), sticky="w")
+
     # Button to save the result
     master.equalizer_frame.save_button = customtkinter.CTkButton(master.equalizer_frame,
                                           text="Save", width=3,

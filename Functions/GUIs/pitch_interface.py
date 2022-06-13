@@ -70,6 +70,14 @@ def pitch_interface(master):
     canvas4.get_tk_widget().configure(background='black', width=720, height=200)
     canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
 
+    master.pitch_frame.no_audio_label = customtkinter.CTkLabel(master=master.pitch_frame,
+                                                                   text="No audio loaded",
+                                                                   text_font=("Roboto Medium", -15),
+                                                                   fg_color=("white", "gray18"),
+                                                                   width=30)  # font name and size in px
+
+    master.pitch_frame.no_audio_label.grid(row=2, column=0, pady=(50, 0), padx=(325, 600), sticky="w")
+
     # Define the style
     style = ttk.Style()
     style.configure("TScale", background="gray18")
