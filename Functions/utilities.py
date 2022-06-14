@@ -38,22 +38,18 @@ def browse_file1(master, case):
     filename = filedialog.askopenfilename(title="Please Select a File")
     try:
         if case ==1:
-
-            master.y = None
             master.equalizer_frame.save_button.configure(state = DISABLED)
             filtering(master,1,filename)
             master.equalizer_frame.filelocation1.delete(0, END)
             master.equalizer_frame.filelocation1.insert(0, filename)
 
         elif case == 2:
-            master.y2 = None
             master.stretcher_frame.save_button.configure(state=DISABLED)
             stretching(master,1,filename)
             master.stretcher_frame.filelocation_stretcher.delete(0, END)
             master.stretcher_frame.filelocation_stretcher.insert(0, filename)
 
         else:
-            master.y3 = None
             master.pitch_frame.save_button.configure(state=DISABLED)
             shifting(master,1,filename)
             master.pitch_frame.filelocation_pitch.delete(0, END)
@@ -174,24 +170,25 @@ def filtering(master,case,filename):
     a = fig1.add_subplot(111)
 
     if (case == 2):
-        a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size), mY_plot, lw=1.5, label='mX')
+        a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size), mY_plot, lw=1.5, label='frequencies')
         a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size),filt + max(mX_plot), c ='0.5', lw=1.5, label='filter')
         a.legend(prop={'size': 10})
-        a.axis([0, 20250, max(mX_plot)-60, max(mX_plot) + 10])
+        a.axis([0, fs/2, max(mX_plot)-70, max(mX_plot) + 10])
         a.spines['right'].set_visible(False)
         a.spines['top'].set_visible(False)
     else:
-        a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size), mX_plot, lw=1.5, label='mX')
+        a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size), mX_plot, lw=1.5, label='frequencies')
         a.plot(fs / 2 * np.arange(1, mX_plot.size + 1) / float(mX_plot.size), filt + max(mX_plot), c ='0.5', lw=1.5, label='filter')
         a.legend(prop={'size': 10})
-        a.axis([0, 20250, max(mX_plot)-60, max(mX_plot) + 10])
+        a.axis([0, fs/2, max(mX_plot)-70, max(mX_plot) + 10])
+        a.set_xlabel('Frequencies')
         a.spines['right'].set_visible(False)
         a.spines['top'].set_visible(False)
 
     canvas = FigureCanvasTkAgg(fig1, master.equalizer_frame)
     canvas.draw()
     canvas.get_tk_widget().configure(background='black', width=330, height=200)
-    canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(220, 600), pady=(0,0))
+    canvas.get_tk_widget().grid(row=6, column=0, sticky="nw", padx=(220, 600), pady=(0,0))
 
     if case == 2: #If we pressed the button Equalize, we can save the file (case = 2)
         master.equalizer_frame.save_button.configure(state=NORMAL)

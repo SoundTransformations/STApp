@@ -30,7 +30,7 @@ def stftFiltering(x, fs, w, N, H, sliders):
 
 	# Build the filt array
 	startBin = 0
-	nBins = 193  # 183
+	nBins = 205  # 183
 	db_to_down = 60
 
 	filt = np.zeros(int(N/2+1)) - 60
@@ -39,7 +39,7 @@ def stftFiltering(x, fs, w, N, H, sliders):
 
 	for i in range(1, 10):  # 91
 		bandpass = (np.hanning(nBins) * (db_to_down + int(sliders[i])))
-		filt[startBin + i * 96 - int(nBins / 2):startBin + i * 96 - int(nBins / 2) + nBins] += bandpass
+		filt[startBin + i * 102 - int(nBins / 2):startBin + i * 102 - int(nBins / 2) + nBins] += bandpass
 
 	while pin <= pend:  # while sound pointer is smaller than last sample
 		# -----analysis-----

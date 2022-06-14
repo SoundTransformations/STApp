@@ -61,12 +61,12 @@ def equalizer_interface(master):
     # Create an slider space
 
     master.equalizer_frame.freq1_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="32 Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="0k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
-                                            width=30)  # font name and size in px
+                                            width=30)
 
-    master.equalizer_frame.freq1_label.grid(row=2, column=0, pady=(15,0), padx=50, sticky="nw")
+    master.equalizer_frame.freq1_label.grid(row=2, column=0, pady=(15,0), padx=54, sticky="nw")
 
     # slider current value
     master.equalizer_frame.s1_current_value = tk.DoubleVar()
@@ -109,12 +109,12 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq2_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="64 Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="2.2k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.equalizer_frame.freq2_label.grid(row=2, column=0, pady=(15,0), padx=110, sticky="nw")
+    master.equalizer_frame.freq2_label.grid(row=2, column=0, pady=(15,0), padx=108, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s2_current_value = tk.DoubleVar()
@@ -156,12 +156,12 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq3_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="125 Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="4.4k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.equalizer_frame.freq3_label.grid(row=2, column=0, pady=(15,0), padx=170, sticky="nw")
+    master.equalizer_frame.freq3_label.grid(row=2, column=0, pady=(15,0), padx=171, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s3_current_value = tk.DoubleVar()
@@ -203,12 +203,12 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq4_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="260 Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="6.6k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.equalizer_frame.freq4_label.grid(row=2, column=0, pady=(15,0), padx=238, sticky="nw")
+    master.equalizer_frame.freq4_label.grid(row=2, column=0, pady=(15,0), padx=234, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s4_current_value = tk.DoubleVar()
@@ -225,7 +225,7 @@ def equalizer_interface(master):
                                 command=slider4_changed,
                                 variable=master.equalizer_frame.s4_current_value)
 
-    master.equalizer_frame.slider_4.grid(row=3, column=0, pady=10, padx=250, sticky="w")
+    master.equalizer_frame.slider_4.grid(row=3, column=0, pady=10, padx=248, sticky="w")
 
     # Value label
     master.equalizer_frame.s4_value_label = ttk.Label(master.equalizer_frame,
@@ -250,12 +250,12 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq5_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="500 Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="8.8k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.equalizer_frame.freq5_label.grid(row=2, column=0, pady=(15,0), padx= 305, sticky="nw")
+    master.equalizer_frame.freq5_label.grid(row=2, column=0, pady=(15,0), padx= 298, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s5_current_value = tk.DoubleVar()
@@ -272,7 +272,7 @@ def equalizer_interface(master):
                                 command=slider5_changed,
                                 variable=master.equalizer_frame.s5_current_value)
 
-    master.equalizer_frame.slider_5.grid(row=3, column=0, pady=10, padx=320, sticky="w")
+    master.equalizer_frame.slider_5.grid(row=3, column=0, pady=10, padx=312, sticky="w")
 
     # Value label
     master.equalizer_frame.s5_value_label = ttk.Label(master.equalizer_frame,
@@ -281,7 +281,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.equalizer_frame.s5_value_label.grid(row=4, column=0, pady=0, padx=315, sticky='sw')
+    master.equalizer_frame.s5_value_label.grid(row=4, column=0, pady=0, padx=308, sticky='sw')
 
     # Button to reset the slider
     master.equalizer_frame.btn_reset5 = customtkinter.CTkButton(master.equalizer_frame,
@@ -292,18 +292,18 @@ def equalizer_interface(master):
                                      fg_color="gray40",
                                      command=lambda: f.reset_slider5(master))
 
-    master.equalizer_frame.btn_reset5.grid(row=5, column=0, pady=(5, 50), padx=317, sticky='sw')
+    master.equalizer_frame.btn_reset5.grid(row=5, column=0, pady=(5, 50), padx=310, sticky='sw')
 
 
     ## Create an slider space
 
     master.equalizer_frame.freq6_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                            text="1k Hz",
-                                            text_font=("Roboto Medium", -12),
+                                            text="10k Hz",
+                                            text_font=("Roboto Medium", -10),
                                             fg_color=("white", "gray30"),
                                             width=30)
 
-    master.equalizer_frame.freq6_label.grid(row=2, column=0, pady=(15,0), padx=372, sticky="nw")
+    master.equalizer_frame.freq6_label.grid(row=2, column=0, pady=(15,0), padx=362, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s6_current_value = tk.DoubleVar()
@@ -320,7 +320,7 @@ def equalizer_interface(master):
                                 command=slider6_changed,
                                 variable=master.equalizer_frame.s6_current_value)
 
-    master.equalizer_frame.slider_6.grid(row=3, column=0, pady=10, padx=382, sticky="w")
+    master.equalizer_frame.slider_6.grid(row=3, column=0, pady=10, padx=375, sticky="w")
 
     # Value label
     master.equalizer_frame.s6_value_label = ttk.Label(master.equalizer_frame,
@@ -329,7 +329,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.equalizer_frame.s6_value_label.grid(row=4, column=0, pady=0, padx=378, sticky='sw')
+    master.equalizer_frame.s6_value_label.grid(row=4, column=0, pady=0, padx=372, sticky='sw')
 
     # Button to reset the slider
     master.equalizer_frame.btn_reset6 = customtkinter.CTkButton(master.equalizer_frame,
@@ -340,17 +340,17 @@ def equalizer_interface(master):
                                      fg_color="gray40",
                                      command=lambda: f.reset_slider6(master))
 
-    master.equalizer_frame.btn_reset6.grid(row=5, column=0, pady=(5, 50), padx=380, sticky='sw')
+    master.equalizer_frame.btn_reset6.grid(row=5, column=0, pady=(5, 50), padx=374, sticky='sw')
 
     ## Create an slider space
 
     master.equalizer_frame.freq7_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                             text="2k Hz",
-                                             text_font=("Roboto Medium", -12),
+                                             text="12.2k Hz",
+                                             text_font=("Roboto Medium", -10),
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.equalizer_frame.freq7_label.grid(row=2, column=0, pady=(15,0), padx=430, sticky="nw")
+    master.equalizer_frame.freq7_label.grid(row=2, column=0, pady=(15,0), padx=420, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s7_current_value = tk.DoubleVar()
@@ -367,7 +367,7 @@ def equalizer_interface(master):
                                 command=slider7_changed,
                                 variable=master.equalizer_frame.s7_current_value)
 
-    master.equalizer_frame.slider_7.grid(row=3, column=0, pady=10, padx=442, sticky="w")
+    master.equalizer_frame.slider_7.grid(row=3, column=0, pady=10, padx=435, sticky="w")
 
     # Value label
     master.equalizer_frame.s7_value_label = ttk.Label(master.equalizer_frame,
@@ -376,7 +376,7 @@ def equalizer_interface(master):
                                     justify="center",
                                     foreground="white")
 
-    master.equalizer_frame.s7_value_label.grid(row=4, column=0, pady=0, padx=438, sticky='sw')
+    master.equalizer_frame.s7_value_label.grid(row=4, column=0, pady=0, padx=431, sticky='sw')
 
     # Button to reset the slider
     master.equalizer_frame.btn_reset7 = customtkinter.CTkButton(master.equalizer_frame,
@@ -387,17 +387,17 @@ def equalizer_interface(master):
                                      fg_color="gray40",
                                      command=lambda: f.reset_slider7(master))
 
-    master.equalizer_frame.btn_reset7.grid(row=5, column=0, pady=(5, 50), padx=440, sticky='sw')
+    master.equalizer_frame.btn_reset7.grid(row=5, column=0, pady=(5, 50), padx=432, sticky='sw')
 
     ## Create an slider space
 
     master.equalizer_frame.freq8_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                             text="4k Hz",
-                                             text_font=("Roboto Medium", -12),
+                                             text="14.4k Hz",
+                                             text_font=("Roboto Medium", -10),
                                              fg_color=("white", "gray30"),
                                              width=30)
 
-    master.equalizer_frame.freq8_label.grid(row=2, column=0, pady=(15,0), padx=490, sticky="nw")
+    master.equalizer_frame.freq8_label.grid(row=2, column=0, pady=(15,0), padx=485, sticky="nw")
 
     # Slider current value
     master.equalizer_frame.s8_current_value = tk.DoubleVar()
@@ -439,8 +439,8 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq9_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                             text="8k Hz",
-                                             text_font=("Roboto Medium", -12),
+                                             text="16.6k Hz",
+                                             text_font=("Roboto Medium", -10),
                                              fg_color=("white", "gray30"),
                                              width=30)
 
@@ -486,8 +486,8 @@ def equalizer_interface(master):
     ## Create an slider space
 
     master.equalizer_frame.freq10_label = customtkinter.CTkLabel(master=master.equalizer_frame,
-                                             text="16k Hz",
-                                             text_font=("Roboto Medium", -12),
+                                             text="18.8k Hz",
+                                             text_font=("Roboto Medium", -10),
                                              fg_color=("white", "gray30"),
                                              width=30)
 
@@ -562,7 +562,7 @@ def equalizer_interface(master):
 
     canvas.draw()
     canvas.get_tk_widget().configure(background='black', width=300, height=200)
-    canvas.get_tk_widget().grid(row=6, column=0, sticky="w", padx=(250, 600), pady=(0,0))
+    canvas.get_tk_widget().grid(row=6, column=0, sticky="nw", padx=(230, 600), pady=(0,0))
 
     master.equalizer_frame.no_audio_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                                                 text="No audio loaded",
@@ -570,7 +570,25 @@ def equalizer_interface(master):
                                                                 fg_color=("white", "gray18"),
                                                                 width=30)  # font name and size in px
 
-    master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(0, 0), padx=(335,600), sticky="w")
+    master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(85, 0), padx=(315,600), sticky="nw")
+
+    master.equalizer_frame.xlabel = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                                                   text="Hz",
+                                                                   text_font=("Roboto Medium", -15),
+                                                                   fg_color=("white", "gray18"),
+                                                                   text_color = "gray",
+                                                                   width=30)  # font name and size in px
+
+    master.equalizer_frame.xlabel.grid(row=6, column=0, pady=(205, 0), padx=(370, 600), sticky="w")
+
+    master.equalizer_frame.ylabel = customtkinter.CTkLabel(master=master.equalizer_frame,
+                                                           text="dB",
+                                                           text_font=("Roboto Medium", -15),
+                                                           fg_color=("white", "gray18"),
+                                                           text_color="gray",
+                                                           width=30)  # font name and size in px
+
+    master.equalizer_frame.ylabel.grid(row=6, column=0, pady=(85, 0), padx=(190, 600), sticky="nw")
 
     # Button to save the result
     master.equalizer_frame.save_button = customtkinter.CTkButton(master.equalizer_frame,
