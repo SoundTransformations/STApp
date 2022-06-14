@@ -570,7 +570,7 @@ def equalizer_interface(master):
                                                                 fg_color=("white", "gray18"),
                                                                 width=30)  # font name and size in px
 
-    master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(85, 0), padx=(315,600), sticky="nw")
+    master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(85, 0), padx=(320,600), sticky="nw")
 
     master.equalizer_frame.xlabel = customtkinter.CTkLabel(master=master.equalizer_frame,
                                                                    text="Hz",
