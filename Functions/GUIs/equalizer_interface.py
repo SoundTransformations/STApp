@@ -1,23 +1,13 @@
-import os
-import sys
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 import customtkinter
+
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from Functions import utilities as f
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
-from Functions.models import utilFunctions as UF
-from Functions.models import dftModel as DFT
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../transformations/'))
-from Functions.transformations import stftTransformations as stft
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../Functions/'))
 
 def equalizer_interface(master):
 
@@ -47,7 +37,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.filelocation1 = customtkinter.CTkEntry(master=master.equalizer_frame,
                                                                   width=10,
-                                                                  placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
+                                                                  placeholder_text="Path to the file: 16 bits, mono and 44100 Hz of sampling rate!")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
     master.equalizer_frame.filelocation1.grid(row=1, column=0, pady=20, padx=(110, 480), sticky="we")
     master.equalizer_frame.filelocation1.focus_set()
@@ -544,7 +534,7 @@ def equalizer_interface(master):
     # Button to browse the input file 1
     master.equalizer_frame.btn_equalize = customtkinter.CTkButton(master.equalizer_frame,
                                                    text="Equalize", width=3,
-                                                   command=lambda: f.filtering(master,2),fg_color=("gray75", "gray30"),
+                                                   command=lambda: f.filtering(master,2,master.equalizer_frame.filelocation1.get()),fg_color=("gray75", "gray30"),
                                                    hover_color="#1c94cf",
                                                    border_color="#6a777d",
                                                    border_width=1)

@@ -6,45 +6,62 @@ from scipy.signal import resample
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
 from Functions.models import dftModel as DFT
 
-def stftFiltering(x, fs, w, N, H, filter):
+def stftFiltering(x, fs, w, N, H, sliders):
 	"""
-	Apply a filter to a sound by using the STFT
-	x: input sound, w: analysis window, N: FFT size, H: hop size
-	filter: magnitude response of filter with frequency-magnitude pairs (in dB)
-	returns y: output sound
-	"""
+		Apply a filter to a sound by using the STFT
+		x: input sound, w: analysis window, N: FFT size, H: hop size
+		filter: magnitude response of filter with frequency-magnitude pairs (in dB)
+		returns y: output sound
+		"""
 
-	M = w.size                                     # size of analysis window
-	hM1 = int(math.floor((M+1)/2))                 # half analysis window size by rounding
-	hM2 = int(math.floor(M/2))                     # half analysis window size by floor
-	x = np.append(np.zeros(hM2),x)                 # add zeros at beginning to center first window at sample 0
-	x = np.append(x,np.zeros(hM1))                 # add zeros at the end to analyze last sample
-	pin = hM1                                      # initialize sound pointer in middle of analysis window       
-	pend = x.size-hM1                              # last sample to start a frame
-	w = w / sum(w)                                 # normalize analysis window
-	y = np.zeros(x.size)                           # initialize output array
-	mX_plot = np.zeros(int(N/2+1))
-	mY_plot = np.zeros(int(N/2+1))
+
+	M = w.size  # size of analysis window
+	hM1 = int(math.floor((M + 1) / 2))  # half analysis window size by rounding
+	hM2 = int(math.floor(M / 2))  # half analysis window size by floor
+	x = np.append(np.zeros(hM2), x)  # add zeros at beginning to center first window at sample 0
+	x = np.append(x, np.zeros(hM1))  # add zeros at the end to analyze last sample
+	pin = hM1  # initialize sound pointer in middle of analysis window
+	pend = x.size - hM1  # last sample to start a frame
+	w = w / sum(w)  # normalize analysis window
+	y = np.zeros(x.size)  # initialize output array
+	mX_plot = np.zeros(int(N / 2 + 1))
+	mY_plot = np.zeros(int(N / 2 + 1))
 	counter = 0
-	while pin<=pend:                               # while sound pointer is smaller than last sample
-	#-----analysis-----  
-		x1 = x[pin-hM1:pin+hM2]                    # select one frame of input sound
-		mX, pX = DFT.dftAnal(x1, w, N)             # compute dft
+
+	# Build the filt array
+	startBin = 0
+	nBins = 193  # 183
+	db_to_down = 60
+
+	filt = np.zeros(int(N/2+1)) - 60
+	bandpass1 = (np.hanning(nBins) * (db_to_down + int(sliders[0]))) - db_to_down
+	filt[startBin: startBin + int((nBins) / 2) + 1] = bandpass1[int((nBins) / 2):]
+
+	for i in range(1, 10):  # 91
+		bandpass = (np.hanning(nBins) * (db_to_down + int(sliders[i])))
+		filt[startBin + i * 96 - int(nBins / 2):startBin + i * 96 - int(nBins / 2) + nBins] += bandpass
+
+	while pin <= pend:  # while sound pointer is smaller than last sample
+		# -----analysis-----
+		x1 = x[pin - hM1:pin + hM2]  # select one frame of input sound
+		mX, pX = DFT.dftAnal(x1, w, N)  # compute dft
 		mX_plot += mX
-	#------transformation-----
-		mY = mX + filter                           # filter input magnitude spectrum
-		mY_plot+=mY
-	#-----synthesis-----
-		y1 = DFT.dftSynth(mY, pX, M)               # compute idft
-		y[pin-hM1:pin+hM2] += H*y1                 # overlap-add to generate output sound
-		pin += H                                   # advance sound pointer
+		# ------transformation-----
+		mY = mX + filt  # filter input magnitude spectrum
+		mY_plot += mY
+		# -----synthesis-----
+		y1 = DFT.dftSynth(mY, pX, M)  # compute idft
+		y[pin - hM1:pin + hM2] += H * y1  # overlap-add to generate output sound
+		pin += H  # advance sound pointer
 		counter += 1
 
-	mX_plot = mX_plot/counter
-	mY_plot = mY_plot/counter
-	y = np.delete(y, range(hM2))                   # delete half of first window which was added in stftAnal
-	y = np.delete(y, range(y.size-hM1, y.size))    # add zeros at the end to analyze last sample
-	return y, mX_plot, mY_plot
+
+
+	mX_plot = mX_plot / counter
+	mY_plot = mY_plot / counter
+	y = np.delete(y, range(hM2))  # delete half of first window which was added in stftAnal
+	y = np.delete(y, range(y.size - hM1, y.size))  # add zeros at the end to analyze last sample
+	return y, mX_plot, mY_plot, filt
 
 
 def stftMorph(x1, x2, fs, w1, N1, w2, N2, H1, smoothf, balancef):

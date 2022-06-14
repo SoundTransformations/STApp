@@ -1,9 +1,6 @@
-import os
-import sys
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
 import customtkinter
 
 from matplotlib.figure import Figure
@@ -11,11 +8,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 from Functions import utilities as f
-
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../models/'))
-from Functions.models import utilFunctions as UF
-
 
 def stretcher_interface(master):
 
@@ -44,7 +36,7 @@ def stretcher_interface(master):
 
     master.stretcher_frame.filelocation_stretcher = customtkinter.CTkEntry(master=master.stretcher_frame,
                                                                   width=10,
-                                                                  placeholder_text="Path to the first input file")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
+                                                                  placeholder_text="Path to the file: 16 bits, mono and 44100 Hz of sampling rate!")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
 
     master.stretcher_frame.filelocation_stretcher.grid(row=1, column=0, pady=20, padx=(110, 650), sticky="we")
     master.stretcher_frame.filelocation_stretcher.focus_set()
@@ -172,7 +164,7 @@ def stretcher_interface(master):
     # Button to apply the transformation
     master.stretcher_frame.apply_button = customtkinter.CTkButton(master.stretcher_frame,
                                                               text="Stretch", width=3,
-                                                              command=lambda: f.stretching(master, 2),fg_color=("gray75", "gray30"),
+                                                              command=lambda: f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get()),fg_color=("gray75", "gray30"),
                                                               hover_color="#1c94cf",
                                                               border_color="#6a777d",
                                                               border_width=1)
