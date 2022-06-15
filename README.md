@@ -11,32 +11,25 @@ shifting and time stretching.
 
 How to Install and Run the Project
 ----------
+**For developers:**
 
-In order to use these tools you have to install Python 3.8.x (recommended) and the following modules: 
-ipython, numpy, matplotlib, scipy, cython and sounddevice.
+In order to use this software you have to install Python 3.8.x (recommended) in your computer. 
+Then you should clone the GithHub repository to your computer: 
 
-Regarding the visualization and edition of the code, you might need to install a python integrated 
-development environment such as PyCharm Community where you will need to configure the interpreter 
-to Python 3.8 and after that you should install all the modules mentioned before. 
+<code>git clone https://github.com/SoundTransformations/STApp.git </code>
 
-In Ubuntu (which we strongly recommend) in order to install all these modules it is as simple as typing
-in the Terminal:
+Now you have the software in your computer. Regarding the visualization and edition of the code, you might need to install a python integrated 
+development environment such as PyCharm Community (recommended) where you will need to configure the interpreter 
+to <code>Python 3.8</code>. One you have configured the interpreter as <code>Python 3.8</code>, you should
+install the following modules:
+<code>ipython</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code>, <code>cython</code>
+and <code>sounddevice</code>, in order to be able tu run the software with all its dependencies.
 
-<code>$ sudo apt-get install python-dev ipython python-numpy python-matplotlib python-scipy cython</code>
+**For users:**
 
-In OSX (which we do not support but that should work) you install these modules by typing in the Terminal:
-
-<code>$ pip install ipython numpy matplotlib scipy cython</code>
-
-then, for using the software, after downloading the whole package, you need to compile some C functions. 
-For that you should go to the directory <code>Functions/models/utilFunctions_C</code> and type:</p>
-
-<code>$ python3 compileModule.py build_ext --inplace </code>
-
-The basic sound analysis/synthesis functions, or models, are in the python archive <code>main.py</code>. 
-To execute the application you have to go to the directory where the <code>main.py</code> file is and type: 
-
-<code>$ python3 main.py </code>
+As a user who only wants to make use of the application, you only need to download the executable file. 
+You can find it on <code>Releases</code> section of the GitHub and just click into <code>STApp.exe</code>. 
+Once you download it, you are ready to use the application.
 
 
 How to Use the Application
