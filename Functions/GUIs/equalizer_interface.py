@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter
 
+import time
+
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -74,16 +76,19 @@ def equalizer_interface(master):
     def slider1_changed(event):
         master.equalizer_frame.s1_value_label.configure(text='{: .2f}'.format(master.equalizer_frame.s1_current_value.get()))
 
+
     # Slider
     master.equalizer_frame.slider_1 = ttk.Scale(master.equalizer_frame,
                                 from_=0,
                                 to=-60,
                                 orient=VERTICAL,
                                 style="TScale",
-                                command= slider1_changed,
+                                command= slider1_changed ,
                                 variable=master.equalizer_frame.s1_current_value)
 
     master.equalizer_frame.slider_1.grid(row=3, column=0, pady=10, padx=65, sticky="w")
+
+    master.equalizer_frame.slider_1.bind("<ButtonRelease-1>", lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
 
     # Value label
     master.equalizer_frame.s1_value_label = ttk.Label(master.equalizer_frame,
@@ -101,10 +106,9 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height =1,
                                      fg_color = "gray40",
-                                     command=lambda: f.reset_slider1(master))
+                                     command=lambda : [f.reset_slider1(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset1.grid(row=5, column=0, pady = (5,50), padx=62, sticky = 'sw')
-
 
     ## Create an slider space
 
@@ -133,6 +137,8 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_2.grid(row=3, column=0, pady=10, padx=122, sticky="w")
 
+    master.equalizer_frame.slider_2.bind("<ButtonRelease-1>", lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s2_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s2_current_value.get()),
@@ -149,7 +155,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider2(master))
+                                     command=lambda : [f.reset_slider2(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset2.grid(row=5, column=0, pady=(5, 50), padx=120, sticky='sw')
 
@@ -180,6 +186,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_3.grid(row=3, column=0, pady=10, padx=185, sticky="w")
 
+    master.equalizer_frame.slider_3.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s3_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s3_current_value.get()),
@@ -196,7 +205,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider3(master))
+                                     command=lambda : [f.reset_slider3(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset3.grid(row=5, column=0, pady=(5, 50), padx=183, sticky='sw')
 
@@ -227,6 +236,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_4.grid(row=3, column=0, pady=10, padx=248, sticky="w")
 
+    master.equalizer_frame.slider_4.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s4_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s4_current_value.get()),
@@ -243,7 +255,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider4(master))
+                                     command=lambda : [f.reset_slider4(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset4.grid(row=5, column=0, pady=(5, 50), padx= 247, sticky='sw')
 
@@ -274,6 +286,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_5.grid(row=3, column=0, pady=10, padx=312, sticky="w")
 
+    master.equalizer_frame.slider_5.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s5_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s5_current_value.get()),
@@ -290,7 +305,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider5(master))
+                                     command=lambda : [f.reset_slider5(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset5.grid(row=5, column=0, pady=(5, 50), padx=310, sticky='sw')
 
@@ -322,6 +337,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_6.grid(row=3, column=0, pady=10, padx=375, sticky="w")
 
+    master.equalizer_frame.slider_6.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s6_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s6_current_value.get()),
@@ -338,7 +356,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider6(master))
+                                     command=lambda: [f.reset_slider6(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset6.grid(row=5, column=0, pady=(5, 50), padx=374, sticky='sw')
 
@@ -369,6 +387,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_7.grid(row=3, column=0, pady=10, padx=435, sticky="w")
 
+    master.equalizer_frame.slider_7.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s7_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s7_current_value.get()),
@@ -385,7 +406,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider7(master))
+                                     command=lambda: [f.reset_slider7(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset7.grid(row=5, column=0, pady=(5, 50), padx=432, sticky='sw')
 
@@ -416,6 +437,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_8.grid(row=3, column=0, pady=10, padx=500, sticky="w")
 
+    master.equalizer_frame.slider_8.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s8_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s8_current_value.get()),
@@ -432,7 +456,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider8(master))
+                                     command=lambda: [f.reset_slider8(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset8.grid(row=5, column=0, pady=(5, 50), padx=499, sticky='sw')
 
@@ -463,6 +487,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_9.grid(row=3, column=0, pady=10, padx=562, sticky="w")
 
+    master.equalizer_frame.slider_9.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s9_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s9_current_value.get()),
@@ -479,7 +506,7 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider9(master))
+                                     command=lambda: [f.reset_slider9(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset9.grid(row=5, column=0, pady=(5, 50), padx=559, sticky='sw')
 
@@ -510,6 +537,9 @@ def equalizer_interface(master):
 
     master.equalizer_frame.slider_10.grid(row=3, column=0, pady=10, padx=502, sticky="e")
 
+    master.equalizer_frame.slider_10.bind("<ButtonRelease-1>",
+                                         lambda h: f.filtering(master, 2, master.equalizer_frame.filelocation1.get()))
+
     # Value label
     master.equalizer_frame.s10_value_label = ttk.Label(master.equalizer_frame,
                                     text='{: .2f}'.format(master.equalizer_frame.s10_current_value.get()),
@@ -526,20 +556,10 @@ def equalizer_interface(master):
                                      text_font=("Roboto Medium", -9),
                                      height=1,
                                      fg_color="gray40",
-                                     command=lambda: f.reset_slider10(master))
+                                     command=lambda: [f.reset_slider10(master),f.filtering(master, 2, master.equalizer_frame.filelocation1.get())])
 
     master.equalizer_frame.btn_reset10.grid(row=5, column=0, pady=(5, 50), padx=502, sticky='se')
 
-
-    # Button to browse the input file 1
-    master.equalizer_frame.btn_equalize = customtkinter.CTkButton(master.equalizer_frame,
-                                                   text="Equalize", width=3,
-                                                   command=lambda: f.filtering(master,2,master.equalizer_frame.filelocation1.get()),fg_color=("gray75", "gray30"),
-                                                   hover_color="#1c94cf",
-                                                   border_color="#6a777d",
-                                                   border_width=1)
-    
-    master.equalizer_frame.btn_equalize.grid(row=3, column=0, sticky="ne", padx=(100, 400), pady=0)
 
     master.equalizer_frame.graphic_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                           text="Graphical representation:",

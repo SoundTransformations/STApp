@@ -164,7 +164,6 @@ def filtering(master,case,filename):
                master.equalizer_frame.s9_current_value.get(), master.equalizer_frame.s10_current_value.get()]
 
     master.y, mX_plot, mY_plot, filt = stft.stftFiltering(x,fs,np.hanning(N),N,100,sliders)
-
     fig1 = Figure(figsize=(16, 9), dpi=100)
     fig1.set_facecolor('#2e2e2e')
     a = fig1.add_subplot(111)
@@ -192,6 +191,7 @@ def filtering(master,case,filename):
 
     if case == 2: #If we pressed the button Equalize, we can save the file (case = 2)
         master.equalizer_frame.save_button.configure(state=NORMAL)
+
 
 def stretching(master,case,filename):
 
@@ -234,6 +234,7 @@ def stretching(master,case,filename):
         canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
 
         master.stretcher_frame.save_button.configure(state=NORMAL)
+
 
 def shifting(master,case,filename):
 

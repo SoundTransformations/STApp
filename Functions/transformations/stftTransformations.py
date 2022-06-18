@@ -14,7 +14,6 @@ def stftFiltering(x, fs, w, N, H, sliders):
 		returns y: output sound
 		"""
 
-
 	M = w.size  # size of analysis window
 	hM1 = int(math.floor((M + 1) / 2))  # half analysis window size by rounding
 	hM2 = int(math.floor(M / 2))  # half analysis window size by floor
