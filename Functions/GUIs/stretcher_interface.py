@@ -93,7 +93,7 @@ def stretcher_interface(master):
                                                                         text_font=("Roboto Medium", -9),
                                                                         height=1,
                                                                         fg_color="gray40",
-                                                                        command=lambda: f.reset_slider_stretcher(master))
+                                                                        command=lambda: [f.reset_slider_stretcher(master),f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get())])
 
     master.stretcher_frame.btn_reset_stretcher_slider.grid(row=3, column=0, pady=(27, 0), padx=157, sticky='nw')
 
@@ -114,25 +114,28 @@ def stretcher_interface(master):
                               command=slider15_changed,
                               variable=master.stretcher_frame.speed_value)
 
-    master.stretcher_frame.time_slider.grid(row=3, column=0, pady=20, padx=200, sticky="w")
+    master.stretcher_frame.time_slider.grid(row=3, column=0, pady=(23,0), padx=200, sticky="nw")
+
+    master.stretcher_frame.time_slider.bind("<ButtonRelease-1>",
+                                         lambda h: f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get()))
 
     # Left limit
     master.stretcher_frame.left_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
-                                                text="0.5",
+                                                text="x2",
                                                 text_font=("Roboto Medium", -11),
                                                 background="gray18",
                                                 foreground="white")
 
-    master.stretcher_frame.left_limit_stretcher.grid(row=3, column=0, pady=(45, 0), padx=160, sticky="w")
+    master.stretcher_frame.left_limit_stretcher.grid(row=3, column=0, pady=(45, 0), padx=150, sticky="nw")
 
     # Right limit
     master.stretcher_frame.right_limit_stretcher = customtkinter.CTkLabel(master=master.stretcher_frame,
-                                               text="2.0",
+                                               text="x0.5",
                                                text_font=("Roboto Medium", -11),
                                                background="gray18",
                                                foreground="white")
 
-    master.stretcher_frame.right_limit_stretcher.grid(row=3, column=0, pady=(45, 0), padx=525, sticky="w")
+    master.stretcher_frame.right_limit_stretcher.grid(row=3, column=0, pady=(45, 0), padx=535, sticky="nw")
 
     # VALUE NUMBER
     master.stretcher_frame.value_number = ttk.Label(master.stretcher_frame,
@@ -141,35 +144,26 @@ def stretcher_interface(master):
                                    justify="center",
                                    foreground="white")
 
-    master.stretcher_frame.value_number.grid(row=4, column=0, pady=10, padx=389, sticky='w')
+    master.stretcher_frame.value_number.grid(row=3, column=0, pady=(60,0), padx=389, sticky='w')
 
     master.stretcher_frame.time_slider.set(1)
 
     # Forward the slider
     master.stretcher_frame.forward_slider = customtkinter.CTkButton(master.stretcher_frame,
                                                                   text=">", width=1,height=1,
-                                                                  command=lambda: f.forward_stretcher_slider(master),fg_color=("gray75", "gray30"))
+                                                                  command=lambda: [f.forward_stretcher_slider(master),f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get())],
+                                                                  fg_color=("gray75", "gray30"))
 
-    master.stretcher_frame.forward_slider.grid(row=4, column=0, pady=10, padx=460, sticky='w')
+    master.stretcher_frame.forward_slider.grid(row=3, column=0, pady=(60,0), padx=460, sticky='w')
 
     # Backward the slider
     master.stretcher_frame.backward_slider = customtkinter.CTkButton(master.stretcher_frame,
                                                                     text="<", width=1, height=1,
-                                                                    command=lambda: f.backward_stretcher_slider(master),
+                                                                    command=lambda:[f.backward_stretcher_slider(master),f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get())],
                                                                     fg_color=("gray75", "gray30"))
 
-    master.stretcher_frame.backward_slider.grid(row=4, column=0, pady=10, padx=319, sticky='w')
+    master.stretcher_frame.backward_slider.grid(row=3, column=0, pady=(60,0), padx=319, sticky='w')
 
-
-    # Button to apply the transformation
-    master.stretcher_frame.apply_button = customtkinter.CTkButton(master.stretcher_frame,
-                                                              text="Stretch", width=3,
-                                                              command=lambda: f.stretching(master, 2, master.stretcher_frame.filelocation_stretcher.get()),fg_color=("gray75", "gray30"),
-                                                              hover_color="#1c94cf",
-                                                              border_color="#6a777d",
-                                                              border_width=1)
-
-    master.stretcher_frame.apply_button.grid(row=3, column=0, sticky="ne", padx=(70, 587), pady=0)
 
     # Button to save the result
     master.stretcher_frame.save_button = customtkinter.CTkButton(master.stretcher_frame,
@@ -178,7 +172,7 @@ def stretcher_interface(master):
                                                              fg_color=("gray75", "gray30"),
                                                              state=DISABLED)
 
-    master.stretcher_frame.save_button.grid(row=3, column=0, sticky="se", padx=(70, 595), pady=0)
+    master.stretcher_frame.save_button.grid(row=3, column=0, sticky="ne", padx=(70, 595), pady=0)
 
     # Button to play the result
     master.stretcher_frame.play_result_button = customtkinter.CTkButton(master.stretcher_frame,
@@ -186,7 +180,7 @@ def stretcher_interface(master):
                                                                     command=lambda: f.play_song(master.y2, 44100),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.stretcher_frame.play_result_button.grid(row=4, column=0, sticky="se", padx=(100, 585), pady=10)
+    master.stretcher_frame.play_result_button.grid(row=3, column=0, sticky="ne", padx=(100, 585), pady=40)
 
     # Button to stop the result
     master.stretcher_frame.stop_result_button = customtkinter.CTkButton(master.stretcher_frame,
@@ -194,4 +188,4 @@ def stretcher_interface(master):
                                                                     command=lambda: f.stop_song(master.y2),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.stretcher_frame.stop_result_button.grid(row=4, column=0, sticky="se", padx=(100, 625), pady=10)
+    master.stretcher_frame.stop_result_button.grid(row=3, column=0, sticky="ne", padx=(100, 625), pady=40)

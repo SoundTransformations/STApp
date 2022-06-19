@@ -3,8 +3,6 @@ import tkinter as tk
 from tkinter import ttk
 import customtkinter
 
-import time
-
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -617,7 +615,7 @@ def equalizer_interface(master):
                                           fg_color=("gray75", "gray30"),
                                           state=DISABLED)
 
-    master.equalizer_frame.save_button.grid(row=3, column=0, sticky="e", padx=(100, 410), pady=0)
+    master.equalizer_frame.save_button.grid(row=3, column=0, sticky="ne", padx=(100, 410), pady=30)
 
 
     #Button to play the result
@@ -626,7 +624,7 @@ def equalizer_interface(master):
                                                  command=lambda: f.play_song(master.y, 44100),
                                                  fg_color=("gray75", "gray30"))
 
-    master.equalizer_frame.play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 400), pady=0)
+    master.equalizer_frame.play_result_button.grid(row=3, column=0, sticky="se", padx=(100, 400), pady=20)
 
     # Button to stop the result
     master.equalizer_frame.stop_result_button = customtkinter.CTkButton(master.equalizer_frame,
@@ -634,4 +632,4 @@ def equalizer_interface(master):
                                                  command=lambda: f.stop_song(master.y),
                                                  fg_color=("gray75", "gray30"))
 
-    master.equalizer_frame.stop_result_button.grid(row=3, column=0, sticky="se", padx=(100, 440), pady=0)
+    master.equalizer_frame.stop_result_button.grid(row=3, column=0, sticky="se", padx=(100, 440), pady=20)

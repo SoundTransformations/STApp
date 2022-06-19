@@ -92,7 +92,7 @@ def pitch_interface(master):
                                                                  text_font=("Roboto Medium", -9),
                                                                  height=1,
                                                                  fg_color="gray40",
-                                                                 command=lambda: f.reset_slider_pitch(master))
+                                                                 command=lambda: [f.reset_slider_pitch(master),f.shifting(master, 2, master.pitch_frame.filelocation_pitch.get())])
 
     master.pitch_frame.btn_reset_pitch_slider.grid(row=3, column=0, pady=(27, 0), padx=157, sticky='nw')
 
@@ -112,9 +112,11 @@ def pitch_interface(master):
                                                 command=slider16_changed,
                                                 variable=master.pitch_frame.current_value)
 
-    master.pitch_frame.pitch_slider.grid(row=3, column=0, pady=20, padx=200, sticky="w")
+    master.pitch_frame.pitch_slider.grid(row=3, column=0, pady=(23,0), padx=200, sticky="nw")
 
-
+    master.pitch_frame.pitch_slider.bind("<ButtonRelease-1>",
+                                            lambda h: f.shifting(master, 2,
+                                                                   master.pitch_frame.filelocation_pitch.get()))
 
     # Left limit
     master.pitch_frame.left_limit_pitch = customtkinter.CTkLabel(master=master.pitch_frame,
@@ -123,7 +125,7 @@ def pitch_interface(master):
                                                                  background="gray18",
                                                                  foreground="white")
 
-    master.pitch_frame.left_limit_pitch.grid(row=3, column=0, pady=(45, 0), padx=160, sticky="w")
+    master.pitch_frame.left_limit_pitch.grid(row=3, column=0, pady=(45, 0), padx=160, sticky="nw")
 
     # Right limit
     master.pitch_frame.right_limit_pitch = customtkinter.CTkLabel(master=master.pitch_frame,
@@ -141,33 +143,24 @@ def pitch_interface(master):
                                                 justify="center",
                                                 foreground="white")
 
-    master.pitch_frame.value_number.grid(row=4, column=0, pady=10, padx=389, sticky='w')
+    master.pitch_frame.value_number.grid(row=3, column=0, pady=(60,0), padx=389, sticky='w')
 
     # Forward the slider
     master.pitch_frame.forward_slider = customtkinter.CTkButton(master.pitch_frame,
                                                                     text=">", width=1, height=1,
-                                                                    command=lambda: f.forward_pitch_slider(master),
+                                                                    command=lambda: [f.forward_pitch_slider(master),f.shifting(master, 2, master.pitch_frame.filelocation_pitch.get())],
                                                                     fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.forward_slider.grid(row=4, column=0, pady=10, padx=460, sticky='w')
+    master.pitch_frame.forward_slider.grid(row=3, column=0, pady=(60,0), padx=460, sticky='w')
 
     # Backward the slider
     master.pitch_frame.backward_slider = customtkinter.CTkButton(master.pitch_frame,
                                                                      text="<", width=1, height=1,
-                                                                     command=lambda: f.backward_pitch_slider(master),
+                                                                     command=lambda: [f.backward_pitch_slider(master),f.shifting(master, 2, master.pitch_frame.filelocation_pitch.get())],
                                                                      fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.backward_slider.grid(row=4, column=0, pady=10, padx=319, sticky='w')
+    master.pitch_frame.backward_slider.grid(row=3, column=0, pady=(60,0), padx=319, sticky='w')
 
-    # Button to apply the transformation
-    master.pitch_frame.apply_button = customtkinter.CTkButton(master.pitch_frame,
-                                                              text="Pitch Shift", width=3,
-                                                              command=lambda: f.shifting(master, 2, master.pitch_frame.filelocation_pitch.get()),fg_color=("gray75", "gray30"),
-                                                              hover_color="#1c94cf",
-                                                              border_color="#6a777d",
-                                                              border_width=1)
-
-    master.pitch_frame.apply_button.grid(row=3, column=0, sticky="ne", padx=(70, 580), pady=0)
 
     # Button to save the result
     master.pitch_frame.save_button = customtkinter.CTkButton(master.pitch_frame,
@@ -176,7 +169,7 @@ def pitch_interface(master):
                                                                  fg_color=("gray75", "gray30"),
                                                                  state=DISABLED)
 
-    master.pitch_frame.save_button.grid(row=3, column=0, sticky="se", padx=(70, 595), pady=0)
+    master.pitch_frame.save_button.grid(row=3, column=0, sticky="ne", padx=(70, 595), pady=0)
 
     # Button to play the result
     master.pitch_frame.play_result_button = customtkinter.CTkButton(master.pitch_frame,
@@ -184,7 +177,7 @@ def pitch_interface(master):
                                                                     command=lambda: f.play_song(master.y3, 44100),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.play_result_button.grid(row=4, column=0, sticky="se", padx=(100, 585), pady=10)
+    master.pitch_frame.play_result_button.grid(row=3, column=0, sticky="ne", padx=(100, 585), pady=40)
 
     # Button to stop the result
     master.pitch_frame.stop_result_button = customtkinter.CTkButton(master.pitch_frame,
@@ -192,4 +185,4 @@ def pitch_interface(master):
                                                                     command=lambda: f.stop_song(master.y3),
                                                                     fg_color=("gray75", "gray30"))
 
-    master.pitch_frame.stop_result_button.grid(row=4, column=0, sticky="se", padx=(100, 625), pady=10)
+    master.pitch_frame.stop_result_button.grid(row=3, column=0, sticky="ne", padx=(100, 625), pady=40)
