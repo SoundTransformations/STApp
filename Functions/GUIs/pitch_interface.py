@@ -1,5 +1,3 @@
-import os
-import sys
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -15,7 +13,7 @@ from Functions import utilities as f
 def pitch_interface(master):
     # CONFIGURE THE PITCH SHIFTING FRAME
 
-    # Configure grid layout (3x7)
+    # Configure grid layout
     master.pitch_frame.rowconfigure(1, weight=0)
 
     # TITLE
@@ -27,7 +25,7 @@ def pitch_interface(master):
 
     master.pitch_frame.frame_title.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
 
-    # INPUT FILE 1
+    #Gadgets to load the input file
     master.pitch_frame.file_label = customtkinter.CTkLabel(master=master.pitch_frame,
                                                            text="File:",
                                                            text_font=("Roboto Medium", -16),
@@ -59,11 +57,14 @@ def pitch_interface(master):
     data = np.zeros(2)
     a4.plot(data)
     a4.axis('off')
+
+    #Show the graphical representation on the canvas
     canvas4 = FigureCanvasTkAgg(fig4, master.pitch_frame)
     canvas4.draw()
     canvas4.get_tk_widget().configure(background='black', width=720, height=200)
     canvas4.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0, 0))
 
+    #Label to be shown when there is no audio loaded
     master.pitch_frame.no_audio_label = customtkinter.CTkLabel(master=master.pitch_frame,
                                                                    text="No audio loaded",
                                                                    text_font=("Roboto Medium", -15),

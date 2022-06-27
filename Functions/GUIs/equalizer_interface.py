@@ -9,32 +9,34 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from Functions import utilities as f
 
+
 def equalizer_interface(master):
 
     ## CONFIGURE THE EQUALIZER FRAME
 
-    # Configure grid layout (3x7)
+    # Configure grid layout
     master.equalizer_frame.rowconfigure(1, weight=0)
 
-
+    #Frame title
     master.equalizer_frame.frame_title = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="Equalizer",
                                             text_font=("Roboto Medium", -30),
                                             fg_color=("white", "gray18"),
-                                            width=30)  # font name and size in px
+                                            width=30)
 
     master.equalizer_frame.frame_title.grid(row=0, column=0, pady=(15,0), padx=40, sticky="w")
 
 
-    ## INPUT FILE 1
+    #Gadgets to load the audio file
     master.equalizer_frame.file_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="File:",
                                             text_font=("Roboto Medium", -16),
                                             fg_color=("white", "gray30"),
-                                            width=30)  # font name and size in px
+                                            width=30)
 
     master.equalizer_frame.file_label.grid(row=1, column=0, pady=0, padx=50, sticky="w")
 
+    #Label of the filepath for the audio file
     master.equalizer_frame.filelocation1 = customtkinter.CTkEntry(master=master.equalizer_frame,
                                                                   width=10,
                                                                   placeholder_text="Path to the file: 16 bits, mono and 44100 Hz of sampling rate!")  # TEXTBOX TO PRINT PATH OF THE SOUND FILE
@@ -44,7 +46,7 @@ def equalizer_interface(master):
 
 
 
-    # Button to browse the input file 1
+    # Button to browse the input file
     master.equalizer_frame.open_file1 = customtkinter.CTkButton(master.equalizer_frame,
                                          text="Import", width=3,
                                          command= lambda: f.browse_file1(master,1))
@@ -559,6 +561,7 @@ def equalizer_interface(master):
     master.equalizer_frame.btn_reset10.grid(row=5, column=0, pady=(5, 50), padx=502, sticky='se')
 
 
+    #Label of the graphical representation
     master.equalizer_frame.graphic_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                           text="Graphical representation:",
                                           text_font=("Roboto Medium", -20),
@@ -567,9 +570,10 @@ def equalizer_interface(master):
 
     master.equalizer_frame.graphic_label.grid(row=5, column=0, pady=(50, 0), padx=40, sticky="sw")
 
-
+    #Set the plot color to the same of the app
     plt.rcParams['axes.facecolor'] = '#2e2e2e'
 
+    #Create a figure to be displayed by default
     default_figure = Figure(figsize=(16,9), dpi = 100)
     default_figure.set_facecolor('#2e2e2e')
     ax= default_figure.add_subplot(111)
@@ -578,10 +582,12 @@ def equalizer_interface(master):
     ax.spines['top'].set_visible(False)
     canvas = FigureCanvasTkAgg(default_figure, master.equalizer_frame)
 
+    #Draw the graphical representation on the canvas
     canvas.draw()
     canvas.get_tk_widget().configure(background='black', width=300, height=200)
     canvas.get_tk_widget().grid(row=6, column=0, sticky="nw", padx=(230, 600), pady=(0,0))
 
+    #Label to be shown when no audio is loaded
     master.equalizer_frame.no_audio_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                                                 text="No audio loaded",
                                                                 text_font=("Roboto Medium", -15),
@@ -590,6 +596,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.no_audio_label.grid(row=6, column=0, pady=(85, 0), padx=(320,600), sticky="nw")
 
+    #x-axis label (Frequencies)
     master.equalizer_frame.xlabel = customtkinter.CTkLabel(master=master.equalizer_frame,
                                                                    text="Hz",
                                                                    text_font=("Roboto Medium", -15),
@@ -599,6 +606,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.xlabel.grid(row=6, column=0, pady=(205, 0), padx=(370, 600), sticky="w")
 
+    #y-axis label (dB's)
     master.equalizer_frame.ylabel = customtkinter.CTkLabel(master=master.equalizer_frame,
                                                            text="dB",
                                                            text_font=("Roboto Medium", -15),

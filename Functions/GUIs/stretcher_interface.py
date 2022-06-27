@@ -9,23 +9,23 @@ import numpy as np
 
 from Functions import utilities as f
 
+
 def stretcher_interface(master):
 
     ## CONFIGURE THE FRAME FOR THE STRETCHER
 
-    # configure grid layout (3x7)
+    # configure grid layout
     master.stretcher_frame.rowconfigure(1, weight=0)
 
 
-    ##TITLE
+    #Title of the interface
     master.stretcher_frame.frame_title = customtkinter.CTkLabel(master=master.stretcher_frame,
                                           text="Time Stretcher", text_font=("Roboto Medium", -30),
                                           fg_color=("white", "gray18"), width=30)  # font name and size in px
 
     master.stretcher_frame.frame_title.grid(row=0, column=0, pady=(15, 0), padx=40, sticky="w")
 
-    ## INPUT FILE 1
-
+    #Gadgets to load the input file
     master.stretcher_frame.file_label = customtkinter.CTkLabel(master=master.stretcher_frame,
                                             text="File:",
                                             text_font=("Roboto Medium", -16),
@@ -56,11 +56,14 @@ def stretcher_interface(master):
     data = np.zeros(2)
     a3.plot(data)
     a3.axis('off')
+
+    #Show the graphical representation on the canvas
     canvas3 = FigureCanvasTkAgg(fig3, master.stretcher_frame)
     canvas3.draw()
     canvas3.get_tk_widget().configure(background='black', width=720, height=200)
     canvas3.get_tk_widget().grid(row=2, column=0, sticky="w", padx=(20, 580), pady=(0,0))
 
+    #Label to be shown when no audio is loaded
     master.stretcher_frame.no_audio_label = customtkinter.CTkLabel(master=master.stretcher_frame,
                                                                    text="No audio loaded",
                                                                    text_font=("Roboto Medium", -15),
@@ -69,13 +72,10 @@ def stretcher_interface(master):
 
     master.stretcher_frame.no_audio_label.grid(row=2, column=0, pady=(50, 0), padx=(325, 600), sticky="w")
 
-
-
-    # Define the style
+    # Define the style for the sliders
     style = ttk.Style()
     style.configure("TScale", background="gray18")
 
-    ##BUTTON FOR TIME DELAY
 
     # Create an slider space
     master.stretcher_frame.label_speed = customtkinter.CTkLabel(master=master.stretcher_frame,
@@ -97,8 +97,7 @@ def stretcher_interface(master):
 
     master.stretcher_frame.btn_reset_stretcher_slider.grid(row=3, column=0, pady=(27, 0), padx=157, sticky='nw')
 
-    ##SLIDER
-    # slider delay value
+    #Slider
     master.stretcher_frame.speed_value = tk.DoubleVar()
 
     def slider15_changed(event):
