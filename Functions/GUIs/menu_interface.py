@@ -45,8 +45,7 @@ def create_main_interface(master):
     master.label_1 = customtkinter.CTkButton(master=master.frame_left,
                                              text = '',
                                              fg_color='#2e2e2e',
-                                             image = photo,
-                                            compound='right',
+                                             image = photo, state = "DISABLED",
                                              width = 100, height = 5)
 
     master.label_1.grid(row=1, column=0, pady=5, padx=0)
