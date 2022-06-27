@@ -1,6 +1,9 @@
 import customtkinter
 from Functions import utilities as f
 
+import os
+import sys
+import tkinter as tk
 
 def create_main_interface(master):
 
@@ -29,12 +32,24 @@ def create_main_interface(master):
     master.frame_left.grid_rowconfigure(8, minsize=20)  # empty row with minsize as spacing
     master.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
 
-    # Add a Label
-    master.label_1 = customtkinter.CTkLabel(master=master.frame_left,
-                                            text="STApp",
-                                            text_font=("Roboto Medium", -16))  # font name and size in px
+    def resource_path(relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+        return os.path.join(base_path, relative_path)
 
-    master.label_1.grid(row=1, column=0, pady=10, padx=10)
+    path = resource_path("STApp_logo.png")
+    photo = tk.PhotoImage(file=path)
+
+    master.label_1 = customtkinter.CTkButton(master=master.frame_left,
+                                             text = '',
+                                             fg_color='#2e2e2e',
+                                             image = photo,
+                                            compound='right',
+                                             width = 100, height = 5)
+
+    master.label_1.grid(row=1, column=0, pady=5, padx=0)
 
     # Add a button
     master.button_1 = customtkinter.CTkButton(master=master.frame_left,

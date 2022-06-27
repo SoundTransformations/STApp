@@ -2,6 +2,7 @@ import os
 import sys
 import customtkinter
 import base64
+import tkinter as tk
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Functions/GUIs'))
 from Functions.GUIs import equalizer_interface as ei, menu_interface as mi, stretcher_interface as si, pitch_interface as oi
