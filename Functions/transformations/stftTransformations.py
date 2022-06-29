@@ -23,20 +23,20 @@ def stftFiltering(x, fs, w, N, H, sliders):
 	pend = x.size - hM1  # last sample to start a frame
 	w = w / sum(w)  # normalize analysis window
 	y = np.zeros(x.size)  # initialize output array
-	mX_plot = np.zeros(int(N / 2 + 1))
-	mY_plot = np.zeros(int(N / 2 + 1))
+	mX_plot = np.zeros(int(N / 2 + 1)) #Initialize input magnitude average
+	mY_plot = np.zeros(int(N / 2 + 1)) #Initialize output magnitude average
 	counter = 0
 
 	# Build the filt array
 	startBin = 0
-	nBins = 205  # 183
-	db_to_down = 60
+	nBins = 205 #Number of bins of each bandpass filter
+	db_to_down = 60 #decibels to center the bandpass filters to the y-axis correctly
 
-	filt = np.zeros(int(N/2+1)) - 60
-	bandpass1 = (np.hanning(nBins) * (db_to_down + int(sliders[0]))) - db_to_down
+	filt = np.zeros(int(N/2+1)) - 60 #Initialize the filter array
+	bandpass1 = (np.hanning(nBins) * (db_to_down + int(sliders[0]))) - db_to_down #Assign the first bandpass
 	filt[startBin: startBin + int((nBins) / 2) + 1] = bandpass1[int((nBins) / 2):]
 
-	for i in range(1, 10):  # 91
+	for i in range(1, 10): #Sum bandpass filters to make a huge bandpass filter with filters centered at linear bands
 		bandpass = (np.hanning(nBins) * (db_to_down + int(sliders[i])))
 		filt[startBin + i * 102 - int(nBins / 2):startBin + i * 102 - int(nBins / 2) + nBins] += bandpass
 
@@ -54,9 +54,7 @@ def stftFiltering(x, fs, w, N, H, sliders):
 		pin += H  # advance sound pointer
 		counter += 1
 
-
-
-	mX_plot = mX_plot / counter
+	mX_plot = mX_plot / counter #Make the average magnitudes
 	mY_plot = mY_plot / counter
 	y = np.delete(y, range(hM2))  # delete half of first window which was added in stftAnal
 	y = np.delete(y, range(y.size - hM1, y.size))  # add zeros at the end to analyze last sample
