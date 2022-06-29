@@ -60,7 +60,7 @@ def equalizer_interface(master):
     style = ttk.Style()
     style.configure("TScale", background="gray18")
 
-    # Create an slider space
+    # Create a slider space
 
     master.equalizer_frame.freq1_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="0k Hz",
@@ -70,7 +70,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq1_label.grid(row=2, column=0, pady=(15,0), padx=54, sticky="nw")
 
-    # slider current value
+    # current value of the slider
     master.equalizer_frame.s1_current_value = tk.DoubleVar()
 
     def slider1_changed(event):
@@ -110,7 +110,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset1.grid(row=5, column=0, pady = (5,50), padx=62, sticky = 'sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq2_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="2.2k Hz",
@@ -120,7 +120,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq2_label.grid(row=2, column=0, pady=(15,0), padx=108, sticky="nw")
 
-    # Slider current value
+    # Current value of the slider
     master.equalizer_frame.s2_current_value = tk.DoubleVar()
 
     def slider2_changed(event):
@@ -159,7 +159,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset2.grid(row=5, column=0, pady=(5, 50), padx=120, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq3_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="4.4k Hz",
@@ -169,7 +169,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq3_label.grid(row=2, column=0, pady=(15,0), padx=171, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s3_current_value = tk.DoubleVar()
 
     def slider3_changed(event):
@@ -209,7 +209,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset3.grid(row=5, column=0, pady=(5, 50), padx=183, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq4_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="6.6k Hz",
@@ -219,7 +219,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq4_label.grid(row=2, column=0, pady=(15,0), padx=234, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s4_current_value = tk.DoubleVar()
 
     def slider4_changed(event):
@@ -259,7 +259,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset4.grid(row=5, column=0, pady=(5, 50), padx= 247, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq5_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="8.8k Hz",
@@ -269,7 +269,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq5_label.grid(row=2, column=0, pady=(15,0), padx= 298, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s5_current_value = tk.DoubleVar()
 
     def slider5_changed(event):
@@ -310,7 +310,7 @@ def equalizer_interface(master):
     master.equalizer_frame.btn_reset5.grid(row=5, column=0, pady=(5, 50), padx=310, sticky='sw')
 
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq6_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                             text="10k Hz",
@@ -320,7 +320,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq6_label.grid(row=2, column=0, pady=(15,0), padx=362, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s6_current_value = tk.DoubleVar()
 
     def slider6_changed(event):
@@ -360,7 +360,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset6.grid(row=5, column=0, pady=(5, 50), padx=374, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq7_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                              text="12.2k Hz",
@@ -370,7 +370,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq7_label.grid(row=2, column=0, pady=(15,0), padx=420, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s7_current_value = tk.DoubleVar()
 
     def slider7_changed(event):
@@ -410,7 +410,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset7.grid(row=5, column=0, pady=(5, 50), padx=432, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq8_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                              text="14.4k Hz",
@@ -420,7 +420,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq8_label.grid(row=2, column=0, pady=(15,0), padx=485, sticky="nw")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s8_current_value = tk.DoubleVar()
 
     def slider8_changed(event):
@@ -460,7 +460,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset8.grid(row=5, column=0, pady=(5, 50), padx=499, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq9_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                              text="16.6k Hz",
@@ -470,7 +470,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq9_label.grid(row=2, column=0, pady=(15,0), padx=550, sticky="n")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s9_current_value = tk.DoubleVar()
 
     def slider9_changed(event):
@@ -510,7 +510,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.btn_reset9.grid(row=5, column=0, pady=(5, 50), padx=559, sticky='sw')
 
-    ## Create an slider space
+    ## Create a slider space
 
     master.equalizer_frame.freq10_label = customtkinter.CTkLabel(master=master.equalizer_frame,
                                              text="18.8k Hz",
@@ -520,7 +520,7 @@ def equalizer_interface(master):
 
     master.equalizer_frame.freq10_label.grid(row=2, column=0, pady=(15,0), padx=485, sticky="ne")
 
-    # Slider current value
+    # current value of the slider
     master.equalizer_frame.s10_current_value = tk.DoubleVar()
 
     def slider10_changed(event):

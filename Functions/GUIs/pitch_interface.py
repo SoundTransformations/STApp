@@ -77,7 +77,7 @@ def pitch_interface(master):
     style = ttk.Style()
     style.configure("TScale", background="gray18")
 
-    # Create an slider space
+    # Create a slider space
     master.pitch_frame.label_tone = customtkinter.CTkLabel(master=master.pitch_frame,
                                                            text="Shift factor",
                                                            text_font=("Roboto Medium", -15),
@@ -97,7 +97,7 @@ def pitch_interface(master):
 
     master.pitch_frame.btn_reset_pitch_slider.grid(row=3, column=0, pady=(27, 0), padx=157, sticky='nw')
 
-    # slider current value
+    # current value of the slider
     master.pitch_frame.current_value = tk.DoubleVar()
 
     def slider16_changed(event):

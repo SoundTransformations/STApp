@@ -19,20 +19,23 @@ from Functions.transformations_interface import sineTransformations_function as 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'transformations/'))
 from Functions.transformations import stftTransformations as stft
 
+# Functions
 
-# Functions to play, browse and save
+# Play function
 def play_song(y,fs):
     try:
         sd.play(y, fs)
     except Exception as e:
         print(e)
 
+# Stop function
 def stop_song(y):
     try:
         sd.stop(y)
     except Exception as e:
         print(e)
 
+# Browse file
 def browse_file1(master, case):
 
     filename = filedialog.askopenfilename(title="Please Select a File")
@@ -61,6 +64,7 @@ def browse_file1(master, case):
 
     return filename
 
+# Save function
 def save_audio(y, fs):
 
     try:
@@ -73,32 +77,38 @@ def save_audio(y, fs):
         messagebox.showinfo(message="You have not saved the file ", title="Are you okay?")
 
 
-#Functions to change between frames
-
+# Functions to change between frames
+# Equalizer
 def change_to_frame1(master):
     try:
         master.equalizer_frame.tkraise()
 
     except Exception:
+        # Error
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
+# Time Stretcher
 def change_to_frame2(master):
     try:
         master.stretcher_frame.tkraise()
 
     except Exception:
+        # Error
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
+# Pitch shifting
 def change_to_frame3(master):
     try:
         master.pitch_frame.tkraise()
 
     except Exception:
+        # Error
         messagebox.showerror(message="Something went wrong", title="You can not get there!")
 
 
 #Functions to reset each slider individually
 
+# Reset Equalizer sliders
 def reset_slider1(master):
     master.equalizer_frame.slider_1.set(0)
 
@@ -129,9 +139,11 @@ def reset_slider9(master):
 def reset_slider10(master):
     master.equalizer_frame.slider_10.set(0)
 
+# Reset pitch shifting sliders
 def reset_slider_pitch(master):
     master.pitch_frame.pitch_slider.set(0)
 
+# Reset time stretcher sliders
 def reset_slider_stretcher(master):
     master.stretcher_frame.time_slider.set(1)
 

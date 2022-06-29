@@ -19,7 +19,7 @@ master.title("Sound Transformations App")
 
 
 #Set the size of the window
-master.geometry("1000x660")
+master.geometry("1000x660")   #Minimum window size
 master.resizable(False,False)
 
 
