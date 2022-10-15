@@ -9,7 +9,7 @@ of sound processing. The transformations that our application will focus on are 
 shifting and time stretching.
 
 ![](documentation_images/windows_dark_Equalizer.PNG)
-| Equalizer on Windows 10 with dark mode and 'dark-blue' theme_
+| Equalizer on Windows 10 with dark mode and 'dark-blue' theme
 
 How to Install and Run the Project
 ----------
