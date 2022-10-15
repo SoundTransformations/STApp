@@ -8,6 +8,8 @@ for the user to make the sound transformations and modifications without a huge 
 of sound processing. The transformations that our application will focus on are equalization, pitch 
 shifting and time stretching.
 
+![](documentation_images/windows_dark_Equalizer.png)
+| _`complex_example.py` on Windows 11 with dark mode and 'dark-blue' theme_
 
 How to Install and Run the Project
 ----------
