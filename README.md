@@ -9,7 +9,7 @@ of sound processing. The transformations that our application will focus on are 
 shifting and time stretching.
 
 ![](documentation_images/windows_dark_Equalizer.PNG)
-| _`complex_example.py` on Windows 11 with dark mode and 'dark-blue' theme_
+| Equalizer on Windows 10 with dark mode and 'dark-blue' theme_
 
 How to Install and Run the Project
 ----------
