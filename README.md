@@ -1,4 +1,4 @@
-# Sound Transformations Application
+# STApp
 
 Project description
 ----------
